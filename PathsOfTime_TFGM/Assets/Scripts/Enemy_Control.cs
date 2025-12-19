@@ -108,7 +108,6 @@ public class Enemy_Control : MonoBehaviour
             { // le hago cosas al PLAYER y al LiveContainer
                 _PC.health -= attackDamage;
                 _MC.UpdateLives();
-                _PC.StartCoroutine(_PC.FlashDamage());
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
                 Invoke("resetATTACK", attackCooldown);

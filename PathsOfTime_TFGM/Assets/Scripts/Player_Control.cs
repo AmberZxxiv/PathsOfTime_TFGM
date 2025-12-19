@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Control : MonoBehaviour
 {// script en el empty padre del PLAYER
@@ -23,13 +24,7 @@ public class Player_Control : MonoBehaviour
     float _movFrontal;
     #endregion
 
-    public GameObject startDungeon;//tp a la sala principal
-
-    #region /// HEALTH STATUS ///
     public float health;
-    public SpriteRenderer spriteRenderer;
-    Color _originalColor;
-    #endregion
 
 
     void Awake()
@@ -43,7 +38,6 @@ public class Player_Control : MonoBehaviour
         _WC = Weapon_Control.instance; //pillo SINGLE del WC
         _MC = Menus_Control.instance; //pillo SINGLE del MC
         _rb = GetComponent<Rigidbody>();
-        _originalColor = spriteRenderer.color;
     }
 
     void Update()
@@ -73,9 +67,9 @@ public class Player_Control : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("portal")) //tp a la sala inicial
+        if (other.CompareTag("portal")) //cargamos escena de dungeon
         {
-            transform.position = startDungeon.transform.position;
+            SceneManager.LoadScene(2);
         }
 
         Power_Giver power = other.GetComponent<Power_Giver>();
@@ -95,8 +89,6 @@ public class Player_Control : MonoBehaviour
 
     private void DoDASH()
     {
-        // triggereo la animacion del weapon script
-        _WC.playAnimator.SetTrigger("isDashing");
         // impulso en la direccion del movimiento
         Vector3 dashDirection = (transform.right * _movLateral + transform.forward * _movFrontal).normalized;
         if (dashDirection == Vector3.zero)
@@ -114,13 +106,6 @@ public class Player_Control : MonoBehaviour
     {
         _canDash = true;
         _isDashing = false;
-    }
-
-    public IEnumerator FlashDamage()//del enemy al hitearme
-    {
-        spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.5f);
-        spriteRenderer.color = _originalColor;
     }
     public IEnumerator StunnKnockback(Vector3 direction, float force) //del enemy al hitearme
     {

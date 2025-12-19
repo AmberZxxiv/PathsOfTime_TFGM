@@ -6,7 +6,7 @@ public class Room_Manager : MonoBehaviour
 {// script en el empty ROM_MAN del inspector
  // SINGLETON script
     public static Room_Manager instance;
-    // SINGLETON script
+ // SINGLETON script
 
     #region /// ROOM MAN LIST ///
     public GameObject[] room1Z;
@@ -21,11 +21,6 @@ public class Room_Manager : MonoBehaviour
     public int roomsSpawned;
     public int maxRooms;
     public NavMeshSurface surface;
-    #endregion
-
-    #region /// POW SPAWNER ///
-    public List<GameObject> powerHands;
-    public List<GameObject> powerSpawns;
     #endregion
 
     #region /// ENEMY SPAWNER ///
@@ -43,23 +38,8 @@ public class Room_Manager : MonoBehaviour
 
     private void Start()
     {
-        SpawnPowerUPs(); // spawnea las powerUPs
         Invoke("BakeNavMesh", 2f); //timer bake navmesh
         Invoke("SpawnEnemy", 2.5f); //timer spawn de enemigos
-    }
-
-    void SpawnPowerUPs()// busco un pow random no repetido de la lista y se lo doy a cada spawner
-    {
-        List<GameObject> availablePower = new List<GameObject>(powerHands);
-        foreach (GameObject spawn in powerSpawns)
-        {
-            if (availablePower.Count == 0) break;
-
-            int randPow = Random.Range(0, availablePower.Count);
-            GameObject prefab = availablePower[randPow];
-            Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
-            availablePower.RemoveAt(randPow);
-        }
     }
 
     void BakeNavMesh() //bakea NavMeshSurface de la escena cuando esta completa

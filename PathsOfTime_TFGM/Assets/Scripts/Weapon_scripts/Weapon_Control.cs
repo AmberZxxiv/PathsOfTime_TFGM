@@ -22,7 +22,6 @@ public class Weapon_Control : MonoBehaviour
     }
 
     // las variables estan en los propios codigos
-    public Animator playAnimator;
     public Transform attackOrigin;
 
     public AnimationCurve test;
@@ -64,8 +63,6 @@ public class Weapon_Control : MonoBehaviour
     {
         // pillo el singleton del Player
         _PC = Player_Control.instance;
-        // pillo el animator controler propio
-        playAnimator = GetComponent<Animator>();
         // desde donde se van a generar los ataques
         if (attackOrigin == null)
         { attackOrigin = this.transform;}
@@ -141,8 +138,6 @@ public class Weapon_Control : MonoBehaviour
         gizRot = attackRot;
         gizExtents = halfExtents;
 
-        // triggereo la animacion
-        playAnimator.SetTrigger("isKicking");
         // instancio prefab para visualizar la zona
         GameObject kickZone = Instantiate(kickPref, attackCenter, attackRot);
         kickZone.transform.localScale = halfExtents * 2;
@@ -183,8 +178,6 @@ public class Weapon_Control : MonoBehaviour
         gizToDraw = WeaponType.Punch;
         gizCenter = attackCenter;
 
-        // triggereo la animacion
-        playAnimator.SetTrigger("isPunching");
         // instancio prefab para visualizar la zona
         GameObject punchZone = Instantiate(punchPref, attackCenter, Quaternion.identity);
         Destroy(punchZone, 0.5f);
@@ -225,8 +218,6 @@ public class Weapon_Control : MonoBehaviour
         Vector3 dir = mouseWorld - attackOrigin.position;
         dir.y = 0; dir.Normalize();
 
-        // triggereo la animacion
-        playAnimator.SetTrigger("isShoting");
         // instancio la bull shot ignorando al player
         GameObject bullShot = Instantiate(shotPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir, Vector3.up) * shotPref.transform.rotation);
         Collider playerCollider = _PC.GetComponent<Collider>();
@@ -253,8 +244,6 @@ public class Weapon_Control : MonoBehaviour
         Vector3 dir = mouseWorld - attackOrigin.position;
         dir.y = 0; dir.Normalize();
 
-        // triggereo la animacion
-        playAnimator.SetTrigger("isCasting");
         // instancio el spell del caster
         GameObject spellCast = Instantiate(magicPref, attackOrigin.position + dir * 2f, Quaternion.LookRotation(dir, Vector3.up) * magicPref.transform.rotation);
         //configuro el ataque en PREFAB
