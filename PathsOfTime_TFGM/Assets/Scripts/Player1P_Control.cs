@@ -4,10 +4,10 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player_Control : MonoBehaviour
+public class Player1P_Control : MonoBehaviour
 {// script en el empty padre del PLAYER
  // SINGLETON script
-    public static Player_Control instance;
+    public static Player1P_Control instance;
  // SINGLETON script
     public Weapon_Control _WC; //pillo SINGLE del MC
     public Menus_Control _MC; //pillo SINGLE del WC
@@ -24,6 +24,11 @@ public class Player_Control : MonoBehaviour
     float _movFrontal;
     #endregion
 
+    //Esto es pa mover la camara con el rat�n
+    public float mouseSensitivity;
+    private float mouseRotation = 0f;
+    public Transform cameraTransform;
+
     public float health;
 
 
@@ -38,10 +43,21 @@ public class Player_Control : MonoBehaviour
         _WC = Weapon_Control.instance; //pillo SINGLE del WC
         _MC = Menus_Control.instance; //pillo SINGLE del MC
         _rb = GetComponent<Rigidbody>();
+        // centramos el cursos en pantalla y lo ocultamos
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
+        // cogemos el valor del cursor para poder darlo de vuelta
+        float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+        transform.Rotate(0, horizontalRotation, 0);
+        mouseRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        mouseRotation = Mathf.Clamp(mouseRotation, -90f, 90f);
+        // lo copiamos en la camara y lo bloqueamos en los polos
+        cameraTransform.localRotation = Quaternion.Euler(mouseRotation, 0, 0);
+
         // aqui cogemos los controles del movimiento
         _movLateral = Input.GetAxis("Horizontal");
         _movFrontal = Input.GetAxis("Vertical");

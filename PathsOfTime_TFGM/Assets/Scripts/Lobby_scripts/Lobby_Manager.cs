@@ -3,7 +3,7 @@ using Unity.AI.Navigation;
 using System.Collections.Generic;
 
 public class Lobby_Manager : MonoBehaviour
-{// script en el empty ROM_MAN del inspector
+{// script en empty padre del LOBBY
  // SINGLETON script
     public static Lobby_Manager instance;
  // SINGLETON script

@@ -557,15 +557,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
+  _2DP: {fileID: 0}
   weapon: 0
-  playAnimator: {fileID: 0}
   attackOrigin: {fileID: 0}
-  test:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   kickPref: {fileID: 8175016819001832673, guid: c11003c6780610d4cb6c283715dc3ef7, type: 3}
   punchPref: {fileID: 6665521685881295858, guid: 2d235c5b32f9a664ab02d5546158131a, type: 3}
   shotPref: {fileID: 277156950887219106, guid: bdd0ef7152a37f749a81a03e522b0593, type: 3}
@@ -2894,12 +2888,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _WC: {fileID: 0}
   _MC: {fileID: 0}
-  movSpeed: 6
-  dashForce: 12
+  movSpeed: 10
+  dashForce: 15
   dashCooldown: 0.35
-  startDungeon: {fileID: 0}
+  mouseSensitivity: 1.5
+  cameraTransform: {fileID: 2005280594}
   health: 10
-  spriteRenderer: {fileID: 0}
 --- !u!4 &1442705216
 Transform:
   m_ObjectHideFlags: 0
@@ -3274,14 +3268,6 @@ MonoBehaviour:
   roomsSpawned: 0
   maxRooms: 10
   surface: {fileID: 2141270859}
-  powerHands:
-  - {fileID: 3772858510270241939, guid: 125e2546eb55f60459aff7743298e755, type: 3}
-  - {fileID: 8923536302046465794, guid: bb02f06ece1719b478f9fa5ba693a7ab, type: 3}
-  - {fileID: 3772858510270241939, guid: f1249f5d81f31f6419163b223fcd9973, type: 3}
-  - {fileID: 3772858510270241939, guid: 4ed80336416e28e4abb1580cdd731fb0, type: 3}
-  powerSpawns:
-  - {fileID: 0}
-  - {fileID: 0}
   bossBall: {fileID: 1707109492200472364, guid: c6e5f7d0b6d18694ea43ef698105398c, type: 3}
   minionBall: {fileID: 5334635643054048245, guid: bc9c3e7dfb41dcb488e566d7821bf2e7, type: 3}
   minionCount: 4

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy_Control : MonoBehaviour
 {// script en cada enemigo
  //pillo SINGLEs del PC y MC
-   public Player_Control _PC;
+   public Player1P_Control _PC;
    public Menus_Control _MC;
 
     #region /// MOVIMIENTO Y TRACKING ///
@@ -43,7 +43,7 @@ public class Enemy_Control : MonoBehaviour
     void Start()
     {
         //pillo SINGLEs del PC y MC
-        _PC = Player_Control.instance;
+        _PC = Player1P_Control.instance;
         _MC = Menus_Control.instance;
         target = _PC.transform; // le doy el transform del PC como target
         agent = GetComponent<NavMeshAgent>(); //pillo IA propia
