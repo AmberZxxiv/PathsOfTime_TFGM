@@ -61,9 +61,6 @@ public class Player1P_Control : MonoBehaviour
         // aqui cogemos los controles del movimiento
         _movLateral = Input.GetAxis("Horizontal");
         _movFrontal = Input.GetAxis("Vertical");
-        // rotamos el player dependiendo de la direccion
-        if (_movLateral != 0 )
-        { transform.localScale = new Vector3(_movLateral > 0 ? -1 : 1, 1, 1); }
         // control del DASH
         if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         { DoDASH(); }
@@ -85,7 +82,7 @@ public class Player1P_Control : MonoBehaviour
     {
         if (other.CompareTag("portal")) //cargamos escena de dungeon
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
 
         Power_Giver power = other.GetComponent<Power_Giver>();
