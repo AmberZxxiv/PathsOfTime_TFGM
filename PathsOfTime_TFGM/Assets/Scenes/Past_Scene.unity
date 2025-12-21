@@ -562,7 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _2DP: {fileID: 0}
-  weapon: 1
+  weapon: 4
   attackOrigin: {fileID: 0}
   kickPref: {fileID: 8175016819001832673, guid: c11003c6780610d4cb6c283715dc3ef7, type: 3}
   punchPref: {fileID: 6665521685881295858, guid: 2d235c5b32f9a664ab02d5546158131a, type: 3}
