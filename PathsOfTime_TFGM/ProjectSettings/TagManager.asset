@@ -4,13 +4,16 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - portal
   - spawnroom
   - closedspawn
   - enemy
   - power
   - boss
   - heal
+  - NPCfut
+  - NPCpas
+  - PORfut
+  - PORpas
   layers:
   - Default
   - TransparentFX

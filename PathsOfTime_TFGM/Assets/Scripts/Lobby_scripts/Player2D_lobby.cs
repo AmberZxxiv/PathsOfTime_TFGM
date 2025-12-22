@@ -30,6 +30,9 @@ public class Player2D_lobby : MonoBehaviour
         _WC = Weapon_Control.instance; //pillo SINGLE del WC
         _MC = Menus_Control.instance; //pillo SINGLE del MC
         _rb = GetComponent<Rigidbody>();
+        // centramos el cursos en pantalla y lo ocultamos
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -52,7 +55,21 @@ public class Player2D_lobby : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("portal")) //cargamos escena de dungeon
+        if (other.CompareTag("NPCpas")) //conversar con NPC pasado
+        {
+            print("Lista para dar el paso?");
+        }
+
+        if (other.CompareTag("NPCfut")) //conversar con NPC futuro
+        {
+            print("Lista para dar el salto?");
+        }
+
+        if (other.CompareTag("PORpas")) //cargamos escena del pasado
+        {
+            SceneManager.LoadScene(2);
+        }
+        if (other.CompareTag("PORfut")) //cargamos escena del futuo
         {
             SceneManager.LoadScene(2);
         }

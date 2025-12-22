@@ -33,10 +33,12 @@ public class Menus_Control : MonoBehaviour
 
     void Update()
     {
-        if (_PC.health <= 0)
+        if (_PC != null && _PC.health <= 0)
         {
-            Time.timeScale = 0;
             deadMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -47,14 +49,17 @@ public class Menus_Control : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 0;
                 pauseMenu.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                Time.timeScale = 0;
             }
         }
     }
 
     void LiveContainer()
     {
+        if (_PC == null) return;
         for (int i = 0; i < (_PC.health*0.5f); i++)
         { // instancio corazones en circulo
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
@@ -93,13 +98,18 @@ public class Menus_Control : MonoBehaviour
 
     public void ShowVictory() //lo llamo desde el TakeDamage del Enemy Boss
     {
-        Time.timeScale = 0;
         victoryMenu.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+
     }
 
     public void QuitPause()
     { 
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pauseMenu.SetActive(false);
     }
 
