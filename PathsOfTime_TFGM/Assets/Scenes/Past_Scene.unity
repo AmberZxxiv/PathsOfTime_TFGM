@@ -3301,7 +3301,7 @@ MonoBehaviour:
   maxRooms: 10
   surface: {fileID: 2141270859}
   bossBall: {fileID: 1707109492200472364, guid: c6e5f7d0b6d18694ea43ef698105398c, type: 3}
-  minionBall: {fileID: 5334635643054048245, guid: bc9c3e7dfb41dcb488e566d7821bf2e7, type: 3}
+  minionBall: {fileID: 2867606892695068438, guid: 53baaa1969dfa1c44964ad43b4a07789, type: 3}
   minionCount: 4
 --- !u!4 &1765574036
 Transform:
