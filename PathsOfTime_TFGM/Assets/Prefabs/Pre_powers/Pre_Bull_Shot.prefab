@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8422274394268058033}
   - component: {fileID: 8786320564751088688}
-  - component: {fileID: 812708123763057579}
   - component: {fileID: 960486338482809754}
+  - component: {fileID: 4714751112301033287}
   - component: {fileID: 1612636594144276500}
   m_Layer: 0
   m_Name: Pre_Bull_Shot
@@ -90,29 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &812708123763057579
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277156950887219106}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.3318672
-  m_Height: 17.907076
-  m_Direction: 0
-  m_Center: {x: -5.713848, y: 0.039255396, z: -0.087297276}
 --- !u!54 &960486338482809754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,6 +117,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!65 &4714751112301033287
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277156950887219106}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20, y: 7, z: 1.5}
+  m_Center: {x: -5, y: 0, z: 0}
 --- !u!114 &1612636594144276500
 MonoBehaviour:
   m_ObjectHideFlags: 0
