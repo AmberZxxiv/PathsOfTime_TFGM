@@ -37,7 +37,7 @@ public class Bull_Shoter : MonoBehaviour
             //reactivar IA
             StartCoroutine(ReactivateAgent(agent, 0.2f));
         }
-        // tener referencia visual y tiempo para activar el agent
+        // tener referencia visual y tiempo para activar el _agent
         StartCoroutine(DestroyAfterDelay(0.3f));
     }
     IEnumerator ReactivateAgent(NavMeshAgent agent, float delay)

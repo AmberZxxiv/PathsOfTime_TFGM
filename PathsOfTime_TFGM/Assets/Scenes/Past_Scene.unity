@@ -562,7 +562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _2DP: {fileID: 0}
-  weapon: 4
+  weapon: 3
   attackOrigin: {fileID: 0}
   kickPref: {fileID: 8175016819001832673, guid: c11003c6780610d4cb6c283715dc3ef7, type: 3}
   punchPref: {fileID: 6665521685881295858, guid: 2d235c5b32f9a664ab02d5546158131a, type: 3}
@@ -3300,8 +3300,8 @@ MonoBehaviour:
   roomsSpawned: 0
   maxRooms: 10
   surface: {fileID: 2141270859}
-  bossBall: {fileID: 1707109492200472364, guid: c6e5f7d0b6d18694ea43ef698105398c, type: 3}
-  minionBall: {fileID: 2867606892695068438, guid: 53baaa1969dfa1c44964ad43b4a07789, type: 3}
+  bossBall: {fileID: 7366125380966331777, guid: 287ac59b96e8ec94fb87d38faeb450a4, type: 3}
+  minionBall: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
   minionCount: 4
 --- !u!4 &1765574036
 Transform:

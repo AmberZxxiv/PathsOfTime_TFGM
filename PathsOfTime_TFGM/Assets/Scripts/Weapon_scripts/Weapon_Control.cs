@@ -209,14 +209,9 @@ public class Weapon_Control : MonoBehaviour
     void DoSHOT()
     {
         print("SHOTED!");
-        // ray desde cam al plano del origen del ataque
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, new Vector3(0, attackOrigin.position.y, 0));
-        if (!plane.Raycast(ray, out float enter)) return;
-        // dirección desde origen hacia posición del ratón
-        Vector3 mouseWorld = ray.GetPoint(enter);
-        Vector3 dir = mouseWorld - attackOrigin.position;
-        dir.y = 0; dir.Normalize();
+        // disparo donde miro con la cam
+        Transform cam = Camera.main.transform;
+        Vector3 dir = cam.forward.normalized;
 
         // instancio la bull shot ignorando al player
         GameObject bullShot = Instantiate(shotPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir, Vector3.up) * shotPref.transform.rotation);
@@ -235,16 +230,11 @@ public class Weapon_Control : MonoBehaviour
     void DoMAGIC()
     {
         print("WIKED!");
-        // ray desde cam al plano del origen del ataque
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, new Vector3(0, attackOrigin.position.y, 0));
-        if (!plane.Raycast(ray, out float enter)) return;
-        // dirección desde origen hacia posición del ratón
-        Vector3 mouseWorld = ray.GetPoint(enter);
-        Vector3 dir = mouseWorld - attackOrigin.position;
-        dir.y = 0; dir.Normalize();
+        // disparo donde miro con la cam
+        Transform cam = Camera.main.transform;
+        Vector3 dir = cam.forward.normalized;
 
-        // instancio el spell del caster
+        // instancio el spell casted ignorando al player
         GameObject spellCast = Instantiate(magicPref, attackOrigin.position + dir * 2f, Quaternion.LookRotation(dir, Vector3.up) * magicPref.transform.rotation);
         //configuro el ataque en PREFAB
         Spell_Caster spell = spellCast.GetComponent<Spell_Caster>();

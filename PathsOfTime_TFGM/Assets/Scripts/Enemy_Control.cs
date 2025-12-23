@@ -10,11 +10,11 @@ public class Enemy_Control : MonoBehaviour
    public Menus_Control _MC;
 
     #region /// MOVIMIENTO Y TRACKING ///
-    private NavMeshAgent agent;
+    NavMeshAgent _agent;
     public Transform target;
     public float agroDistance;
-    private float targetDistance;
     public float wanderRadius;
+    float _targetDistance;
     #endregion
 
     #region /// ATTACK STATS ///
@@ -33,8 +33,8 @@ public class Enemy_Control : MonoBehaviour
 
     #region /// HEALTH STATUS ///
     public float health; // vida de cada enemigo
-    public MeshRenderer meshRenderer;
-    Color originalColor;
+    SpriteRenderer _spriteRenderer;
+    Color _originalColor;
     public GameObject healCherry;
     public float dropChance;
     #endregion
@@ -45,26 +45,25 @@ public class Enemy_Control : MonoBehaviour
         //pillo SINGLEs del PC y MC
         _PC = Player1P_Control.instance;
         _MC = Menus_Control.instance;
-        target = _PC.transform; // le doy el transform del PC como target
-        agent = GetComponent<NavMeshAgent>(); //pillo IA propia
         // desde donde se van a generar los ataques
         if (attackOrigin == null)
-        { attackOrigin = this.transform;}
-        // le asignamos un material individual a cada enemigo
-        meshRenderer.material = new Material(meshRenderer.material);
-        originalColor = meshRenderer.material.color;
+        { attackOrigin = this.transform; }
+        target = _PC.transform; // le doy el transform del PC como target
+        _agent = GetComponent<NavMeshAgent>(); //pillo IA propia
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); //pillo SPRITE del hijo
+        _originalColor = _spriteRenderer.color; // asignamos color a cada enemigo
     }
 
     void Update()
     {
         //compruebo distancia con player
-        targetDistance = Vector3.Distance(agent.transform.position, target.position);
+        _targetDistance = Vector3.Distance(_agent.transform.position, target.position);
         // si esta a rango de ataque, ataco
-        if (targetDistance <= attackRange && _canAttack)
+        if (_targetDistance <= attackRange && _canAttack)
         { DoATTACK();}
         // cuando pilla agro, va hacia el player
-        if (targetDistance <= agroDistance)
-        { agent.SetDestination(target.position); }
+        if (_targetDistance <= agroDistance)
+        { _agent.SetDestination(target.position); }
         // si no, patrulla
         else Wander();
     }
@@ -76,7 +75,7 @@ public class Enemy_Control : MonoBehaviour
         if (wanderTimer <= 0f)
         { //cuando ha pasado el tiempo, le doy una posición nueva y reinicio el contador
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
-            agent.SetDestination(newPos);
+            _agent.SetDestination(newPos);
             wanderTimer = wanderDelay;
         }
     }
@@ -136,9 +135,9 @@ public class Enemy_Control : MonoBehaviour
     }
     public IEnumerator FlashDamage()//propio del ENEMY
     {
-        meshRenderer.material.color = Color.red;
+        _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(1f);
-        meshRenderer.material.color = originalColor;
+        _spriteRenderer.color = _originalColor;
     }
 }
 

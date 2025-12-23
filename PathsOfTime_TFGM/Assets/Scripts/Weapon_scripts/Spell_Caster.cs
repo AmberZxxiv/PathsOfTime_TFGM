@@ -36,7 +36,7 @@ public class Spell_Caster : MonoBehaviour
 
             //reactivar IA
             StartCoroutine(ReactivateAgent(agent, 0.2f));
-            // tener referencia visual y tiempo para activar el agent
+            // tener referencia visual y tiempo para activar el _agent
             StartCoroutine(DestroyAfterDelay(0.5f));
         }
        

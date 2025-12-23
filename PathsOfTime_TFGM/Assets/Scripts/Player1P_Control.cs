@@ -80,18 +80,6 @@ public class Player1P_Control : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("portal")) //cargamos escena de dungeon
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        Power_Giver power = other.GetComponent<Power_Giver>();
-        if (power != null) //si es un PowUp, lo cojo y quito el que tenía
-        {
-            _WC.EquipWeapon(power.newWeapon); //equipo en la weapon
-            Destroy(other.gameObject);
-        }
-
         if (other.CompareTag("heal") && health != 10) // pillo heal si no estoy a tope
         {
             health += 1;
