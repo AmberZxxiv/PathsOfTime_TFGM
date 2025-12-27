@@ -2,10 +2,10 @@ using UnityEngine;
 using Unity.AI.Navigation;
 using System.Collections.Generic;
 
-public class Room_Manager : MonoBehaviour
-{// script en el empty ROM_MAN del inspector
+public class PAS_rooman : MonoBehaviour
+{// script en el empty ROM_MAN del PASADO
  // SINGLETON script
-    public static Room_Manager instance;
+    public static PAS_rooman instance;
  // SINGLETON script
 
     #region /// ROOM MAN LIST ///
@@ -36,7 +36,7 @@ public class Room_Manager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void Start()
+    void Start()
     {
         Invoke("BakeNavMesh", 2f); //timer bake navmesh
         Invoke("SpawnEnemy", 2.5f); //timer spawn de enemigos

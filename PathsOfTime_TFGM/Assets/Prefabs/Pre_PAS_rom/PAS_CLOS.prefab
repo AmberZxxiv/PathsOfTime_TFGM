@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3691242114116702578}
   - component: {fileID: 1927536103070752181}
   m_Layer: 0
-  m_Name: KLOS_mol
+  m_Name: PAS_CLOS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
