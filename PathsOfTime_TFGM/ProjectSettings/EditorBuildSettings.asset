@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Past_Scene.unity
     guid: 1d11c48098086f34f9b7684bda0bb301
+  - enabled: 1
+    path: Assets/Scenes/Future_Scene.unity
+    guid: c0fa30cff44fccb4d8cf579afd7cb7d3
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

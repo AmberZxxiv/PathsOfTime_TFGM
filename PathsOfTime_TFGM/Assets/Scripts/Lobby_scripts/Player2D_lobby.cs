@@ -71,7 +71,7 @@ public class Player2D_lobby : MonoBehaviour
         }
         if (other.CompareTag("PORfut")) //cargamos escena del futuo
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
 
         Power_Giver power = other.GetComponent<Power_Giver>();
