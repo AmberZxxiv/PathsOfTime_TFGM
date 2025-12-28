@@ -3759,11 +3759,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa545872dc898e44199bfb9ac1ee8824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room1Z: []
-  room1X: []
-  room0z: []
-  room0x: []
-  closedRoom: {fileID: 3577886435829724, guid: 2f7805207f69dd84498b3e4bc7e672ad, type: 3}
+  room1Z:
+  - {fileID: 6909319146553241787, guid: 3ba56b453e29bec45b35f1a0794f7ce3, type: 3}
+  - {fileID: 1658844192353780955, guid: 52289abbd9f3e2b4e87d02db50a3b423, type: 3}
+  - {fileID: 8441951604808474699, guid: 4fb912d1f568ff746806edd304ba0cf0, type: 3}
+  - {fileID: 3568794171190452957, guid: 71465faf00fd91249aa9ce5b180fde71, type: 3}
+  room1X:
+  - {fileID: 3091959867163085394, guid: 19f34296ceb4b334490aea936c2cd746, type: 3}
+  - {fileID: 8879879279018446386, guid: 95e5b80bfac53da48b1038998a1b2283, type: 3}
+  - {fileID: 8441951604808474699, guid: 4fb912d1f568ff746806edd304ba0cf0, type: 3}
+  - {fileID: 3568794171190452957, guid: 71465faf00fd91249aa9ce5b180fde71, type: 3}
+  room0z:
+  - {fileID: 7806561769514515792, guid: e3a753c2ca71e404c824322cdf5584fe, type: 3}
+  - {fileID: 8879879279018446386, guid: 95e5b80bfac53da48b1038998a1b2283, type: 3}
+  - {fileID: 1658844192353780955, guid: 52289abbd9f3e2b4e87d02db50a3b423, type: 3}
+  - {fileID: 3568794171190452957, guid: 71465faf00fd91249aa9ce5b180fde71, type: 3}
+  room0x:
+  - {fileID: 4363288728847544590, guid: 968cb7675ee72fc42a2890793887627e, type: 3}
+  - {fileID: 8879879279018446386, guid: 95e5b80bfac53da48b1038998a1b2283, type: 3}
+  - {fileID: 1658844192353780955, guid: 52289abbd9f3e2b4e87d02db50a3b423, type: 3}
+  - {fileID: 8441951604808474699, guid: 4fb912d1f568ff746806edd304ba0cf0, type: 3}
+  closedRoom: {fileID: 3577886435829724, guid: 75837fcc32b6ed24681b908975c3fd8b, type: 3}
   roomMap: []
   roomsSpawned: 0
   maxRooms: 10
@@ -4770,7 +4786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 3
   spawnTime: 0.1
   spawned: 0
@@ -4945,7 +4962,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 1
   spawnTime: 0
   spawned: 0
@@ -5208,7 +5226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 2
   spawnTime: 0.1
   spawned: 0
@@ -5375,7 +5394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 0
   spawnTime: 0.1
   spawned: 0
