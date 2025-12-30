@@ -77,7 +77,7 @@ public class Player2D_lobby : MonoBehaviour
         Power_Giver power = other.GetComponent<Power_Giver>();
         if (power != null) //si es un PowUp, lo equipo en WEAPON
         {
-            _WC.EquipWeapon(power.newWeapon);
+            _WC.NewWeapon(power.newWeapon);
         }
     }
 }

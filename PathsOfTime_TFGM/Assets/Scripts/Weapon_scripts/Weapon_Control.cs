@@ -16,7 +16,7 @@ public class Weapon_Control : MonoBehaviour
     public enum WeaponType
     {
         None,
-        Kick,
+        Sword,
         Punch,
         Shot,
         Magic
@@ -26,7 +26,7 @@ public class Weapon_Control : MonoBehaviour
     public Transform attackOrigin;
 
     #region /// PROYECTIL ZONES ///
-    public GameObject kickPref;
+    public GameObject swordPref;
     public GameObject punchPref;
     public GameObject shotPref;
     public GameObject magicPref;
@@ -34,7 +34,7 @@ public class Weapon_Control : MonoBehaviour
 
     #region /// UI MARKERS ///
     public GameObject uiPower;
-    public GameObject kickPow;
+    public GameObject swordPow;
     public GameObject punchPow;
     public GameObject shotPow;
     public GameObject magicPow;
@@ -66,6 +66,7 @@ public class Weapon_Control : MonoBehaviour
         // desde donde se van a generar los ataques
         if (attackOrigin == null)
         { attackOrigin = this.transform;}
+        Invoke("EquipWeapon", 0.1f); // equipo arma inicial
     }
 
     void Update()
@@ -77,19 +78,23 @@ public class Weapon_Control : MonoBehaviour
         }
     }
 
-     public void EquipWeapon(WeaponType newWeapon) //lo llama el trigger del PLAYER
-    { 
+    public void NewWeapon(WeaponType newWeapon) //lo llama el trigger del POW_GIVER
+    {
         // igualo mi weapon al del Pow_Giver
         weapon = newWeapon;
+        EquipWeapon();
+    }
+     public void EquipWeapon()
+    {
         // elimino el marcador del anterior weapon
         foreach (Transform child in uiPower.transform)
         { Destroy(child.gameObject); }
         // declaro el weapon que voy a instanciar en la UI
         GameObject iconToInstantiate = null;
-        switch (newWeapon)
+        switch (weapon)
         {
            case WeaponType.None: return;
-           case WeaponType.Kick:iconToInstantiate = kickPow; break;
+           case WeaponType.Sword:iconToInstantiate = swordPow; break;
            case WeaponType.Punch: iconToInstantiate = punchPow; break;
            case WeaponType.Shot: iconToInstantiate = shotPow; break;
            case WeaponType.Magic: iconToInstantiate = magicPow; break;
@@ -106,42 +111,82 @@ public class Weapon_Control : MonoBehaviour
         switch (weapon)
         {
         case WeaponType.None: return;
-        case WeaponType.Kick: DoKICK(); break;
+        case WeaponType.Sword: DoSWOSH(); break;
         case WeaponType.Punch:DoPUNCH();break;
         case WeaponType.Shot: DoSHOT(); break;
         case WeaponType.Magic:DoMAGIC();break;
         }
     }
 
-    void DoKICK()
+    void DoSWOSH()
     {
-        print("KICKED!");
-        // ray desde cam al plano del origen del ataque
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, new Vector3(0, attackOrigin.position.y, 0));
-        if (!plane.Raycast(ray, out float enter)) return;
-        // dirección desde origen hacia posición del ratón
-        Vector3 mouseWorld = ray.GetPoint(enter);
-        Vector3 dir = mouseWorld - attackOrigin.position;
-        dir.y = 0; dir.Normalize();
+        print("TOUCHE!");
+        float radius = 5f;
+        // disparo donde miro con la cam
+        Transform cam = Camera.main.transform;
+        Vector3 dir = cam.forward.normalized;
+        Vector3 attackCenter = attackOrigin.position + dir * radius;
+        // copio los datos para darselos al gizdraw
+        gizToDraw = WeaponType.Sword;
+        gizCenter = attackCenter;
+
+        // instancio prefab para visualizar la zona
+        GameObject swoshZone = Instantiate(swordPref, attackCenter, Quaternion.LookRotation(dir));
+        swoshZone.transform.Rotate(90f, 0f, -45f);
+        Vector3 baseScale = swoshZone.transform.localScale;
+        swoshZone.transform.localScale = baseScale * (radius-2f);
+        Destroy(swoshZone, 0.5f);
+        // genero el collider con todos los datos e impacto
+        Collider[] hits = Physics.OverlapSphere(attackCenter, radius);
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("enemy") || hit.CompareTag("boss"))
+            {
+                print("HITTED!");
+                //cojo los componentes del enemigo
+                NavMeshAgent agent = hit.GetComponent<NavMeshAgent>();
+                Enemy_Control enemy = hit.GetComponent<Enemy_Control>();
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                // reset físico para que les afecte el impulso
+                agent.enabled = false;
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                // HITEO
+                enemy.TakeDamage(2);
+                rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+                rb.AddExplosionForce(2f, attackCenter, 2f, 2f, ForceMode.Impulse);
+                //reactivar IA
+                StartCoroutine(ReactivateAgent(agent, 0.5f));
+            }
+        }
+    }
+
+    void DoPUNCH()
+    {
+        print("PUNCHED!");
+        // disparo donde miro con la cam
+        Transform cam = Camera.main.transform;
+        Vector3 dir = cam.forward.normalized;
 
         // limites del rectangulo en anchura, altura y largura
         Vector3 halfExtents = new Vector3(1f, 1f, 5f);
-        // centro a mitad de la longitud hacia delante
-        Vector3 attackCenter = attackOrigin.position + dir * 5f;
-        attackCenter.y = 0;
+        // centro el box del ataque a mitad distancia
+        float attackLength = halfExtents.z;
+        Vector3 attackCenter = attackOrigin.position + dir * attackLength;
         // rotacion del box que apunte a dir
         Quaternion attackRot = Quaternion.LookRotation(dir, Vector3.up);
         // guardo los datos para darselos al gizdraw
-        gizToDraw = WeaponType.Kick;
+        gizToDraw = WeaponType.Punch;
         gizCenter = attackCenter;
         gizRot = attackRot;
         gizExtents = halfExtents;
 
         // instancio prefab para visualizar la zona
-        GameObject kickZone = Instantiate(kickPref, attackCenter, attackRot);
-        kickZone.transform.localScale = halfExtents * 2;
-        Destroy(kickZone, 0.5f);
+        GameObject punchZone = Instantiate(punchPref, attackCenter, attackRot);
+        punchZone.transform.Rotate(90f, 0f, -45f);
+        Vector3 baseScale = punchZone.transform.localScale;
+        punchZone.transform.localScale = Vector3.Scale(baseScale, halfExtents * 2f);
+        Destroy(punchZone, 0.5f);
         // genero el collider con todos los datos e impacto
         Collider[] hits = Physics.OverlapBox(attackCenter, halfExtents, attackRot);
         foreach (Collider hit in hits)
@@ -162,44 +207,6 @@ public class Weapon_Control : MonoBehaviour
                 Vector3 kickDir = dir + Vector3.up * 0.25f;
                 kickDir.Normalize();
                 rb.AddForce(kickDir * 7f, ForceMode.Impulse);
-                //reactivar IA
-                StartCoroutine(ReactivateAgent(agent, 0.5f));
-            }
-        }
-    }
-
-    void DoPUNCH()
-    {
-        print("PUNCHED!");
-        // solo necesito el centro debajo del player
-        Vector3 attackCenter = attackOrigin.position;
-        attackCenter.y = 0;
-        // copio los datos para darselos al gizdraw
-        gizToDraw = WeaponType.Punch;
-        gizCenter = attackCenter;
-
-        // instancio prefab para visualizar la zona
-        GameObject punchZone = Instantiate(punchPref, attackCenter, Quaternion.identity);
-        Destroy(punchZone, 0.5f);
-        // genero el collider con todos los datos e impacto
-        Collider[] hits = Physics.OverlapSphere(attackCenter, 7f);
-        foreach (Collider hit in hits)
-        {
-            if (hit.CompareTag("enemy") || hit.CompareTag("boss"))
-            {
-                print("HITTED!");
-                //cojo los componentes del enemigo
-                NavMeshAgent agent = hit.GetComponent<NavMeshAgent>();
-                Enemy_Control enemy = hit.GetComponent<Enemy_Control>();
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-                // reset físico para que les afecte el impulso
-                agent.enabled = false;
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                // HITEO
-                enemy.TakeDamage(2);
-                rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
-                rb.AddExplosionForce(2f, attackCenter, 2f, 2f, ForceMode.Impulse);
                 //reactivar IA
                 StartCoroutine(ReactivateAgent(agent, 0.5f));
             }
@@ -252,17 +259,17 @@ public class Weapon_Control : MonoBehaviour
         {
             case WeaponType.None: return;
 
-            case WeaponType.Kick:
-        Gizmos.color = Color.green;
-        Gizmos.matrix = Matrix4x4.TRS(gizCenter, gizRot, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, gizExtents * 2f);
-            break;
+            case WeaponType.Sword:
+                Gizmos.color = Color.green;
+                Gizmos.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one);
+                Gizmos.DrawWireSphere(gizCenter, 5f);
+                break;
 
             case WeaponType.Punch:
-        Gizmos.color = Color.red;
-        Gizmos.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one);
-        Gizmos.DrawWireSphere(gizCenter, 7f);
-            break;
+                Gizmos.color = Color.red;
+                Gizmos.matrix = Matrix4x4.TRS(gizCenter, gizRot, Vector3.one);
+                Gizmos.DrawWireCube(Vector3.zero, gizExtents * 2f);
+                break;
         }
     }
 

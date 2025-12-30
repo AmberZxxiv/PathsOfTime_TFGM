@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static Weapon_Control;
 
 public class Enemy_Control : MonoBehaviour
 {// script en cada enemigo
  //pillo SINGLEs del PC y MC
    public Player1P_Control _PC;
    public Menus_Control _MC;
-
+   
+    public EnemyType enemyType;
+    public enum EnemyType
+    {
+        Gnobot,
+        Hydra,
+        Angel,
+    }
     #region /// MOVIMIENTO Y TRACKING ///
     NavMeshAgent _agent;
     public Transform target;
@@ -29,10 +37,11 @@ public class Enemy_Control : MonoBehaviour
     public float wanderDelay; //cada cuanto spatrulla
     public float wanderTimer; //contador interno
     public float attackCooldown; //cada cuanto ataca
+    public float lastAttackTimer; //contador interno
     #endregion
 
     #region /// HEALTH STATUS ///
-    public float health; // vida de cada enemigo
+    public float health;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
     public GameObject healCherry;
@@ -60,7 +69,7 @@ public class Enemy_Control : MonoBehaviour
         _targetDistance = Vector3.Distance(_agent.transform.position, target.position);
         // si esta a rango de ataque, ataco
         if (_targetDistance <= attackRange && _canAttack)
-        { DoATTACK();}
+        { DoBASIC();}
         // cuando pilla agro, va hacia el player
         if (_targetDistance <= agroDistance)
         { _agent.SetDestination(target.position); }
@@ -90,9 +99,22 @@ public class Enemy_Control : MonoBehaviour
         return !found ? origin : navHit.position;
     }
 
-    void DoATTACK()
+    void AttackFunction()
     {
-        _canAttack = false;
+        // compruebo el tiempo del cooldown
+        if (Time.time < lastAttackTimer + attackCooldown) return;
+        lastAttackTimer = Time.time;
+        // activo el ataque correspondiente al weapon equipado
+        switch (enemyType)
+        {
+            case EnemyType.Gnobot: DoBASIC(); break;
+            case EnemyType.Hydra: DoBITE(); break;
+            case EnemyType.Angel: DoBLESS(); break;
+        }
+    }
+
+    void DoBASIC()
+    {
         // dirección desde enemigo a player
         Vector3 dir = target.position - attackOrigin.position;
         dir.y = 0; dir.Normalize();
@@ -109,13 +131,52 @@ public class Enemy_Control : MonoBehaviour
                 _MC.UpdateLives();
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
-                Invoke("resetATTACK", attackCooldown);
             }
         }
     }
-    void resetATTACK()
+
+    
+    void DoBITE() //aqui tengo que poner el especial del HYDRA
     {
-        _canAttack = true;
+        // dirección desde enemigo a player
+        Vector3 dir = target.position - attackOrigin.position;
+        dir.y = 0; dir.Normalize();
+        // limites en anchura, altura, largura y centro
+        Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
+        Vector3 center = attackOrigin.position + dir * attackRange;
+        // genero el collider y HITEO
+        Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(dir));
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            { // le hago cosas al PLAYER y al LiveContainer
+                _PC.health -= attackDamage;
+                _MC.UpdateLives();
+                Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
+                _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
+            }
+        }
+    }
+    void DoBLESS() //aqui tengo que poner el especial del ANGEL
+    {
+        // dirección desde enemigo a player
+        Vector3 dir = target.position - attackOrigin.position;
+        dir.y = 0; dir.Normalize();
+        // limites en anchura, altura, largura y centro
+        Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
+        Vector3 center = attackOrigin.position + dir * attackRange;
+        // genero el collider y HITEO
+        Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(dir));
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            { // le hago cosas al PLAYER y al LiveContainer
+                _PC.health -= attackDamage;
+                _MC.UpdateLives();
+                Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
+                _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
+            }
+        }
     }
 
     public void TakeDamage(float damage)//llamo desde WEAPON para hitear enemys

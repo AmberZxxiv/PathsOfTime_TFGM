@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3186367245664081287}
   - component: {fileID: 63975454540325391}
   m_Layer: 0
-  m_Name: Pre_Equip_Kick
+  m_Name: Pre_Equip_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
