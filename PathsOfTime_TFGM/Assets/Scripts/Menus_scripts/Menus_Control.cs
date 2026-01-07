@@ -7,7 +7,7 @@ public class Menus_Control : MonoBehaviour
   // SINGLETON script
     public static Menus_Control instance;
   // SINGLETON script
-    public Player1P_Control _PC; //pillo SINGLE del PC
+    public Player_Control _PC; //pillo SINGLE del PC
 
     public GameObject deadMenu;
     public GameObject pauseMenu;
@@ -26,7 +26,7 @@ public class Menus_Control : MonoBehaviour
     void Start()
     {
         // pillo el singleton del Player
-        _PC = Player1P_Control.instance;
+        _PC = Player_Control.instance;
         Time.timeScale = 1;
         LiveContainer();
     }

@@ -35,6 +35,7 @@ public class Room_Spawner : MonoBehaviour
         // si pillo futuro activo futuro
         if (_FRM != null)
         { Invoke("SpawnFutureRoom", spawnTime);}
+
     }
 
     void SpawnPastRoom()

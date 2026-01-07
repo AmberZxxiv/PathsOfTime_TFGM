@@ -4,10 +4,10 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player1P_Control : MonoBehaviour
+public class Player_Control : MonoBehaviour
 {// script en el empty padre del PLAYER
  // SINGLETON script
-    public static Player1P_Control instance;
+    public static Player_Control instance;
  // SINGLETON script
     public Weapon_Control _WC; //pillo SINGLE del MC
     public Menus_Control _MC; //pillo SINGLE del WC
@@ -32,9 +32,9 @@ public class Player1P_Control : MonoBehaviour
     public float health;
 
 
-    void Awake()
-    {// awake para instanciar singleton sin superponer varios
-        if (instance == null) instance = this;
+    void Awake()// singleton sin superponer y no destruir al cambiar escena
+    {
+        if (instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
         else Destroy(gameObject);
     }
 
@@ -61,6 +61,9 @@ public class Player1P_Control : MonoBehaviour
         // aqui cogemos los controles del movimiento
         _movLateral = Input.GetAxis("Horizontal");
         _movFrontal = Input.GetAxis("Vertical");
+        // rotamos el player dependiendo de la direccion
+        if (_movLateral != 0)
+        { transform.localScale = new Vector3(_movLateral > 0 ? -1 : 1, 1, 1); }
         // control del DASH
         if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         { DoDASH(); }
@@ -80,6 +83,33 @@ public class Player1P_Control : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("NPCpas")) //conversar con NPC pasado
+        {
+            print("Lista para dar el paso?");
+        }
+        if (other.CompareTag("NPCfut")) //conversar con NPC futuro
+        {
+            print("Lista para dar el salto?");
+        }
+        if (other.CompareTag("PORpas")) //cogemos dungeon pasado y cargamos escena
+        {
+            PlayerPrefs.SetInt("Dungeon", 0);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(2);
+        }
+        if (other.CompareTag("PORfut")) //cogemos dungeon futuro y cargamos escena
+        {
+            PlayerPrefs.SetInt("Dungeon", 1);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(2);
+        }
+
+        Power_Giver power = other.GetComponent<Power_Giver>();
+        if (power != null) //si es un PowUp, lo equipo en WEAPON
+        {
+            _WC.NewWeapon(power.newWeapon);
+        }
+
         if (other.CompareTag("heal") && health != 10) // pillo heal si no estoy a tope
         {
             health += 1;

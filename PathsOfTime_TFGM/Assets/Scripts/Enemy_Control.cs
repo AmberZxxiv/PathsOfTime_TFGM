@@ -7,7 +7,7 @@ using static Weapon_Control;
 public class Enemy_Control : MonoBehaviour
 {// script en cada enemigo
  //pillo SINGLEs del PC y MC
-   public Player1P_Control _PC;
+   public Player_Control _PC;
    public Menus_Control _MC;
    
     public EnemyType enemyType;
@@ -52,7 +52,7 @@ public class Enemy_Control : MonoBehaviour
     void Start()
     {
         //pillo SINGLEs del PC y MC
-        _PC = Player1P_Control.instance;
+        _PC = Player_Control.instance;
         _MC = Menus_Control.instance;
         // desde donde se van a generar los ataques
         if (attackOrigin == null)

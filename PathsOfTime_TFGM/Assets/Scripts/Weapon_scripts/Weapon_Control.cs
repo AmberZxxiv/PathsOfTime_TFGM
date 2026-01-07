@@ -9,8 +9,7 @@ public class Weapon_Control : MonoBehaviour
  // SINGLETON script
     public static Weapon_Control instance;
  // SINGLETON script
-    public Player1P_Control _PC; //pillo SINGLE del PC
-    public Player2D_lobby _2DP; //pillo SINGLE del P2D
+    public Player_Control _PC; //pillo SINGLE del PC
 
     public WeaponType weapon;
     public enum WeaponType
@@ -52,7 +51,7 @@ public class Weapon_Control : MonoBehaviour
     public float lastAttackTimer;
     #endregion
 
-    void Awake()// awake para instanciar singleton sin superponer varios
+    void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
         if (instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
         else Destroy(gameObject);
@@ -60,9 +59,8 @@ public class Weapon_Control : MonoBehaviour
 
     void Start()
     {
-        // pillo SINGLE del PC y P2D
-        _PC = Player1P_Control.instance;
-        _2DP = Player2D_lobby.instance;
+        // pillo SINGLE del PC
+        _PC = Player_Control.instance;
         // desde donde se van a generar los ataques
         if (attackOrigin == null)
         { attackOrigin = this.transform;}
@@ -222,7 +220,7 @@ public class Weapon_Control : MonoBehaviour
 
         // instancio la bull shot ignorando al player
         GameObject bullShot = Instantiate(shotPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir, Vector3.up) * shotPref.transform.rotation);
-        Collider playerCollider = _PC !=null ?_PC.GetComponent<Collider>(): _2DP.GetComponent<Collider>();
+        Collider playerCollider = _PC.GetComponent<Collider>();
         Collider bulletCollider = bullShot.GetComponent<Collider>();
         Physics.IgnoreCollision(bulletCollider, playerCollider);
         //configuro el ataque en PREFAB

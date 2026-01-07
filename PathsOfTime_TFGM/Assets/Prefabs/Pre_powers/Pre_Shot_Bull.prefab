@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4714751112301033287}
   - component: {fileID: 1612636594144276500}
   m_Layer: 0
-  m_Name: Pre_Bull_Shot
+  m_Name: Pre_Shot_Bull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
