@@ -53,22 +53,22 @@ public class Weapon_Control : MonoBehaviour
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
-        if (instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
+        if (instance == null) { instance = this; DontDestroyOnLoad(this.gameObject); }
         else Destroy(gameObject);
     }
 
     void Start()
     {
-        // pillo SINGLE del PC
-        _PC = Player_Control.instance;
-        // desde donde se van a generar los ataques
-        if (attackOrigin == null)
-        { attackOrigin = this.transform;}
-        Invoke("EquipWeapon", 0.1f); // equipo arma inicial
+        Invoke("EquipWeapon", 1f); // equipo arma inicial
     }
 
     void Update()
     {
+        //me aseguro que coge el origen si lo pierde
+        if (_PC == null)
+        { _PC = Player_Control.instance; }
+        if (attackOrigin == null)
+        { attackOrigin = _PC.transform; }
         // clic IZD ataca
         if (Input.GetMouseButton(0))
         {
@@ -76,9 +76,8 @@ public class Weapon_Control : MonoBehaviour
         }
     }
 
-    public void NewWeapon(WeaponType newWeapon) //lo llama el trigger del POW_GIVER
+    public void NewWeapon(WeaponType newWeapon) //igualo al trigger del POW_GIVER
     {
-        // igualo mi weapon al del Pow_Giver
         weapon = newWeapon;
         EquipWeapon();
     }

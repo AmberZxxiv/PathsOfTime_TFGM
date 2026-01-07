@@ -34,7 +34,7 @@ public class Player_Control : MonoBehaviour
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
-        if (instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
+        if (instance == null) { instance = this; /*DontDestroyOnLoad(gameObject)*/; }
         else Destroy(gameObject);
     }
 
