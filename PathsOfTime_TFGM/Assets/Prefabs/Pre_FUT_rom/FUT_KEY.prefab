@@ -129,7 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 2
   spawnTime: 0.2
   spawned: 0
@@ -321,7 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 0
   spawnTime: 0.2
   spawned: 0
@@ -725,7 +727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 1
   spawnTime: 0.2
   spawned: 0
@@ -823,7 +826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RM: {fileID: 0}
+  _PRM: {fileID: 0}
+  _FRM: {fileID: 0}
   direction: 3
   spawnTime: 0.2
   spawned: 0
@@ -971,6 +975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1653396984942089038}
     m_Modifications:
+    - target: {fileID: 270558099996652653, guid: c7b04573f8843ec4a80f09622ea97aec, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 270558099996652653, guid: c7b04573f8843ec4a80f09622ea97aec, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

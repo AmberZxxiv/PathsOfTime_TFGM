@@ -4924,7 +4924,7 @@ MonoBehaviour:
   _PRM: {fileID: 0}
   _FRM: {fileID: 0}
   direction: 1
-  spawnTime: 0
+  spawnTime: 0.1
   spawned: 0
 --- !u!1 &5182547827939375074
 GameObject:

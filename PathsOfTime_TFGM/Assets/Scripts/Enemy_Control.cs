@@ -67,14 +67,18 @@ public class Enemy_Control : MonoBehaviour
     {
         //compruebo distancia con player
         _targetDistance = Vector3.Distance(_agent.transform.position, target.position);
-        // si esta a rango de ataque, ataco
-        if (_targetDistance <= attackRange && _canAttack)
-        { DoBASIC();}
         // cuando pilla agro, va hacia el player
         if (_targetDistance <= agroDistance)
         { _agent.SetDestination(target.position); }
         // si no, patrulla
         else Wander();
+    }
+
+    private void FixedUpdate()
+    {
+        // si esta a rango de ataque, ataco
+        if (_targetDistance <= attackRange && _canAttack)
+        { AttackFunction(); }
     }
 
     void Wander()

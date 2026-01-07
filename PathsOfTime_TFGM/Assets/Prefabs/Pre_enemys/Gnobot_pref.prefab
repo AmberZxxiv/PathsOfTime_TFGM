@@ -120,18 +120,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _MC: {fileID: 0}
+  enemyType: 0
   target: {fileID: 0}
   agroDistance: 20
   wanderRadius: 10
   attackOrigin: {fileID: 0}
   attackRange: 3
   attackDamage: 1
-  attackForce: 20
+  attackForce: 5
   wanderDelay: 2
   wanderTimer: 2
   attackCooldown: 1
+  lastAttackTimer: 0
   health: 6
-  spriteRenderer: {fileID: 0}
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   dropChance: 0.25
 --- !u!1 &3760786183897453476
