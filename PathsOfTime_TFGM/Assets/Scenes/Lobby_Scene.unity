@@ -544,10 +544,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: movSpeed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: dashForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: fallSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: jumpForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: jumpSpeed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
@@ -2864,6 +2876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
+  _WC: {fileID: 0}
   deadMenu: {fileID: 0}
   pauseMenu: {fileID: 765615810}
   victoryMenu: {fileID: 0}
@@ -2876,6 +2889,7 @@ MonoBehaviour:
   punchPow: {fileID: 5857481253972021794, guid: c8db5872919b06242a080f80f9c6d507, type: 3}
   shotPow: {fileID: 5857481253972021794, guid: 1f6d7f7b39d6e6c40a361663a3808849, type: 3}
   magicPow: {fileID: 5857481253972021794, guid: b747a7117fae59745a374661782ec985, type: 3}
+  weaponEquip: 0
 --- !u!1001 &1919122164
 PrefabInstance:
   m_ObjectHideFlags: 0

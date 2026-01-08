@@ -2743,6 +2743,7 @@ MonoBehaviour:
   bossHydra: {fileID: 7366125380966331777, guid: 287ac59b96e8ec94fb87d38faeb450a4, type: 3}
   bossAngel: {fileID: 7366125380966331777, guid: 30b3d0305474e60419517d72657b7026, type: 3}
   miniGnobot: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+  miniDronlibri: {fileID: 468121702110529948, guid: b696394931073f247b7c804dd6d2cb34, type: 3}
   minionCount: 5
 --- !u!4 &1765574036
 Transform:
@@ -2878,6 +2879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
+  _WC: {fileID: 0}
   deadMenu: {fileID: 951824162}
   pauseMenu: {fileID: 1238022334}
   victoryMenu: {fileID: 2104520575}
@@ -2890,6 +2892,7 @@ MonoBehaviour:
   punchPow: {fileID: 5857481253972021794, guid: c8db5872919b06242a080f80f9c6d507, type: 3}
   shotPow: {fileID: 5857481253972021794, guid: 1f6d7f7b39d6e6c40a361663a3808849, type: 3}
   magicPow: {fileID: 5857481253972021794, guid: b747a7117fae59745a374661782ec985, type: 3}
+  weaponEquip: 0
 --- !u!1 &1988531539
 GameObject:
   m_ObjectHideFlags: 0

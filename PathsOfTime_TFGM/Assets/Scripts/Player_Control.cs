@@ -22,6 +22,10 @@ public class Player_Control : MonoBehaviour
     bool _isStunned = false;
     float _movLateral;
     float _movFrontal;
+    public float jumpForce;
+    bool _isGrounded = true;
+    public float jumpSpeed;
+    public float fallSpeed;
     #endregion
 
     #region /// CAMERA LOCATION ///
@@ -68,6 +72,9 @@ public class Player_Control : MonoBehaviour
         // control del DASH
         if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         { DoDASH(); }
+        // si pulsamos espacio y estamos tocando suelo, aplicamos el salto
+        if (Input.GetButtonDown("Jump") && _isGrounded)
+        { DoJUMP(); }
     }
 
     private void FixedUpdate()
@@ -117,6 +124,24 @@ public class Player_Control : MonoBehaviour
             _MC.UpdateLives();
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // compruebo haber colisionado con el suelo
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            print("SUELO");
+            _isGrounded = true;
+        }
+    }
+
+    void DoJUMP()
+    {
+        //actualizamos el estado del salto, la altura y damos la fuerza
+        _isGrounded = false;
+        _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+        _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     private void DoDASH()

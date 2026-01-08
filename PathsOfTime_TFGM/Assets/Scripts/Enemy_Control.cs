@@ -14,6 +14,7 @@ public class Enemy_Control : MonoBehaviour
     public enum EnemyType
     {
         Gnobot,
+        Dronlibri,
         Hydra,
         Angel,
     }
@@ -112,6 +113,7 @@ public class Enemy_Control : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Gnobot: DoBASIC(); break;
+            case EnemyType.Dronlibri: DoBEAM(); break;
             case EnemyType.Hydra: DoBITE(); break;
             case EnemyType.Angel: DoBLESS(); break;
         }
@@ -139,7 +141,28 @@ public class Enemy_Control : MonoBehaviour
         }
     }
 
-    
+    void DoBEAM()
+    {
+        // dirección desde enemigo a player
+        Vector3 dir = target.position - attackOrigin.position;
+        dir.y = 0; dir.Normalize();
+        // limites en anchura, altura, largura y centro
+        Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
+        Vector3 center = attackOrigin.position + dir * attackRange;
+        // genero el collider y HITEO
+        Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(dir));
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Player"))
+            { // le hago cosas al PLAYER y al LiveContainer
+                _PC.health -= attackDamage;
+                _MC.UpdateLives();
+                Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
+                _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
+            }
+        }
+    }
+
     void DoBITE() //aqui tengo que poner el especial del HYDRA
     {
         // dirección desde enemigo a player

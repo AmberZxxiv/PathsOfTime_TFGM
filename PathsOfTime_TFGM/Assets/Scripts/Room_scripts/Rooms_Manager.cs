@@ -27,6 +27,7 @@ public class Rooms_Manager : MonoBehaviour
     public GameObject bossHydra;
     public GameObject bossAngel;
     public GameObject miniGnobot;
+    public GameObject miniDronlibri;
     public int minionCount;
     #endregion
 
@@ -49,28 +50,46 @@ public class Rooms_Manager : MonoBehaviour
     void SpawnEnemy()
     {
         int dungeon = PlayerPrefs.GetInt("Dungeon"); //compruebo la dungeon escogida
-        if (dungeon == 0) //Hydra aparece en ultima sala en su 00
+        if (dungeon == 0) //generacion del pasado
         {
-         Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
-        }
-        if (dungeon == 1)//Angel aparece en ultima sala en su 00
-        {
-            Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
-        }
+            //Hydra aparece en ultima sala en su 00
+            Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
 
-        // en todas menos la ultima, aparecen minions en los spawners
-        float radio = 2f;
-        for(int i = 0; i < roomMap.Count-1; i++)
-        {
-           Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
-           Vector3 center = enemySpawn.position + Vector3.up * 0.5f;
-            for (int m = 0; m < minionCount; m++)
+            // en todas menos la ultima, aparecen Gnobots en los spawners
+            float radio = 2f;
+            for (int i = 0; i < roomMap.Count - 1; i++)
             {
-               float angle = (360f / minionCount) * m;
-                Vector3 offset = new Vector3
-                (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
-                 Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
-                Instantiate(miniGnobot, center + offset, transform.rotation);
+                Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
+                Vector3 center = enemySpawn.position + Vector3.up * 0.5f;
+                for (int m = 0; m < minionCount; m++)
+                {
+                    float angle = (360f / minionCount) * m;
+                    Vector3 offset = new Vector3
+                    (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
+                     Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
+                    Instantiate(miniGnobot, center + offset, transform.rotation);
+                }
+            }
+        }
+        if (dungeon == 1) //generacion del futuro
+        {
+            //Angel aparece en ultima sala en su 00
+            Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
+
+            // en todas menos la ultima, aparecen Dronliibris en los spawners
+            float radio = 2f;
+            for (int i = 0; i < roomMap.Count - 1; i++)
+            {
+                Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
+                Vector3 center = enemySpawn.position + Vector3.up * 7.5f;
+                for (int m = 0; m < minionCount; m++)
+                {
+                    float angle = (360f / minionCount) * m;
+                    Vector3 offset = new Vector3
+                    (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
+                     Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
+                    Instantiate(miniDronlibri, center + offset, transform.rotation);
+                }
             }
         }
     }

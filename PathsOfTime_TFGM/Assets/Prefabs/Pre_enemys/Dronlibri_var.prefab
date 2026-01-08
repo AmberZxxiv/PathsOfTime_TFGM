@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7636451711651966319
+--- !u!1001 &701583439773553010
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,30 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: m_Name
-      value: Angel_var
+    - target: {fileID: 202304687226869781, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_Mass
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 202304687226869781, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: m_TagString
-      value: boss
+      propertyPath: m_Name
+      value: Dronlibri_var
       objectReference: {fileID: 0}
     - target: {fileID: 1759593054512746133, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1c62df94d659f164787322e100ec5a10, type: 3}
-    - target: {fileID: 3058846852766819351, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3058846852766819351, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3058846852766819351, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: ecfb7de2056c46048bd8870e3d9039ce, type: 3}
     - target: {fileID: 3058846852766819351, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -72,45 +64,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4048415107947427447, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: m_Speed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: health
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: enemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: dropChance
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: attackForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: attackRange
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: agroDistance
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: attackDamage
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
-      propertyPath: attackCooldown
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6019465198720560833, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

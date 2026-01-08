@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 229801431135670589}
   m_Layer: 0
   m_Name: 'Floor '
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,8 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PRM: {fileID: 0}
-  _FRM: {fileID: 0}
+  _RM: {fileID: 0}
   direction: 2
   spawnTime: 0.2
   spawned: 0
@@ -516,8 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PRM: {fileID: 0}
-  _FRM: {fileID: 0}
+  _RM: {fileID: 0}
   direction: 0
   spawnTime: 0.2
   spawned: 0
@@ -607,8 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4511188d6be3d6b40b77fe28015b077e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PRM: {fileID: 0}
-  _FRM: {fileID: 0}
+  _RM: {fileID: 0}
 --- !u!114 &-9064154535282846902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,8 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PRM: {fileID: 0}
-  _FRM: {fileID: 0}
+  _RM: {fileID: 0}
   direction: 1
   spawnTime: 0.2
   spawned: 0
@@ -834,8 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6bb142cd190c054787aac232dff576f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PRM: {fileID: 0}
-  _FRM: {fileID: 0}
+  _RM: {fileID: 0}
   direction: 3
   spawnTime: 0.2
   spawned: 0
