@@ -2,10 +2,10 @@ using UnityEngine;
 using Unity.AI.Navigation;
 using System.Collections.Generic;
 
-public class PAS_rooman : MonoBehaviour
-{// script en el empty ROM_MAN del PASADO
+public class Rooms_Manager : MonoBehaviour
+{// script en el empty ROM_MAN
  // SINGLETON script
-    public static PAS_rooman instance;
+    public static Rooms_Manager instance;
  // SINGLETON script
 
     #region /// ROOM MAN LIST ///
@@ -24,8 +24,9 @@ public class PAS_rooman : MonoBehaviour
     #endregion
 
     #region /// ENEMY SPAWNER ///
-    public GameObject bossBall;
-    public GameObject minionBall;
+    public GameObject bossHydra;
+    public GameObject bossAngel;
+    public GameObject miniGnobot;
     public int minionCount;
     #endregion
 
@@ -47,8 +48,15 @@ public class PAS_rooman : MonoBehaviour
 
     void SpawnEnemy()
     {
-        //el Boss aparece en la ultima sala de la lista en su 00
-        Instantiate(bossBall, roomMap[roomMap.Count-1].transform.position + Vector3.up * 5, transform.rotation);
+        int dungeon = PlayerPrefs.GetInt("Dungeon"); //compruebo la dungeon escogida
+        if (dungeon == 0) //Hydra aparece en ultima sala en su 00
+        {
+         Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
+        }
+        if (dungeon == 1)//Angel aparece en ultima sala en su 00
+        {
+            Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
+        }
 
         // en todas menos la ultima, aparecen minions en los spawners
         float radio = 2f;
@@ -62,7 +70,7 @@ public class PAS_rooman : MonoBehaviour
                 Vector3 offset = new Vector3
                 (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
                  Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
-                Instantiate(minionBall, center + offset, transform.rotation);
+                Instantiate(miniGnobot, center + offset, transform.rotation);
             }
         }
     }

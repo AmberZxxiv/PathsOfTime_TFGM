@@ -9,8 +9,8 @@ public class Player_Control : MonoBehaviour
  // SINGLETON script
     public static Player_Control instance;
  // SINGLETON script
-    public Weapon_Control _WC; //pillo SINGLE del MC
-    public Menus_Control _MC; //pillo SINGLE del WC
+    public Weapon_Control _WC; //pillo SINGLE del WC
+    public Menus_Control _MC; //pillo SINGLE del MC
 
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
@@ -24,17 +24,18 @@ public class Player_Control : MonoBehaviour
     float _movFrontal;
     #endregion
 
-    //Esto es pa mover la camara con el rat�n
+    #region /// CAMERA LOCATION ///
     public float mouseSensitivity;
     private float mouseRotation = 0f;
     public Transform cameraTransform;
+    #endregion
 
     public float health;
 
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
-        if (instance == null) { instance = this; /*DontDestroyOnLoad(gameObject)*/; }
+        if (instance == null) { instance = this; }
         else Destroy(gameObject);
     }
 
@@ -91,13 +92,13 @@ public class Player_Control : MonoBehaviour
         {
             print("Lista para dar el salto?");
         }
-        if (other.CompareTag("PORpas")) //cogemos dungeon pasado y cargamos escena
+        if (other.CompareTag("PORpas")) //guardamos dungeon pasado y cargamos escena
         {
             PlayerPrefs.SetInt("Dungeon", 0);
             PlayerPrefs.Save();
             SceneManager.LoadScene(2);
         }
-        if (other.CompareTag("PORfut")) //cogemos dungeon futuro y cargamos escena
+        if (other.CompareTag("PORfut")) //guardamos dungeon futuro y cargamos escena
         {
             PlayerPrefs.SetInt("Dungeon", 1);
             PlayerPrefs.Save();

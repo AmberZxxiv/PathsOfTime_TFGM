@@ -10,6 +10,7 @@ public class Weapon_Control : MonoBehaviour
     public static Weapon_Control instance;
  // SINGLETON script
     public Player_Control _PC; //pillo SINGLE del PC
+    public Menus_Control _MC; //pillo SINGLE del MC
 
     public WeaponType weapon;
     public enum WeaponType
@@ -31,14 +32,6 @@ public class Weapon_Control : MonoBehaviour
     public GameObject magicPref;
     #endregion
 
-    #region /// UI MARKERS ///
-    public GameObject uiPower;
-    public GameObject swordPow;
-    public GameObject punchPow;
-    public GameObject shotPow;
-    public GameObject magicPow;
-    #endregion
-
     #region /// GIZDRAW MARKERS ///
     WeaponType gizToDraw = WeaponType.None;
     Vector3 gizCenter;
@@ -53,52 +46,31 @@ public class Weapon_Control : MonoBehaviour
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
-        if (instance == null) { instance = this; DontDestroyOnLoad(this.gameObject); }
+        if (instance == null) 
+        { instance = this; DontDestroyOnLoad(this.gameObject); }
         else Destroy(gameObject);
     }
 
     void Start()
-    {
-        Invoke("EquipWeapon", 1f); // equipo arma inicial
-    }
+    { }
 
     void Update()
     {
-        //me aseguro que coge el origen si lo pierde
-        if (_PC == null)
-        { _PC = Player_Control.instance; }
-        if (attackOrigin == null)
-        { attackOrigin = _PC.transform; }
+        //ASEGURO SINGLES AL CAMBIAR ESCENA
+        if (_PC == null) { _PC = Player_Control.instance; }
+        if (_MC == null) { _MC = Menus_Control.instance; }
+        if (attackOrigin == null) { attackOrigin = _PC.transform; }
         // clic IZD ataca
         if (Input.GetMouseButton(0))
-        {
-            AttackFunction();
-        }
+        { AttackFunction(); }
     }
 
     public void NewWeapon(WeaponType newWeapon) //igualo al trigger del POW_GIVER
     {
         weapon = newWeapon;
-        EquipWeapon();
+        _MC.EquipWeapon(newWeapon); //cambio el UI del Menu_Control
     }
-     public void EquipWeapon()
-    {
-        // elimino el marcador del anterior weapon
-        foreach (Transform child in uiPower.transform)
-        { Destroy(child.gameObject); }
-        // declaro el weapon que voy a instanciar en la UI
-        GameObject iconToInstantiate = null;
-        switch (weapon)
-        {
-           case WeaponType.None: return;
-           case WeaponType.Sword:iconToInstantiate = swordPow; break;
-           case WeaponType.Punch: iconToInstantiate = punchPow; break;
-           case WeaponType.Shot: iconToInstantiate = shotPow; break;
-           case WeaponType.Magic: iconToInstantiate = magicPow; break;
-        }
-        Instantiate(iconToInstantiate, uiPower.transform);
-    }
-
+     
     void AttackFunction()
     {
         // compruebo el tiempo del cooldown

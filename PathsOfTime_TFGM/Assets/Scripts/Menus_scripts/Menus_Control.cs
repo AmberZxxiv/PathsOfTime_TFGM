@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Weapon_Control;
 
 public class Menus_Control : MonoBehaviour
 { // script en el canvas de cada escena
@@ -8,14 +9,28 @@ public class Menus_Control : MonoBehaviour
     public static Menus_Control instance;
   // SINGLETON script
     public Player_Control _PC; //pillo SINGLE del PC
+    public Weapon_Control _WC; //pillo SINGLE del WC
+
 
     public GameObject deadMenu;
     public GameObject pauseMenu;
     public GameObject victoryMenu;
+
+    #region /// HEARTS UI ///
     public List<Hearts_Eater> actualLives = new List<Hearts_Eater>();
     public GameObject heartPrefab;
     public GameObject heartContainer;
     public float heartRadio;
+    #endregion
+
+    #region /// WEAPONS UI ///
+    public GameObject weaponContainer;
+    public GameObject swordPow;
+    public GameObject punchPow;
+    public GameObject shotPow;
+    public GameObject magicPow;
+    public Weapon_Control.WeaponType weaponEquip;
+    #endregion
 
     void Awake()
     {// awake para instanciar singleton sin superponer varios
@@ -25,10 +40,14 @@ public class Menus_Control : MonoBehaviour
 
     void Start()
     {
-        // pillo el singleton del Player
+        // pillo los singles
         _PC = Player_Control.instance;
+        _WC = Weapon_Control.instance;
         Time.timeScale = 1;
         LiveContainer();
+        // equipo arma inicial
+        weaponEquip = _WC.weapon;
+        EquipWeapon(weaponEquip); 
     }
 
     void Update()
@@ -57,9 +76,26 @@ public class Menus_Control : MonoBehaviour
         }
     }
 
+    public void EquipWeapon(WeaponType weapon) //llamo Weapon_Control para mostrar arma equipada
+    {
+        // elimino el marcador del anterior weapon
+        foreach (Transform child in weaponContainer.transform)
+        { Destroy(child.gameObject); }
+        // declaro el weapon que voy a instanciar en la UI
+        GameObject iconToInstantiate = null;
+        switch (weapon)
+        {
+            case WeaponType.None: return;
+            case WeaponType.Sword: iconToInstantiate = swordPow; break;
+            case WeaponType.Punch: iconToInstantiate = punchPow; break;
+            case WeaponType.Shot: iconToInstantiate = shotPow; break;
+            case WeaponType.Magic: iconToInstantiate = magicPow; break;
+        }
+        Instantiate(iconToInstantiate, weaponContainer.transform);
+    }
+
     void LiveContainer()
     {
-        if (_PC == null) return;
         for (int i = 0; i < (_PC.health*0.5f); i++)
         { // instancio corazones en circulo
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);

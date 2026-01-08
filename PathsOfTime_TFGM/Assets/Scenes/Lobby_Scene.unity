@@ -497,7 +497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 246339425}
   m_Layer: 5
-  m_Name: EquipPow
+  m_Name: WeaponContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,17 +744,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
+  _MC: {fileID: 0}
   weapon: 0
   attackOrigin: {fileID: 0}
   swordPref: {fileID: 4424006084866504917, guid: 21c83cbbfcb5e7a4f8f9e983876414c1, type: 3}
   punchPref: {fileID: 4424006084866504917, guid: 0c175cc03568c1a4e9b979ef637d4ef2, type: 3}
   shotPref: {fileID: 277156950887219106, guid: bdd0ef7152a37f749a81a03e522b0593, type: 3}
   magicPref: {fileID: 4424006084866504917, guid: cfa706704071a4d46a378e08448a586f, type: 3}
-  uiPower: {fileID: 246339424}
-  swordPow: {fileID: 5857481253972021794, guid: 01e6ca1ca5954a341a3e55f1c92af89d, type: 3}
-  punchPow: {fileID: 5857481253972021794, guid: c8db5872919b06242a080f80f9c6d507, type: 3}
-  shotPow: {fileID: 5857481253972021794, guid: 1f6d7f7b39d6e6c40a361663a3808849, type: 3}
-  magicPow: {fileID: 5857481253972021794, guid: b747a7117fae59745a374661782ec985, type: 3}
   attackCooldown: 0.55
   lastAttackTimer: 0
 --- !u!4 &313976407
@@ -2875,6 +2871,11 @@ MonoBehaviour:
   heartPrefab: {fileID: 5544477635962534840, guid: 38f0452b8a071df449b39fa054fe910a, type: 3}
   heartContainer: {fileID: 345697881}
   heartRadio: 110
+  weaponContainer: {fileID: 246339424}
+  swordPow: {fileID: 5857481253972021794, guid: 01e6ca1ca5954a341a3e55f1c92af89d, type: 3}
+  punchPow: {fileID: 5857481253972021794, guid: c8db5872919b06242a080f80f9c6d507, type: 3}
+  shotPow: {fileID: 5857481253972021794, guid: 1f6d7f7b39d6e6c40a361663a3808849, type: 3}
+  magicPow: {fileID: 5857481253972021794, guid: b747a7117fae59745a374661782ec985, type: 3}
 --- !u!1001 &1919122164
 PrefabInstance:
   m_ObjectHideFlags: 0
