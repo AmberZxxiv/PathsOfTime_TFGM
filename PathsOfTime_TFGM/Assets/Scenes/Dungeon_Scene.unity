@@ -2738,7 +2738,7 @@ MonoBehaviour:
   closedRoom: {fileID: 3577886435829724, guid: 454e16c02ae360845aad6fb0dd41d3f0, type: 3}
   roomMap: []
   roomsSpawned: 0
-  maxRooms: 10
+  maxRooms: 15
   surface: {fileID: 2141270859}
   bossHydra: {fileID: 7366125380966331777, guid: 287ac59b96e8ec94fb87d38faeb450a4, type: 3}
   bossAngel: {fileID: 7366125380966331777, guid: 30b3d0305474e60419517d72657b7026, type: 3}
