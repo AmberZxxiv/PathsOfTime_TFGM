@@ -216,7 +216,7 @@ public class Enemy_Control : MonoBehaviour
             { _MC.ShowVictory(); }
             if (Random.value <= dropChance)
             {
-                Instantiate(healCherry, transform.position + Vector3.up * 2, transform.rotation);
+                Instantiate(healCherry, transform.position + Vector3.up * 1, transform.rotation);
             }
             Destroy(gameObject);
         }

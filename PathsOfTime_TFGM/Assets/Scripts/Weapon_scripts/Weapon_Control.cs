@@ -138,7 +138,7 @@ public class Weapon_Control : MonoBehaviour
         Vector3 dir = cam.forward.normalized;
 
         // limites del rectangulo en anchura, altura y largura
-        Vector3 halfExtents = new Vector3(1f, 1f, 5f);
+        Vector3 halfExtents = new Vector3(0.75f, 0.75f, 3.5f);
         // centro el box del ataque a mitad distancia
         float attackLength = halfExtents.z;
         Vector3 attackCenter = attackOrigin.position + dir * attackLength;
