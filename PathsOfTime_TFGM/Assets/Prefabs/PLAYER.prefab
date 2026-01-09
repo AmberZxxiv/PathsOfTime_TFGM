@@ -322,12 +322,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _WC: {fileID: 0}
   _MC: {fileID: 0}
-  movSpeed: 10
+  movSpeed: 15
   dashForce: 15
   dashCooldown: 0.35
   jumpForce: 5
-  jumpSpeed: 2.5
-  fallSpeed: 2.5
+  jumpSpeed: 10
+  fallSpeed: 10
   mouseSensitivity: 1.5
   cameraTransform: {fileID: 8028699948671482168}
   health: 10
