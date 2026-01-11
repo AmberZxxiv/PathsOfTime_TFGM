@@ -80,7 +80,7 @@ public class Player_Control : MonoBehaviour
     private void FixedUpdate()
     {
         if (_isStunned) return; // si me limpian el movimiento no hago nada
-        if (!_isDashing) // cuando dasheo no controlo el movimiento
+        if (!_isDashing || !_isGrounded) // cuando dasheo y salto NO controlo el movimiento
         {
             // aqui damos los valores del movimiento
             Vector3 playerMovement = (transform.right * _movLateral + transform.forward * _movFrontal);
@@ -131,8 +131,12 @@ public class Player_Control : MonoBehaviour
         // compruebo haber colisionado con el suelo
         if (collision.gameObject.CompareTag("ground"))
         {
-            print("SUELO");
             _isGrounded = true;
+        }
+        // si choco con algo mortal, me quito las vidas
+        if (collision.gameObject.CompareTag("deadly"))
+        {
+            health = 0;
         }
     }
 
@@ -141,7 +145,7 @@ public class Player_Control : MonoBehaviour
         //actualizamos el estado del salto, la altura y damos la fuerza
         _isGrounded = false;
         _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
-        _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
     }
 
     private void DoDASH()

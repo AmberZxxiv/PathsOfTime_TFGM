@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Weapon_Control;
 
 public class Menus_Control : MonoBehaviour
 { // script en el canvas de cada escena
@@ -10,7 +9,6 @@ public class Menus_Control : MonoBehaviour
   // SINGLETON script
     public Player_Control _PC; //pillo SINGLE del PC
     public Weapon_Control _WC; //pillo SINGLE del WC
-
 
     public GameObject deadMenu;
     public GameObject pauseMenu;
@@ -29,7 +27,7 @@ public class Menus_Control : MonoBehaviour
     public GameObject punchPow;
     public GameObject shotPow;
     public GameObject magicPow;
-    public Weapon_Control.WeaponType weaponEquip;
+    public Weapon_Control.WeaponType weaponType;
     #endregion
 
     void Awake()
@@ -46,19 +44,13 @@ public class Menus_Control : MonoBehaviour
         Time.timeScale = 1;
         LiveContainer();
         // equipo arma inicial
-        weaponEquip = _WC.weapon;
-        EquipWeapon(weaponEquip); 
+        EquipWeapon(weaponType); 
     }
 
     void Update()
     {
         if (_PC != null && _PC.health <= 0)
-        {
-            deadMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            Time.timeScale = 0;
-        }
+        { ShowDead(); }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -76,7 +68,7 @@ public class Menus_Control : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(WeaponType weapon) //llamo Weapon_Control para mostrar arma equipada
+    public void EquipWeapon(Weapon_Control.WeaponType weapon) //llamo Weapon_Control para mostrar arma equipada
     {
         // elimino el marcador del anterior weapon
         foreach (Transform child in weaponContainer.transform)
@@ -85,11 +77,11 @@ public class Menus_Control : MonoBehaviour
         GameObject iconToInstantiate = null;
         switch (weapon)
         {
-            case WeaponType.None: return;
-            case WeaponType.Sword: iconToInstantiate = swordPow; break;
-            case WeaponType.Punch: iconToInstantiate = punchPow; break;
-            case WeaponType.Shot: iconToInstantiate = shotPow; break;
-            case WeaponType.Magic: iconToInstantiate = magicPow; break;
+            case Weapon_Control.WeaponType.None: return;
+            case Weapon_Control.WeaponType.Sword: iconToInstantiate = swordPow; break;
+            case Weapon_Control.WeaponType.Punch: iconToInstantiate = punchPow; break;
+            case Weapon_Control.WeaponType.Shot: iconToInstantiate = shotPow; break;
+            case Weapon_Control.WeaponType.Magic: iconToInstantiate = magicPow; break;
         }
         Instantiate(iconToInstantiate, weaponContainer.transform);
     }
@@ -132,13 +124,21 @@ public class Menus_Control : MonoBehaviour
         }
     }
 
-    public void ShowVictory() //lo llamo desde el TakeDamage del Enemy Boss
+    public void ShowVictory() //llamo desde TakeDamage de Enemy Boss
     {
         victoryMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0;
 
+    }
+
+    public void ShowDead()
+    {
+        deadMenu.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        Time.timeScale = 0;
     }
 
     public void QuitPause()
