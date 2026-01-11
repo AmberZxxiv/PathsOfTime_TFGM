@@ -330,7 +330,7 @@ MonoBehaviour:
   fallSpeed: 15
   mouseSensitivity: 1.5
   cameraTransform: {fileID: 8028699948671482168}
-  health: 10
+  playerHealth: 10
 --- !u!54 &95219399892648931
 Rigidbody:
   m_ObjectHideFlags: 0

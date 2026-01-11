@@ -26,7 +26,7 @@ public class Spell_Caster : MonoBehaviour
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
 
             // reset fisico
-            agent.enabled = false;
+            agent.isStopped = true;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
@@ -35,13 +35,13 @@ public class Spell_Caster : MonoBehaviour
             rb.AddForce(transform.forward * 2.5f, ForceMode.Impulse);
 
             //reactivar IA
-            StartCoroutine(ReactivateAgent(agent, 0.2f));
+            StartCoroutine(ResumeAgent(agent, 0.2f));
             // tener referencia visual y tiempo para activar el _agent
             StartCoroutine(DestroyAfterDelay(0.5f));
         }
        
     }
-    IEnumerator ReactivateAgent(NavMeshAgent agent, float delay)
+    IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
     {
         yield return new WaitForSeconds(delay);
         agent.enabled = true;

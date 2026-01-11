@@ -132,7 +132,7 @@ MonoBehaviour:
   wanderTimer: 2
   attackCooldown: 1
   lastAttackTimer: 0
-  health: 6
+  enemyHealth: 6
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   dropChance: 0.25
 --- !u!1 &3760786183897453476

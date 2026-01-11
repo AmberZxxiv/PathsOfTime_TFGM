@@ -34,7 +34,7 @@ public class Player_Control : MonoBehaviour
     public Transform cameraTransform;
     #endregion
 
-    public float health;
+    public float playerHealth;
 
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
@@ -118,10 +118,10 @@ public class Player_Control : MonoBehaviour
             _WC.NewWeapon(power.newWeapon);
         }
 
-        if (other.CompareTag("heal") && health != 10) // pillo heal si no estoy a tope
+        if (other.CompareTag("heal") && playerHealth != 10) // pillo heal si no estoy a tope
         {
-            health += 1;
-            _MC.UpdateLives();
+            playerHealth += 1;
+            _MC.UpdateLives(playerHealth);
             Destroy(other.gameObject);
         }
     }
@@ -136,7 +136,9 @@ public class Player_Control : MonoBehaviour
         // si choco con algo mortal, me quito las vidas
         if (collision.gameObject.CompareTag("deadly"))
         {
-            health = 0;
+            playerHealth -= 10;
+            _MC.UpdateLives(playerHealth);
+            _MC.ShowDead();
         }
     }
 

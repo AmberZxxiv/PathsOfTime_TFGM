@@ -117,7 +117,7 @@ public class Weapon_Control : MonoBehaviour
                 Enemy_Control enemy = hit.GetComponent<Enemy_Control>();
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 // reset físico para que les afecte el impulso
-                agent.enabled = false;
+                agent.isStopped = true;
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 // HITEO
@@ -125,7 +125,7 @@ public class Weapon_Control : MonoBehaviour
                 rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
                 rb.AddExplosionForce(2f, attackCenter, 2f, 2f, ForceMode.Impulse);
                 //reactivar IA
-                StartCoroutine(ReactivateAgent(agent, 0.5f));
+                StartCoroutine(ResumeAgent(agent, 0.5f));
             }
         }
     }
@@ -168,7 +168,7 @@ public class Weapon_Control : MonoBehaviour
                 Enemy_Control enemy = hit.GetComponent<Enemy_Control>();
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 // reset físico para que les afecte el impulso
-                agent.enabled = false;
+                agent.isStopped = true;
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 // HITEO
@@ -177,7 +177,7 @@ public class Weapon_Control : MonoBehaviour
                 kickDir.Normalize();
                 rb.AddForce(kickDir * 7f, ForceMode.Impulse);
                 //reactivar IA
-                StartCoroutine(ReactivateAgent(agent, 0.5f));
+                StartCoroutine(ResumeAgent(agent, 0.5f));
             }
         }
     }
@@ -242,7 +242,7 @@ public class Weapon_Control : MonoBehaviour
         }
     }
 
-    IEnumerator ReactivateAgent(NavMeshAgent agent, float delay)
+    IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
     { // pa reactivar la IA tras el hit
         yield return new WaitForSeconds(delay);
         agent.enabled = true;

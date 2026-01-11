@@ -27,7 +27,6 @@ public class Menus_Control : MonoBehaviour
     public GameObject punchPow;
     public GameObject shotPow;
     public GameObject magicPow;
-    public Weapon_Control.WeaponType weaponType;
     #endregion
 
     void Awake()
@@ -42,16 +41,13 @@ public class Menus_Control : MonoBehaviour
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
         Time.timeScale = 1;
-        LiveContainer();
+        LiveContainer(_PC.playerHealth);
         // equipo arma inicial
-        EquipWeapon(weaponType); 
+        EquipWeapon(_WC.weapon); 
     }
 
     void Update()
     {
-        if (_PC != null && _PC.health <= 0)
-        { ShowDead(); }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenu.activeSelf)
@@ -66,6 +62,8 @@ public class Menus_Control : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+        if (_PC.playerHealth <= 0)
+        { ShowDead(); }
     }
 
     public void EquipWeapon(Weapon_Control.WeaponType weapon) //llamo Weapon_Control para mostrar arma equipada
@@ -86,36 +84,34 @@ public class Menus_Control : MonoBehaviour
         Instantiate(iconToInstantiate, weaponContainer.transform);
     }
 
-    void LiveContainer()
+    void LiveContainer(float playerHealth)
     {
-        for (int i = 0; i < (_PC.health*0.5f); i++)
+        for (int i = 0; i < (_PC.playerHealth*0.5f); i++)
         { // instancio corazones en circulo
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
             RectTransform rt = heart.GetComponent<RectTransform>();
-            float angulo = (360f / (_PC.health * 0.5f)) * i;
+            float angulo = (360f / (_PC.playerHealth * 0.5f)) * i;
             float rad = angulo * Mathf.Deg2Rad;
             float x = Mathf.Cos(rad) * heartRadio;
             float y = Mathf.Sin(rad) * heartRadio;
             rt.anchoredPosition = new Vector2(x, y);
             actualLives.Add(heart.GetComponent<Hearts_Eater>());
         }
-        UpdateLives();
+        UpdateLives(_PC.playerHealth);
     }
-    public void UpdateLives()
+    public void UpdateLives(float playerHealth)
     {
-        float remaining = _PC.health;
-
         foreach (Hearts_Eater cupcake in actualLives)
         {
-            if (remaining >= 2)
+            if (playerHealth >= 2)
             {
                 cupcake.EatHeart(2);
-                remaining -= 2;
+                playerHealth -= 2;
             }
-            else if (remaining == 1)
+            else if (playerHealth == 1)
             {
                 cupcake.EatHeart(1);
-                remaining -= 1;
+                playerHealth -= 1;
             }
             else
             {

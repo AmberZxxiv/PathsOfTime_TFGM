@@ -41,7 +41,7 @@ public class Enemy_Control : MonoBehaviour
     #endregion
 
     #region /// HEALTH STATUS ///
-    public float health;
+    public float enemyHealth;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
     public GameObject healCherry;
@@ -132,8 +132,8 @@ public class Enemy_Control : MonoBehaviour
         {
             if (hit.CompareTag("Player"))
             { // le hago cosas al PLAYER y al LiveContainer
-                _PC.health -= attackDamage;
-                _MC.UpdateLives();
+                _PC.playerHealth -= attackDamage;
+                _MC.UpdateLives(_PC.playerHealth);
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
             }
@@ -154,8 +154,8 @@ public class Enemy_Control : MonoBehaviour
         {
             if (hit.CompareTag("Player"))
             { // le hago cosas al PLAYER y al LiveContainer
-                _PC.health -= attackDamage;
-                _MC.UpdateLives();
+                _PC.playerHealth -= attackDamage;
+                _MC.UpdateLives(_PC.playerHealth);
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
             }
@@ -176,8 +176,8 @@ public class Enemy_Control : MonoBehaviour
         {
             if (hit.CompareTag("Player"))
             { // le hago cosas al PLAYER y al LiveContainer
-                _PC.health -= attackDamage;
-                _MC.UpdateLives();
+                _PC.playerHealth -= attackDamage;
+                _MC.UpdateLives(_PC.playerHealth);
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
             }
@@ -197,8 +197,8 @@ public class Enemy_Control : MonoBehaviour
         {
             if (hit.CompareTag("Player"))
             { // le hago cosas al PLAYER y al LiveContainer
-                _PC.health -= attackDamage;
-                _MC.UpdateLives();
+                _PC.playerHealth -= attackDamage;
+                _MC.UpdateLives(_PC.playerHealth);
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
             }
@@ -208,8 +208,8 @@ public class Enemy_Control : MonoBehaviour
     public void TakeDamage(float damage)//llamo desde WEAPON para hitear enemys
     {
         StartCoroutine(FlashDamage());
-        health -= damage;
-        if (health <= 0)
+        enemyHealth -= damage;
+        if (enemyHealth <= 0)
         {
             if (CompareTag("boss"))
             { _MC.ShowVictory(); }
