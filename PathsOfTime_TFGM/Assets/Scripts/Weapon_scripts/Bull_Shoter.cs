@@ -43,7 +43,7 @@ public class Bull_Shoter : MonoBehaviour
     IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
     {
         yield return new WaitForSeconds(delay);
-        agent.enabled = true;
+        if (agent != null) agent.isStopped = false;
     }
 
     IEnumerator DestroyAfterDelay(float delay)

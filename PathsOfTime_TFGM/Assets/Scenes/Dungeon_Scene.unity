@@ -2312,7 +2312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _MC: {fileID: 0}
-  weapon: 2
+  weapon: 4
   attackOrigin: {fileID: 0}
   swordPref: {fileID: 4424006084866504917, guid: 21c83cbbfcb5e7a4f8f9e983876414c1, type: 3}
   punchPref: {fileID: 4424006084866504917, guid: 0c175cc03568c1a4e9b979ef637d4ef2, type: 3}

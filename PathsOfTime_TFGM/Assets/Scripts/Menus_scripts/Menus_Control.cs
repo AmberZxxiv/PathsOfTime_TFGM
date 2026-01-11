@@ -41,9 +41,9 @@ public class Menus_Control : MonoBehaviour
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
         Time.timeScale = 1;
-        LiveContainer(_PC.playerHealth);
+        if (_PC != null) LiveContainer(_PC.playerHealth);
         // equipo arma inicial
-        EquipWeapon(_WC.weapon); 
+        if (_WC != null) EquipWeapon(_WC.weapon); 
     }
 
     void Update()
@@ -62,7 +62,7 @@ public class Menus_Control : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
-        if (_PC.playerHealth <= 0)
+        if (_PC != null && _PC.playerHealth <= 0)
         { ShowDead(); }
     }
 

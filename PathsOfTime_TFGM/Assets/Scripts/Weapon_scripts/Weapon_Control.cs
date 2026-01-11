@@ -245,6 +245,6 @@ public class Weapon_Control : MonoBehaviour
     IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
     { // pa reactivar la IA tras el hit
         yield return new WaitForSeconds(delay);
-        agent.enabled = true;
+        if (agent != null) agent.isStopped = false;
     }
 }
