@@ -80,7 +80,7 @@ public class Player_Control : MonoBehaviour
     private void FixedUpdate()
     {
         if (_isStunned) return; // si me limpian el movimiento no hago nada
-        if (!_isDashing || !_isGrounded) // cuando dasheo y salto NO controlo el movimiento
+        if (!_isDashing /*|| !_isGrounded*/) // cuando dasheo y salto NO controlo el movimiento
         {
             // aqui damos los valores del movimiento
             Vector3 playerMovement = (transform.right * _movLateral + transform.forward * _movFrontal);

@@ -2720,21 +2720,25 @@ MonoBehaviour:
   - {fileID: 7443176066029446252, guid: 0c8ad007b232e4b4496a5e5f57fef9c8, type: 3}
   - {fileID: 1581574603929288141, guid: 126123985f0ee8e4395dec3606488bc4, type: 3}
   - {fileID: 8534670604316156348, guid: d60b7588f38e1df468e0495052dd1033, type: 3}
+  - {fileID: 8843121236005786612, guid: 79f92548b66a0b1479615d2e40ea5729, type: 3}
   room1X:
   - {fileID: 4893934952092034725, guid: c8126e34362b7df478c32c389cffd0b3, type: 3}
   - {fileID: 5791167151712167949, guid: b386be3d07f18154f9365a035ce2e80f, type: 3}
   - {fileID: 3806522924259177281, guid: f06eb4434788dec4d9510f51dc70af8c, type: 3}
   - {fileID: 8534670604316156348, guid: d60b7588f38e1df468e0495052dd1033, type: 3}
+  - {fileID: 8843121236005786612, guid: 79f92548b66a0b1479615d2e40ea5729, type: 3}
   room0z:
   - {fileID: 7976255950890531712, guid: f2876be7bfca06248b41ff4470db516e, type: 3}
   - {fileID: 7443176066029446252, guid: 0c8ad007b232e4b4496a5e5f57fef9c8, type: 3}
   - {fileID: 3001740126394293733, guid: 153e6a07f87d4c548ac684ffd4512203, type: 3}
   - {fileID: 8534670604316156348, guid: d60b7588f38e1df468e0495052dd1033, type: 3}
+  - {fileID: 8843121236005786612, guid: 79f92548b66a0b1479615d2e40ea5729, type: 3}
   room0x:
   - {fileID: 1716317419820948007, guid: 872d3e9b24aec8c41b52ba91a9995b4a, type: 3}
   - {fileID: 5791167151712167949, guid: b386be3d07f18154f9365a035ce2e80f, type: 3}
   - {fileID: 3234843826888220134, guid: 99d7a962843ebd74ab7717fe0bf0634c, type: 3}
   - {fileID: 8534670604316156348, guid: d60b7588f38e1df468e0495052dd1033, type: 3}
+  - {fileID: 8843121236005786612, guid: 79f92548b66a0b1479615d2e40ea5729, type: 3}
   closedRoom: {fileID: 3577886435829724, guid: 454e16c02ae360845aad6fb0dd41d3f0, type: 3}
   roomMap: []
   roomsSpawned: 0
@@ -3142,7 +3146,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -3225,7 +3229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8154340026326034547, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.61
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 8154340026326034547, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: m_LocalPosition.z
