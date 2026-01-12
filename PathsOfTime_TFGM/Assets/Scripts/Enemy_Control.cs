@@ -109,22 +109,6 @@ public class Enemy_Control : MonoBehaviour
             }
         }
     }
-
-    void FlyToTarget()
-    {
-        Vector3 targetPos = target.position;
-        targetPos.y += flyHeight;
-        transform.position = Vector3.MoveTowards
-        (transform.position,targetPos,flySpeed * Time.deltaTime);
-        transform.LookAt(targetPos);
-    }
-    void FlyWander()
-    {
-        Vector3 floatPos = transform.position;
-        floatPos.y = Mathf.Sin(Time.time) * 0.5f + flyHeight;
-        transform.position = Vector3.Lerp
-        (transform.position,floatPos,Time.deltaTime);
-    }
     void GroundWander()
     {
         //empiezo el conteo para cambiar de posicion
@@ -136,7 +120,6 @@ public class Enemy_Control : MonoBehaviour
             wanderTimer = wanderDelay;
         }
     }
-
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     { 
         // genero Vector3 en el radio del enemigo y le devuelve un objetivo
@@ -145,6 +128,21 @@ public class Enemy_Control : MonoBehaviour
         NavMeshHit navHit;
         bool found = NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
         return !found ? origin : navHit.position;
+    }
+    void FlyToTarget()
+    {
+        Vector3 targetPos = target.position;
+        targetPos.y += flyHeight;
+        transform.position = Vector3.MoveTowards
+        (transform.position, targetPos, flySpeed * Time.deltaTime);
+        transform.LookAt(targetPos);
+    }
+    void FlyWander()
+    {
+        Vector3 floatPos = transform.position;
+        floatPos.y = Mathf.Sin(Time.time) * 0.5f + flyHeight;
+        transform.position = Vector3.Lerp
+        (transform.position, floatPos, Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -161,10 +159,15 @@ public class Enemy_Control : MonoBehaviour
         // activo el ataque correspondiente al weapon equipado
         switch (enemyType)
         {
-            case EnemyType.Gnobot: DoBASIC(); break;
-            case EnemyType.Dronlibri: DoBEAM(); break;
-            case EnemyType.Hydra: DoBITE(); break;
-            case EnemyType.Angel: DoBLESS(); break;
+            case EnemyType.Gnobot:
+            case EnemyType.Hydra:
+                DoBASIC();
+                break;
+
+            case EnemyType.Dronlibri:
+            case EnemyType.Angel:
+                DoBEAM();
+                break;
         }
     }
 
@@ -191,49 +194,6 @@ public class Enemy_Control : MonoBehaviour
     }
 
     void DoBEAM()
-    {
-        // dirección desde enemigo a player
-        Vector3 dir = target.position - attackOrigin.position;
-        dir.y = 0; dir.Normalize();
-        // limites en anchura, altura, largura y centro
-        Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
-        Vector3 center = attackOrigin.position + dir * attackRange;
-        // genero el collider y HITEO
-        Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(dir));
-        foreach (Collider hit in hits)
-        {
-            if (hit.CompareTag("Player"))
-            { // le hago cosas al PLAYER y al LiveContainer
-                _PC.playerHealth -= attackDamage;
-                _MC.UpdateLives(_PC.playerHealth);
-                Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
-                _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
-            }
-        }
-    }
-
-    void DoBITE() //aqui tengo que poner el especial del HYDRA
-    {
-        // dirección desde enemigo a player
-        Vector3 dir = target.position - attackOrigin.position;
-        dir.y = 0; dir.Normalize();
-        // limites en anchura, altura, largura y centro
-        Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
-        Vector3 center = attackOrigin.position + dir * attackRange;
-        // genero el collider y HITEO
-        Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(dir));
-        foreach (Collider hit in hits)
-        {
-            if (hit.CompareTag("Player"))
-            { // le hago cosas al PLAYER y al LiveContainer
-                _PC.playerHealth -= attackDamage;
-                _MC.UpdateLives(_PC.playerHealth);
-                Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
-                _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
-            }
-        }
-    }
-    void DoBLESS() //aqui tengo que poner el especial del ANGEL
     {
         // dirección desde enemigo a player
         Vector3 dir = target.position - attackOrigin.position;
