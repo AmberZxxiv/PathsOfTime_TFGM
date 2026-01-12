@@ -22,6 +22,8 @@ public class Enemy_Control : MonoBehaviour
     public Transform target;
     public float agroDistance;
     public float wanderRadius;
+    public float flySpeed;
+    public float flyHeight;
     float _targetDistance;
     #endregion
 
@@ -54,13 +56,19 @@ public class Enemy_Control : MonoBehaviour
         //pillo SINGLEs del PC y MC
         _PC = Player_Control.instance;
         _MC = Menus_Control.instance;
-        // desde donde se van a generar los ataques
-        if (attackOrigin == null)
-        { attackOrigin = this.transform; }
-        target = _PC.transform; // le doy el transform del PC como target
-        _agent = GetComponent<NavMeshAgent>(); //pillo IA propia
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); //pillo SPRITE del hijo
-        _originalColor = _spriteRenderer.color; // asignamos color a cada enemigo
+        // pillo NavMesh si tiene Humanoid agent
+        switch (enemyType)
+        {
+            case EnemyType.Gnobot:
+            case EnemyType.Hydra:
+            _agent = GetComponent<NavMeshAgent>();
+            break;
+        }
+        // pillo su origen, el objetivo y los colores
+        attackOrigin = this.transform;
+        target = _PC.transform;
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _originalColor = _spriteRenderer.color;
     }
 
     void Update()
@@ -69,19 +77,55 @@ public class Enemy_Control : MonoBehaviour
         _targetDistance = Vector3.Distance(_agent.transform.position, target.position);
         // cuando pilla agro, va hacia el player
         if (_targetDistance <= agroDistance)
-        { _agent.SetDestination(target.position); }
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Gnobot:
+                case EnemyType.Hydra:
+                    _agent.SetDestination(target.position);
+                    break;
+
+                case EnemyType.Dronlibri:
+                case EnemyType.Angel:
+                    FlyToTarget();
+                    break;
+            }
+
+        }
         // si no, patrulla
-        else Wander();
+        else
+        {
+            switch (enemyType)
+            {
+                case EnemyType.Gnobot:
+                case EnemyType.Hydra:
+                    GroundWander();
+                    break;
+
+                case EnemyType.Dronlibri:
+                case EnemyType.Angel:
+                    FlyWander();
+                    break;
+            }
+        }
     }
 
-    private void FixedUpdate()
+    void FlyToTarget()
     {
-        // si esta a rango de ataque, ataco
-        if (_targetDistance <= attackRange && _canAttack)
-        { AttackFunction(); }
+        Vector3 targetPos = target.position;
+        targetPos.y += flyHeight;
+        transform.position = Vector3.MoveTowards
+        (transform.position,targetPos,flySpeed * Time.deltaTime);
+        transform.LookAt(targetPos);
     }
-
-    void Wander()
+    void FlyWander()
+    {
+        Vector3 floatPos = transform.position;
+        floatPos.y = Mathf.Sin(Time.time) * 0.5f + flyHeight;
+        transform.position = Vector3.Lerp
+        (transform.position,floatPos,Time.deltaTime);
+    }
+    void GroundWander()
     {
         //empiezo el conteo para cambiar de posicion
         wanderTimer -=Time.deltaTime;
@@ -103,6 +147,12 @@ public class Enemy_Control : MonoBehaviour
         return !found ? origin : navHit.position;
     }
 
+    private void FixedUpdate()
+    {
+        // si esta a rango de ataque, ataco
+        if (_targetDistance <= attackRange && _canAttack)
+        { AttackFunction(); }
+    }
     void AttackFunction()
     {
         // compruebo el tiempo del cooldown
