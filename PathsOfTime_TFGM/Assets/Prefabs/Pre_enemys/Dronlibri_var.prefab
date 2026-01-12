@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 202304687226869781, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_Mass
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 202304687226869781, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_UseGravity
@@ -64,9 +64,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4048415107947427447, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: enemyType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: flyHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: attackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: agroDistance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6019465198720560833, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_LocalPosition.y

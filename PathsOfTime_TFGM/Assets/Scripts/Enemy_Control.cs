@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.UI.ScrollRect;
 
 public class Enemy_Control : MonoBehaviour
 {// script en cada enemigo
@@ -19,6 +20,7 @@ public class Enemy_Control : MonoBehaviour
     }
     #region /// MOVIMIENTO Y TRACKING ///
     NavMeshAgent _agent;
+    Rigidbody _rb;
     public Transform target;
     public float agroDistance;
     public float wanderRadius;
@@ -36,10 +38,10 @@ public class Enemy_Control : MonoBehaviour
     #endregion
 
     #region /// COOLDOWN CONTROL ///
-    public float wanderDelay; //cada cuanto spatrulla
-    public float wanderTimer; //contador interno
-    public float attackCooldown; //cada cuanto ataca
-    public float lastAttackTimer; //contador interno
+    public float wanderCooldown; 
+    public float wanderTimer; 
+    public float attackCooldown;
+    public float attackTimer;
     #endregion
 
     #region /// HEALTH STATUS ///
@@ -64,7 +66,8 @@ public class Enemy_Control : MonoBehaviour
             _agent = GetComponent<NavMeshAgent>();
             break;
         }
-        // pillo su origen, el objetivo y los colores
+        // pillo rigidbody, origen, objetivo y colores
+        _rb = GetComponent<Rigidbody>();
         attackOrigin = this.transform;
         target = _PC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -74,7 +77,7 @@ public class Enemy_Control : MonoBehaviour
     void Update()
     {
         //compruebo distancia con player
-        _targetDistance = Vector3.Distance(_agent.transform.position, target.position);
+        _targetDistance = Vector3.Distance(this.transform.position, target.position);
         // cuando pilla agro, va hacia el player
         if (_targetDistance <= agroDistance)
         {
@@ -117,7 +120,7 @@ public class Enemy_Control : MonoBehaviour
         { //cuando ha pasado el tiempo, le doy una posición nueva y reinicio el contador
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             _agent.SetDestination(newPos);
-            wanderTimer = wanderDelay;
+            wanderTimer = wanderCooldown;
         }
     }
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
@@ -154,24 +157,24 @@ public class Enemy_Control : MonoBehaviour
     void AttackFunction()
     {
         // compruebo el tiempo del cooldown
-        if (Time.time < lastAttackTimer + attackCooldown) return;
-        lastAttackTimer = Time.time;
+        if (Time.time < attackTimer + attackCooldown) return;
+        attackTimer = Time.time;
         // activo el ataque correspondiente al weapon equipado
         switch (enemyType)
         {
             case EnemyType.Gnobot:
             case EnemyType.Hydra:
-                DoBASIC();
+                DoMELE();
                 break;
 
             case EnemyType.Dronlibri:
             case EnemyType.Angel:
-                DoBEAM();
+                DoRANGE();
                 break;
         }
     }
 
-    void DoBASIC()
+    void DoMELE()
     {
         // dirección desde enemigo a player
         Vector3 dir = target.position - attackOrigin.position;
@@ -193,7 +196,7 @@ public class Enemy_Control : MonoBehaviour
         }
     }
 
-    void DoBEAM()
+    void DoRANGE()
     {
         // dirección desde enemigo a player
         Vector3 dir = target.position - attackOrigin.position;
@@ -215,7 +218,7 @@ public class Enemy_Control : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)//llamo desde WEAPON para hitear enemys
+    public void HITEDenemy(Vector3 force, float damage)
     {
         StartCoroutine(FlashDamage());
         enemyHealth -= damage;
@@ -229,12 +232,34 @@ public class Enemy_Control : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    
+         _rb.linearVelocity = Vector3.zero;
+         _rb.angularVelocity = Vector3.zero;
+         _rb.AddForce(force, ForceMode.Impulse);
+
+        switch (enemyType)
+        {
+            case EnemyType.Gnobot:
+            case EnemyType.Hydra:
+                StartCoroutine(DisableAgentTemporarily(0.2f));
+                break;
+        }
     }
-    public IEnumerator FlashDamage()//propio del ENEMY
+    IEnumerator FlashDamage()
     {
         _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(1f);
         _spriteRenderer.color = _originalColor;
+    }
+    IEnumerator DisableAgentTemporarily(float delay)
+    {
+        if (_agent != null && _agent.isOnNavMesh)
+            _agent.isStopped = true;
+
+        yield return new WaitForSeconds(delay);
+
+        if (_agent != null && _agent.isOnNavMesh)
+            _agent.isStopped = false;
     }
 }
 

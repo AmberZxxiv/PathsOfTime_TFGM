@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: enemyType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: dropChance

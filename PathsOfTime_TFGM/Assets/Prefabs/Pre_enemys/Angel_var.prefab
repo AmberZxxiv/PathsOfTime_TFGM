@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 202304687226869781, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_Name
       value: Angel_var
@@ -76,13 +80,21 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 4048415107947427447, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: health
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: enemyType
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: flyHeight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: dropChance
@@ -94,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: attackRange
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: enemyHealth

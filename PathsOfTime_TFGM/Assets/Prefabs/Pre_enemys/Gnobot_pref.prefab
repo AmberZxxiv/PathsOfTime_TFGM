@@ -44,7 +44,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135923462562175214}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -124,6 +124,8 @@ MonoBehaviour:
   target: {fileID: 0}
   agroDistance: 20
   wanderRadius: 10
+  flySpeed: 10
+  flyHeight: 2
   attackOrigin: {fileID: 0}
   attackRange: 3
   attackDamage: 1

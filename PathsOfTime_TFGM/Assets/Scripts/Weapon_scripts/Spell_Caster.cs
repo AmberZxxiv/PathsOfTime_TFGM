@@ -20,33 +20,13 @@ public class Spell_Caster : MonoBehaviour
         if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("boss"))
         {
             print("HITTED!");
-            //cojo los componentes del enemigo
-            NavMeshAgent agent = other.gameObject.GetComponent<NavMeshAgent>();
+            //cojo el script del enemigo
             Enemy_Control enemy = other.gameObject.GetComponent<Enemy_Control>();
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-
-            // reset fisico
-            agent.isStopped = true;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-
-            // pegar
-            enemy.TakeDamage(damage);
-            rb.AddForce(transform.forward * 2.5f, ForceMode.Impulse);
-
-            //reactivar IA
-            StartCoroutine(ResumeAgent(agent, 0.2f));
-            // tener referencia visual y tiempo para activar el _agent
+            enemy.HITEDenemy(transform.forward * 2f, damage);
             StartCoroutine(DestroyAfterDelay(0.5f));
         }
        
     }
-    IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (agent != null) agent.isStopped = false;
-    }
-
     IEnumerator DestroyAfterDelay(float delay)
     {
         // espero y elimino

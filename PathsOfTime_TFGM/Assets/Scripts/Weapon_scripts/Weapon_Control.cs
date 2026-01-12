@@ -112,20 +112,9 @@ public class Weapon_Control : MonoBehaviour
             if (hit.CompareTag("enemy") || hit.CompareTag("boss"))
             {
                 print("HITTED!");
-                //cojo los componentes del enemigo
-                NavMeshAgent agent = hit.GetComponent<NavMeshAgent>();
-                Enemy_Control enemy = hit.GetComponent<Enemy_Control>();
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-                // reset físico para que les afecte el impulso
-                agent.isStopped = true;
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                // HITEO
-                enemy.TakeDamage(2);
-                rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
-                rb.AddExplosionForce(2f, attackCenter, 2f, 2f, ForceMode.Impulse);
-                //reactivar IA
-                StartCoroutine(ResumeAgent(agent, 0.5f));
+                //cojo el script del enemigo
+                Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
+                enemy.HITEDenemy(transform.forward * 5f, 2f);
             }
         }
     }
@@ -163,21 +152,9 @@ public class Weapon_Control : MonoBehaviour
             if (hit.CompareTag("enemy") || hit.CompareTag("boss"))
             {
                 print("HITTED!");
-                //cojo los componentes del enemigo
-                NavMeshAgent agent = hit.GetComponent<NavMeshAgent>();
-                Enemy_Control enemy = hit.GetComponent<Enemy_Control>();
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-                // reset físico para que les afecte el impulso
-                agent.isStopped = true;
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                // HITEO
-                enemy.TakeDamage(2);
-                Vector3 kickDir = dir + Vector3.up * 0.25f;
-                kickDir.Normalize();
-                rb.AddForce(kickDir * 7f, ForceMode.Impulse);
-                //reactivar IA
-                StartCoroutine(ResumeAgent(agent, 0.5f));
+                //cojo el script del enemigo
+                Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
+                enemy.HITEDenemy(transform.forward * 5f, 2f);
             }
         }
     }

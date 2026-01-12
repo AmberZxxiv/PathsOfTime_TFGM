@@ -117,13 +117,6 @@ public class Player_Control : MonoBehaviour
         {
             _WC.NewWeapon(power.newWeapon);
         }
-
-        if (other.CompareTag("heal") && playerHealth != 10) // pillo heal si no estoy a tope
-        {
-            playerHealth += 1;
-            _MC.UpdateLives(playerHealth);
-            Destroy(other.gameObject);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -139,6 +132,12 @@ public class Player_Control : MonoBehaviour
             playerHealth -= 10;
             _MC.UpdateLives(playerHealth);
             _MC.ShowDead();
+        }
+        if (collision.gameObject.CompareTag("heal") && playerHealth != 10) // pillo heal si no estoy a tope
+        {
+            playerHealth += 1;
+            _MC.UpdateLives(playerHealth);
+            Destroy(collision.gameObject);
         }
     }
 
