@@ -9,6 +9,7 @@ public class Spell_Caster : MonoBehaviour
 
     public float damage;
     public float lifeTime;
+    public float delay;
 
     void Start()
     {
@@ -23,11 +24,11 @@ public class Spell_Caster : MonoBehaviour
             //cojo el script del enemigo
             Enemy_Control enemy = other.gameObject.GetComponent<Enemy_Control>();
             enemy.HITEDenemy(transform.forward * 2f, damage);
-            StartCoroutine(DestroyAfterDelay(0.5f));
+            StartCoroutine(ImpactDestroy());
         }
        
     }
-    IEnumerator DestroyAfterDelay(float delay)
+    IEnumerator ImpactDestroy()
     {
         // espero y elimino
         yield return new WaitForSeconds(delay);

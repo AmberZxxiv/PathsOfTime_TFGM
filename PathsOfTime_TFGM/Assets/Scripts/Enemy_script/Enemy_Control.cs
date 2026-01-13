@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.UI.ScrollRect;
@@ -26,10 +27,12 @@ public class Enemy_Control : MonoBehaviour
     public float wanderRadius;
     public float flySpeed;
     public float flyHeight;
+    public float maxRange;
     float _targetDistance;
     #endregion
 
     #region /// ATTACK STATS ///
+    public GameObject splitPref;
     public Transform attackOrigin;
     public float attackRange;
     public float attackDamage;
@@ -73,7 +76,6 @@ public class Enemy_Control : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
     }
-
     void Update()
     {
         //compruebo distancia con player
@@ -134,11 +136,11 @@ public class Enemy_Control : MonoBehaviour
     }
     void FlyToTarget()
     {
-        Vector3 targetPos = target.position;
-        targetPos.y += flyHeight;
+        Vector3 playerRange = (transform.position - target.position).normalized;
+        Vector3 targetPos = target.position + playerRange * maxRange;
+        targetPos.y = flyHeight;
         transform.position = Vector3.MoveTowards
         (transform.position, targetPos, flySpeed * Time.deltaTime);
-        transform.LookAt(targetPos);
     }
     void FlyWander()
     {
@@ -198,27 +200,22 @@ public class Enemy_Control : MonoBehaviour
 
     void DoRANGE()
     {
-        // dirección desde enemigo a player
-        Vector3 dir = target.position - attackOrigin.position;
-        dir.y = 0; dir.Normalize();
-        // limites en anchura, altura, largura y centro
-        Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
-        Vector3 center = attackOrigin.position + dir * attackRange;
-        // genero el collider y HITEO
-        Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(dir));
-        foreach (Collider hit in hits)
-        {
-            if (hit.CompareTag("Player"))
-            { // le hago cosas al PLAYER y al LiveContainer
-                _PC.playerHealth -= attackDamage;
-                _MC.UpdateLives(_PC.playerHealth);
-                Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
-                _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
-            }
-        }
+        print("SPLITED!");
+        // disparo hacia el pecho del player
+        Vector3 targetPos = target.position + Vector3.up * 1.5f;
+        Vector3 dir = (targetPos - attackOrigin.position).normalized;
+        // instancio el proyectil
+        GameObject splitShot = Instantiate(splitPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
+        // evito que se choque con el mismo
+        Collider enemyCollider = GetComponent<Collider>();
+        Collider splitCollider = splitShot.GetComponent<Collider>();
+        Physics.IgnoreCollision(splitCollider, enemyCollider);
+        //doy fuerza al proyectil
+        Rigidbody rb = splitShot.GetComponent<Rigidbody>();
+        rb.linearVelocity = dir * 50f;
     }
 
-    public void HITEDenemy(Vector3 force, float damage)
+    public void HITEDenemy(Vector3 force, float damage) //desde WEAPON
     {
         StartCoroutine(FlashDamage());
         enemyHealth -= damage;

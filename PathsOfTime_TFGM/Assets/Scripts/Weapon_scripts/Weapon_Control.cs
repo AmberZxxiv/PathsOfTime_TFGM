@@ -22,10 +22,8 @@ public class Weapon_Control : MonoBehaviour
         Magic
     }
 
-    // las variables estan en los propios codigos
+    #region /// ATTACK ZONES ///
     public Transform attackOrigin;
-
-    #region /// PROYECTIL ZONES ///
     public GameObject swordPref;
     public GameObject punchPref;
     public GameObject shotPref;
@@ -50,10 +48,11 @@ public class Weapon_Control : MonoBehaviour
         { instance = this; DontDestroyOnLoad(this.gameObject); }
         else Destroy(gameObject);
     }
-
-    void Start()
-    { }
-
+    public void NewWeapon(WeaponType newWeapon) //llamo en el POW_GIVER
+    {
+        weapon = newWeapon;
+        _MC.EquipWeapon(newWeapon); //cambio el UI del Menu_Control
+    }
     void Update()
     {
         //ASEGURO SINGLES AL CAMBIAR ESCENA
@@ -64,13 +63,6 @@ public class Weapon_Control : MonoBehaviour
         if (Input.GetMouseButton(0))
         { AttackFunction(); }
     }
-
-    public void NewWeapon(WeaponType newWeapon) //igualo al trigger del POW_GIVER
-    {
-        weapon = newWeapon;
-        _MC.EquipWeapon(newWeapon); //cambio el UI del Menu_Control
-    }
-     
     void AttackFunction()
     {
         // compruebo el tiempo del cooldown
@@ -114,11 +106,10 @@ public class Weapon_Control : MonoBehaviour
                 print("HITTED!");
                 //cojo el script del enemigo
                 Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
-                enemy.HITEDenemy(transform.forward * 5f, 2f);
+                enemy.HITEDenemy(transform.forward * 7f, 2f);
             }
         }
     }
-
     void DoPUNCH()
     {
         print("PUNCHED!");
@@ -154,7 +145,7 @@ public class Weapon_Control : MonoBehaviour
                 print("HITTED!");
                 //cojo el script del enemigo
                 Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
-                enemy.HITEDenemy(transform.forward * 5f, 2f);
+                enemy.HITEDenemy(transform.forward * 10f, 2f);
             }
         }
     }
@@ -166,20 +157,15 @@ public class Weapon_Control : MonoBehaviour
         Transform cam = Camera.main.transform;
         Vector3 dir = cam.forward.normalized;
 
-        // instancio la bull shot ignorando al player
+        // instancio la bala ignorando al player
         GameObject bullShot = Instantiate(shotPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir, Vector3.up) * shotPref.transform.rotation);
         Collider playerCollider = _PC.GetComponent<Collider>();
         Collider bulletCollider = bullShot.GetComponent<Collider>();
         Physics.IgnoreCollision(bulletCollider, playerCollider);
-        //configuro el ataque en PREFAB
-        Bull_Shoter bullet = bullShot.GetComponent<Bull_Shoter>();
-        bullet.damage = 2f;
-        bullet.lifeTime = 1.5f;
         // le doy fuerza a la bala pa lanzarla
         Rigidbody rb = bullShot.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * 50f;
     }
-
     void DoMAGIC()
     {
         print("WIKED!");
@@ -187,17 +173,18 @@ public class Weapon_Control : MonoBehaviour
         Transform cam = Camera.main.transform;
         Vector3 dir = cam.forward.normalized;
 
-        // instancio el spell casted ignorando al player
+        // instancio el spell ignorando al player
         GameObject spellCast = Instantiate(magicPref, attackOrigin.position + dir * 2f, Quaternion.LookRotation(dir, Vector3.up) * magicPref.transform.rotation);
-        //configuro el ataque en PREFAB
-        Spell_Caster spell = spellCast.GetComponent<Spell_Caster>();
-        spell.damage = 2f;
-        spell.lifeTime = 1f;
         // le doy fuerza a la bala pa lanzarla
         Rigidbody rb = spellCast.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * 15f;
     }
 
+    IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
+    { // pa reactivar la IA tras el hit
+        yield return new WaitForSeconds(delay);
+        if (agent != null) agent.isStopped = false;
+    }
     private void OnDrawGizmos() // pa ver referencia mele en visor
     {
         if (attackOrigin == null) return;
@@ -217,11 +204,5 @@ public class Weapon_Control : MonoBehaviour
                 Gizmos.DrawWireCube(Vector3.zero, gizExtents * 2f);
                 break;
         }
-    }
-
-    IEnumerator ResumeAgent(NavMeshAgent agent, float delay)
-    { // pa reactivar la IA tras el hit
-        yield return new WaitForSeconds(delay);
-        if (agent != null) agent.isStopped = false;
     }
 }

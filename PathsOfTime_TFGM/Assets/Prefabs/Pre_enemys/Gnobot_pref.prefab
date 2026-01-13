@@ -126,14 +126,16 @@ MonoBehaviour:
   wanderRadius: 10
   flySpeed: 10
   flyHeight: 2
+  maxRange: 5
+  splitPref: {fileID: 8850432258290061902, guid: d1dd525d5a35b60478ce0000e3950354, type: 3}
   attackOrigin: {fileID: 0}
   attackRange: 3
   attackDamage: 1
   attackForce: 5
-  wanderDelay: 2
+  wanderCooldown: 0
   wanderTimer: 2
   attackCooldown: 1
-  lastAttackTimer: 0
+  attackTimer: 0
   enemyHealth: 6
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   dropChance: 0.25

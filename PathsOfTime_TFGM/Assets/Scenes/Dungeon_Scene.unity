@@ -2312,7 +2312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _MC: {fileID: 0}
-  weapon: 4
+  weapon: 3
   attackOrigin: {fileID: 0}
   swordPref: {fileID: 4424006084866504917, guid: 21c83cbbfcb5e7a4f8f9e983876414c1, type: 3}
   punchPref: {fileID: 4424006084866504917, guid: 0c175cc03568c1a4e9b979ef637d4ef2, type: 3}
@@ -2362,15 +2362,15 @@ RectTransform:
   m_GameObject: {fileID: 1417846481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 676321395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1820, y: -980}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1417846483
 MonoBehaviour:
@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b798d3df241b4e34bb2ae30809a971fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08538c577f092e143bc2c69b8432f211, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

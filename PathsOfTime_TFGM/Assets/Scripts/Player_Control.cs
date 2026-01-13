@@ -36,13 +36,11 @@ public class Player_Control : MonoBehaviour
 
     public float playerHealth;
 
-
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
         if (instance == null) { instance = this; }
         else Destroy(gameObject);
     }
-
     void Start()
     {
         _WC = Weapon_Control.instance; //pillo SINGLE del WC
@@ -52,7 +50,6 @@ public class Player_Control : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
     void Update()
     {
         // cogemos el valor del cursor para poder darlo de vuelta
@@ -76,7 +73,6 @@ public class Player_Control : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _isGrounded)
         { DoJUMP(); }
     }
-
     private void FixedUpdate()
     {
         if (_isStunned) return; // si me limpian el movimiento no hago nada
@@ -118,7 +114,6 @@ public class Player_Control : MonoBehaviour
             _WC.NewWeapon(power.newWeapon);
         }
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         // compruebo haber colisionado con el suelo
@@ -148,7 +143,6 @@ public class Player_Control : MonoBehaviour
         _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
         _rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
     }
-
     private void DoDASH()
     {
         // impulso en la direccion del movimiento
