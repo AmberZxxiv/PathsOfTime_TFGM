@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2917996505517250820}
   - component: {fileID: 4834794231507948359}
   - component: {fileID: 3517831443132686833}
+  - component: {fileID: -1454092345837435233}
   m_Layer: 0
   m_Name: Pre_Cherry_Heal
   m_TagString: heal
@@ -137,3 +138,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-1454092345837435233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576113440945831091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ffade0069263646bb45c10d7c01272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4135764028730325023}
   - component: {fileID: 4048415107947427447}
   - component: {fileID: 5478924098898778670}
+  - component: {fileID: 7766454580206351369}
   m_Layer: 0
   m_Name: Gnobot_pref
   m_TagString: enemy
@@ -139,6 +140,18 @@ MonoBehaviour:
   enemyHealth: 6
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   dropChance: 0.25
+--- !u!114 &7766454580206351369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135923462562175214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ffade0069263646bb45c10d7c01272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3760786183897453476
 GameObject:
   m_ObjectHideFlags: 0

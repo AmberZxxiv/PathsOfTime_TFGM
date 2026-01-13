@@ -21,19 +21,27 @@ public class Enemy_Control : MonoBehaviour
     }
     #region /// MOVIMIENTO Y TRACKING ///
     NavMeshAgent _agent;
-    Rigidbody _rb;
     public Transform target;
     public float agroDistance;
     public float wanderRadius;
+    #endregion
+
+    #region /// CONTROL DE VUELO ///
+    Rigidbody _rb;
+    Vector3 _startPoint;
+    Vector3 _patrolPoint;
+    bool _hasPoint = false;
     public float flySpeed;
     public float flyHeight;
     public float maxRange;
     float _targetDistance;
     #endregion
 
+
+
     #region /// ATTACK STATS ///
     public GameObject splitPref;
-    public Transform attackOrigin;
+    Transform _attackOrigin;
     public float attackRange;
     public float attackDamage;
     public float attackForce;
@@ -71,7 +79,8 @@ public class Enemy_Control : MonoBehaviour
         }
         // pillo rigidbody, origen, objetivo y colores
         _rb = GetComponent<Rigidbody>();
-        attackOrigin = this.transform;
+        _attackOrigin = this.transform;
+        _startPoint = this.transform.position;
         target = _PC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
@@ -144,12 +153,26 @@ public class Enemy_Control : MonoBehaviour
     }
     void FlyWander()
     {
-        Vector3 floatPos = transform.position;
-        floatPos.y = Mathf.Sin(Time.time) * 0.5f + flyHeight;
-        transform.position = Vector3.Lerp
-        (transform.position, floatPos, Time.deltaTime);
-    }
+        //compruebo si ha llegado al punto o no tiene
+        if (!_hasPoint || 
+            Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z),
+                              new Vector3(_patrolPoint.x, 0, _patrolPoint.z)) < 1f)
+        {
+            _patrolPoint = RandomFlyPoint(transform.position, wanderRadius);
+            _hasPoint = true;
+        }
 
+        Vector3 newPos = _patrolPoint;
+        newPos.y += Mathf.Sin(Time.time * 1f) * 0.5f;
+        transform.position = Vector3.MoveTowards
+        (transform.position, newPos, flySpeed * Time.deltaTime);
+    }
+    Vector3 RandomFlyPoint(Vector3 origin, float radius)
+    {
+        Vector2 randCircle = Random.insideUnitCircle * radius;
+        Vector3 point = new Vector3(origin.x + randCircle.x, flyHeight, origin.z + randCircle.y);
+        return point;
+    }
     private void FixedUpdate()
     {
         // si esta a rango de ataque, ataco
@@ -179,11 +202,11 @@ public class Enemy_Control : MonoBehaviour
     void DoMELE()
     {
         // dirección desde enemigo a player
-        Vector3 dir = target.position - attackOrigin.position;
+        Vector3 dir = target.position - _attackOrigin.position;
         dir.y = 0; dir.Normalize();
         // limites en anchura, altura, largura y centro
         Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
-        Vector3 center = attackOrigin.position + dir * attackRange;
+        Vector3 center = _attackOrigin.position + dir * attackRange;
         // genero el collider y HITEO
         Collider[] hits = Physics.OverlapBox(center,halfExtents,Quaternion.LookRotation(dir));
         foreach (Collider hit in hits)
@@ -203,9 +226,9 @@ public class Enemy_Control : MonoBehaviour
         print("SPLITED!");
         // disparo hacia el pecho del player
         Vector3 targetPos = target.position + Vector3.up * 1.5f;
-        Vector3 dir = (targetPos - attackOrigin.position).normalized;
+        Vector3 dir = (targetPos - _attackOrigin.position).normalized;
         // instancio el proyectil
-        GameObject splitShot = Instantiate(splitPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
+        GameObject splitShot = Instantiate(splitPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
         // evito que se choque con el mismo
         Collider enemyCollider = GetComponent<Collider>();
         Collider splitCollider = splitShot.GetComponent<Collider>();
