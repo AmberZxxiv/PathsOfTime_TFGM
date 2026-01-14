@@ -325,9 +325,9 @@ MonoBehaviour:
   movSpeed: 15
   dashForce: 15
   dashCooldown: 0.35
-  jumpForce: 10
-  jumpSpeed: 15
-  fallSpeed: 15
+  jumpForce: 15
+  jumpSpeed: 2.5
+  fallSpeed: 2.5
   mouseSensitivity: 1.5
   cameraTransform: {fileID: 8028699948671482168}
   playerHealth: 10

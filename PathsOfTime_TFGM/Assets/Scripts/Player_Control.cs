@@ -63,7 +63,7 @@ public class Player_Control : MonoBehaviour
         // aqui cogemos los controles del movimiento
         _movLateral = Input.GetAxis("Horizontal");
         _movFrontal = Input.GetAxis("Vertical");
-        // rotamos el player dependiendo de la direccion
+        // hacemos que el personaje se mueva a donde mira
         if (_movLateral != 0)
         { transform.localScale = new Vector3(_movLateral > 0 ? -1 : 1, 1, 1); }
         // control del DASH
@@ -76,12 +76,22 @@ public class Player_Control : MonoBehaviour
     private void FixedUpdate()
     {
         if (_isStunned) return; // si me limpian el movimiento no hago nada
-        if (!_isDashing /*|| !_isGrounded*/) // cuando dasheo y salto NO controlo el movimiento
+        if (!_isDashing) // cuando dasheo y salto NO controlo el movimiento
         {
             // aqui damos los valores del movimiento
             Vector3 playerMovement = (transform.right * _movLateral + transform.forward * _movFrontal);
             Vector3 playerSpeed = new Vector3(playerMovement.x * movSpeed, _rb.linearVelocity.y, playerMovement.z * movSpeed);
             _rb.linearVelocity = playerSpeed;
+        }
+        // aumentamos la velocidad del salto al subir
+        if (_rb.linearVelocity.y > 0f)
+        {
+            _rb.linearVelocity += Vector3.up * Physics.gravity.y * jumpSpeed * Time.fixedDeltaTime;
+        }
+        // aumentamos la gravedad al caer del salto
+        if (_rb.linearVelocity.y < 0f)
+        {
+            _rb.linearVelocity += Vector3.up * Physics.gravity.y * fallSpeed * Time.fixedDeltaTime;
         }
     }
 
@@ -135,13 +145,13 @@ public class Player_Control : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
+    
     void DoJUMP()
     {
         //actualizamos el estado del salto, la altura y damos la fuerza
         _isGrounded = false;
         _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
-        _rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
     private void DoDASH()
     {
