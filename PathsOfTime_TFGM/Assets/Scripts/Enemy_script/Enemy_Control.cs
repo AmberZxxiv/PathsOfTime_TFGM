@@ -80,7 +80,7 @@ public class Enemy_Control : MonoBehaviour
         // pillo rigidbody, origen, objetivo y colores
         _rb = GetComponent<Rigidbody>();
         _attackOrigin = this.transform;
-        _startPoint = this.transform.position;
+        _startPoint = transform.position;
         target = _PC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
@@ -88,7 +88,7 @@ public class Enemy_Control : MonoBehaviour
     void Update()
     {
         //compruebo distancia con player
-        _targetDistance = Vector3.Distance(this.transform.position, target.position);
+        _targetDistance = Vector3.Distance(transform.position, target.position);
         // cuando pilla agro, va hacia el player
         if (_targetDistance <= agroDistance)
         {
@@ -148,24 +148,27 @@ public class Enemy_Control : MonoBehaviour
         Vector3 playerRange = (transform.position - target.position).normalized;
         Vector3 targetPos = target.position + playerRange * maxRange;
         targetPos.y = flyHeight;
-        transform.position = Vector3.MoveTowards
-        (transform.position, targetPos, flySpeed * Time.deltaTime);
+        Vector3 finalPos = Vector3.MoveTowards
+        (_rb.position, targetPos, flySpeed * Time.deltaTime);
+        _rb.MovePosition(finalPos);
     }
     void FlyWander()
     {
         //compruebo si ha llegado al punto o no tiene
-        if (!_hasPoint || 
-            Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z),
-                              new Vector3(_patrolPoint.x, 0, _patrolPoint.z)) < 1f)
+        if (!_hasPoint || Vector3.Distance
+            (new Vector3(transform.position.x, 0, transform.position.z),
+             new Vector3(_patrolPoint.x, 0, _patrolPoint.z)) < 1f)
         {
             _patrolPoint = RandomFlyPoint(transform.position, wanderRadius);
             _hasPoint = true;
         }
 
         Vector3 newPos = _patrolPoint;
-        newPos.y += Mathf.Sin(Time.time * 1f) * 0.5f;
-        transform.position = Vector3.MoveTowards
-        (transform.position, newPos, flySpeed * Time.deltaTime);
+        newPos.y += Mathf.Sin(Time.time) * 0.5f;
+       Vector3 finalPos = Vector3.MoveTowards
+        (_rb.position, newPos, flySpeed * Time.deltaTime);
+        _rb.MovePosition(finalPos);
+
     }
     Vector3 RandomFlyPoint(Vector3 origin, float radius)
     {

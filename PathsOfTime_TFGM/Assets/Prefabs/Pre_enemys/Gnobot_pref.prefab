@@ -63,7 +63,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &4135764028730325023
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -129,7 +129,6 @@ MonoBehaviour:
   flyHeight: 2
   maxRange: 5
   splitPref: {fileID: 8850432258290061902, guid: d1dd525d5a35b60478ce0000e3950354, type: 3}
-  attackOrigin: {fileID: 0}
   attackRange: 3
   attackDamage: 1
   attackForce: 5
