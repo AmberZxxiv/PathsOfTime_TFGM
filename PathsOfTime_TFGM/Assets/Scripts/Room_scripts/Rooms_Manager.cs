@@ -28,6 +28,7 @@ public class Rooms_Manager : MonoBehaviour
     public GameObject bossAngel;
     public GameObject miniGnobot;
     public GameObject miniDronlibri;
+    public GameObject miniTurrem;
     public int minionCount;
     #endregion
 
@@ -49,25 +50,32 @@ public class Rooms_Manager : MonoBehaviour
 
     void SpawnEnemy()
     {
+        float percentTorrem = 0.25f;
         int dungeon = PlayerPrefs.GetInt("Dungeon"); //compruebo la dungeon escogida
         if (dungeon == 0) //generacion del pasado
         {
             //Hydra aparece en ultima sala en su 00
             Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
-
-            // en todas menos la ultima, aparecen Gnobots en los spawners
-            float radio = 2f;
+            // spawneo gnobots o torrems en las salas menos la ultima
             for (int i = 0; i < roomMap.Count - 1; i++)
             {
                 Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
                 Vector3 center = enemySpawn.position + Vector3.up * 0.5f;
-                for (int m = 0; m < minionCount; m++)
+                //decido si spawneo torrem
+                if (Random.value <= percentTorrem)
+                { Instantiate(miniTurrem, center, transform.rotation); }
+                // sino spawneo grupo de gnobots
+                else
                 {
-                    float angle = (360f / minionCount) * m;
-                    Vector3 offset = new Vector3
-                    (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
-                     Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
-                    Instantiate(miniGnobot, center + offset, transform.rotation);
+                    float radio = 2f;
+                    for (int m = 0; m < minionCount; m++)
+                    {
+                        float angle = (360f / minionCount) * m;
+                        Vector3 offset = new Vector3
+                        (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
+                         Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
+                        Instantiate(miniGnobot, center + offset, transform.rotation);
+                    }
                 }
             }
         }
@@ -75,20 +83,26 @@ public class Rooms_Manager : MonoBehaviour
         {
             //Angel aparece en ultima sala en su 00
             Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
-
-            // en todas menos la ultima, aparecen Dronliibris en los spawners
-            float radio = 2f;
+            // spawneo dronlibris o torrems en las salas menos la ultima
             for (int i = 0; i < roomMap.Count - 1; i++)
             {
                 Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
-                Vector3 center = enemySpawn.position + Vector3.up * 7.5f;
-                for (int m = 0; m < minionCount; m++)
+                Vector3 center = enemySpawn.position + Vector3.up * 0.5f;
+                //decido si spawneo torrem
+                if (Random.value <= percentTorrem)
+                { Instantiate(miniTurrem, center, transform.rotation); }
+                // sino spawneo grupo de dronlibris
+                else
                 {
-                    float angle = (360f / minionCount) * m;
-                    Vector3 offset = new Vector3
-                    (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
-                     Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
-                    Instantiate(miniDronlibri, center + offset, transform.rotation);
+                    float radio = 2f;
+                    for (int m = 0; m < minionCount; m++)
+                    {
+                        float angle = (360f / minionCount) * m;
+                        Vector3 offset = new Vector3
+                        (Mathf.Cos(angle * Mathf.Deg2Rad), 0,
+                         Mathf.Sin(angle * Mathf.Deg2Rad)) * radio;
+                        Instantiate(miniDronlibri, center + offset, transform.rotation);
+                    }
                 }
             }
         }

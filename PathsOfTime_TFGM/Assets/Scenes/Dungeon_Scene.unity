@@ -470,6 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 355315257}
+  - component: {fileID: 355315258}
   m_Layer: 0
   m_Name: PosPo
   m_TagString: Untagged
@@ -492,6 +493,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &355315258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355315256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bef2d743063d904458566eb04cb73a2e, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 1
 --- !u!1 &419663177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,6 +2797,7 @@ MonoBehaviour:
   bossAngel: {fileID: 7366125380966331777, guid: 30b3d0305474e60419517d72657b7026, type: 3}
   miniGnobot: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
   miniDronlibri: {fileID: 468121702110529948, guid: b696394931073f247b7c804dd6d2cb34, type: 3}
+  miniTurrem: {fileID: 714076751192314245, guid: 34122415ff50ea541944444b04520ed5, type: 3}
   minionCount: 5
 --- !u!4 &1765574036
 Transform:
@@ -3329,10 +3348,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 490035145}
   - {fileID: 705507995}
+  - {fileID: 355315257}
   - {fileID: 2141270860}
   - {fileID: 1817314115}
   - {fileID: 1765574036}
   - {fileID: 1405465638}
   - {fileID: 9057301112742867873}
   - {fileID: 745252417}
-  - {fileID: 355315257}

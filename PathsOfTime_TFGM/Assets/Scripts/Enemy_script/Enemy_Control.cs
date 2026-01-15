@@ -16,6 +16,7 @@ public class Enemy_Control : MonoBehaviour
     {
         Gnobot,
         Dronlibri,
+        Torrem,
         Hydra,
         Angel,
     }
@@ -37,8 +38,6 @@ public class Enemy_Control : MonoBehaviour
     float _targetDistance;
     #endregion
 
-
-
     #region /// ATTACK STATS ///
     public GameObject splitPref;
     Transform _attackOrigin;
@@ -46,6 +45,13 @@ public class Enemy_Control : MonoBehaviour
     public float attackDamage;
     public float attackForce;
     bool _canAttack = true;
+    #endregion
+
+    #region /// ATTACK STATS ///
+    public LineRenderer laserBeam;
+    public LayerMask laserMask;
+    public GameObject laserOrigin;
+    bool _laserActive = false;
     #endregion
 
     #region /// COOLDOWN CONTROL ///
@@ -87,6 +93,9 @@ public class Enemy_Control : MonoBehaviour
     }
     void Update()
     {
+        // si es Torrem, uso su sistema
+        if (enemyType == EnemyType.Torrem) { TrackerTurrem(); return; }
+        
         //compruebo distancia con player
         _targetDistance = Vector3.Distance(transform.position, target.position);
         // cuando pilla agro, va hacia el player
@@ -179,8 +188,7 @@ public class Enemy_Control : MonoBehaviour
     private void FixedUpdate()
     {
         // si esta a rango de ataque, ataco
-        if (_targetDistance <= attackRange && _canAttack)
-        { AttackFunction(); }
+        if (_targetDistance <= attackRange && _canAttack) { AttackFunction(); }
     }
     void AttackFunction()
     {
@@ -192,16 +200,13 @@ public class Enemy_Control : MonoBehaviour
         {
             case EnemyType.Gnobot:
             case EnemyType.Hydra:
-                DoMELE();
-                break;
+             DoMELE(); break;
 
             case EnemyType.Dronlibri:
             case EnemyType.Angel:
-                DoRANGE();
-                break;
+            DoRANGE(); break;
         }
     }
-
     void DoMELE()
     {
         // dirección desde enemigo a player
@@ -223,7 +228,6 @@ public class Enemy_Control : MonoBehaviour
             }
         }
     }
-
     void DoRANGE()
     {
         print("SPLITED!");
@@ -241,6 +245,42 @@ public class Enemy_Control : MonoBehaviour
         rb.linearVelocity = dir * 50f;
     }
 
+    void TrackerTurrem()
+    {
+        print("TRACKED!");
+        Vector3 dir = (target.position) - laserOrigin.transform.position;
+        Debug.DrawRay(laserOrigin.transform.position, dir.normalized * attackRange, Color.magenta);
+        float distance = dir.magnitude;
+
+        if (distance > attackRange) { DisableLaser(); return; }
+
+        RaycastHit hit;
+        if (Physics.Raycast(laserOrigin.transform.position, dir.normalized, out hit, attackRange, laserMask))
+        {
+            EnableLaser(hit.point);
+            if (hit.collider.CompareTag("Player"))
+            {
+                _PC.playerHealth -= attackDamage * Time.deltaTime;
+                _MC.UpdateLives(_PC.playerHealth);
+            }
+        }
+        else
+        {
+            // Si no golpea nada, apunta hasta el máximo rango
+            EnableLaser(laserOrigin.transform.position + dir.normalized * attackRange);
+        }
+    }
+
+    void EnableLaser(Vector3 hitPoint)
+    {
+        laserBeam.enabled = true; _laserActive = true;
+        laserBeam.SetPosition(0, laserOrigin.transform.position);
+        laserBeam.SetPosition(1, hitPoint);
+    }
+
+    void DisableLaser()
+    { laserBeam.enabled = false; _laserActive = false; } 
+
     public void HITEDenemy(Vector3 force, float damage) //desde WEAPON
     {
         StartCoroutine(FlashDamage());
@@ -255,17 +295,18 @@ public class Enemy_Control : MonoBehaviour
             }
             Destroy(gameObject);
         }
-    
-         _rb.linearVelocity = Vector3.zero;
-         _rb.angularVelocity = Vector3.zero;
-         _rb.AddForce(force, ForceMode.Impulse);
-
+        if (_rb != null)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+            _rb.AddForce(force, ForceMode.Impulse);
+        }
         switch (enemyType)
         {
             case EnemyType.Gnobot:
             case EnemyType.Hydra:
-                StartCoroutine(DisableAgentTemporarily(0.2f));
-                break;
+            StartCoroutine(DisableAgentTemporarily(0.2f));
+            break;
         }
     }
     IEnumerator FlashDamage()
