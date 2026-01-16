@@ -2788,7 +2788,8 @@ MonoBehaviour:
   - {fileID: 8534670604316156348, guid: d60b7588f38e1df468e0495052dd1033, type: 3}
   - {fileID: 8843121236005786612, guid: 79f92548b66a0b1479615d2e40ea5729, type: 3}
   - {fileID: 5791167151712167949, guid: b386be3d07f18154f9365a035ce2e80f, type: 3}
-  closedRoom: {fileID: 3577886435829724, guid: 454e16c02ae360845aad6fb0dd41d3f0, type: 3}
+  closedPast: {fileID: 3577886435829724, guid: 454e16c02ae360845aad6fb0dd41d3f0, type: 3}
+  closedFutur: {fileID: 3577886435829724, guid: 76cc13588430f6c4b95ace66ed912f77, type: 3}
   roomMap: []
   roomsSpawned: 0
   maxRooms: 15

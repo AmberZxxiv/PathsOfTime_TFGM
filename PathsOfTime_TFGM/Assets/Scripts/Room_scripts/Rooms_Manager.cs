@@ -13,7 +13,8 @@ public class Rooms_Manager : MonoBehaviour
     public GameObject[] room1X;
     public GameObject[] room0z;
     public GameObject[] room0x;
-    public GameObject closedRoom;
+    public GameObject closedPast;
+    public GameObject closedFutur;
     #endregion
 
     #region /// MAP CONTROL ///
@@ -52,7 +53,7 @@ public class Rooms_Manager : MonoBehaviour
     {
         float percentTorrem = 0.25f;
         int dungeon = PlayerPrefs.GetInt("Dungeon"); //compruebo la dungeon escogida
-        if (dungeon == 0) //generacion del pasado
+        if (dungeon == 0) //enemigos del pasado
         {
             //Hydra aparece en ultima sala en su 00
             Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
@@ -79,7 +80,7 @@ public class Rooms_Manager : MonoBehaviour
                 }
             }
         }
-        if (dungeon == 1) //generacion del futuro
+        if (dungeon == 1) //enemigos del futuro
         {
             //Angel aparece en ultima sala en su 00
             Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);

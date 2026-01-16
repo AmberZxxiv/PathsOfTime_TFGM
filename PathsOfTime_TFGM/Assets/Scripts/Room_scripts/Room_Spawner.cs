@@ -6,11 +6,6 @@ public class Room_Spawner : MonoBehaviour
 { // script en trigger RoomSpawner de cada puerta abierta
     public Rooms_Manager _RM; //singleton Rooms_Manager
 
-
-    //Suelo, plataformas, paredes, paredes interiores, liquidos, techos
-    public Material[] futureFloorMat;
-    public Material[] pastFloorMat;
-
     // enum para definir la direccion del spawn
     public RoomDirection direction;
     public enum RoomDirection
@@ -25,14 +20,29 @@ public class Room_Spawner : MonoBehaviour
     [Range(0.1f, 0.9f)]
     public float spawnTime = 0.2f;
     // SPAWNEO CADA X SEGUNDOS PORQUE PETA
+    int _dungeon;
     public bool spawned = false;
+
+    // declaro todas las variables de materiales
+    public Material futurFloor;
+    public Material pastFloor;
+    public Material futurWall;
+    public Material pastWall;
+    public Material futurCeiling;
+    public Material pastCeiling;
+    public Material futurPlataform;
+    public Material pastPlataform;
+    public Material futurRumble;
+    public Material pastRumble;
+    public Material futurLiquid;
+    public Material pastLiquid;
 
     void Start()
     {
         //pillo SINGLE del RM
         _RM = Rooms_Manager.instance;
         //compruebo la dungeon escogida
-        int dungeon = PlayerPrefs.GetInt("Dungeon");
+        _dungeon = PlayerPrefs.GetInt("Dungeon");
         { Invoke("SpawnRoom", spawnTime); }
 
     }
@@ -63,12 +73,13 @@ public class Room_Spawner : MonoBehaviour
            Debug.LogWarning("Room Direction no asignada en Room_Spawner");
            return;
         }
-        if (_RM.roomsSpawned >= _RM.maxRooms && spawned==false)
-        { // al max de salas, sala cerrada en altura
-            roomToSpawn = _RM.closedRoom;
-            roomPos = Vector3.up *5;
-        }
-        else { _RM.roomsSpawned++; } // de base, sumo las salas spawneadas
+        // si he llegado al max de salas, pongo salas cerradas
+        if (_RM.roomsSpawned >= _RM.maxRooms && spawned==false && _dungeon == 0)
+        { roomToSpawn = _RM.closedPast; roomPos = Vector3.up *5;}
+        if (_RM.roomsSpawned >= _RM.maxRooms && spawned == false && _dungeon == 1)
+        { roomToSpawn = _RM.closedFutur; roomPos = Vector3.up * 5; }
+        // de base, sumo las salas spawneadas
+        else { _RM.roomsSpawned++; }
         // instancio la selección y apago el spawn
         GameObject roomInstantiated = Instantiate(roomToSpawn, transform.position + roomPos, transform.rotation);
         FindFloors(roomInstantiated);
@@ -76,14 +87,12 @@ public class Room_Spawner : MonoBehaviour
     }
     void FindFloors(GameObject roomToSearch)
     {
-        foreach (Transform child in roomToSearch.transform)
+        foreach (Transform child in roomToSearch.GetComponentInChildren<Transform>())
         {
             if (child.CompareTag("ground"))
-            {
-                child.GetComponent<MeshRenderer>().material = 
-                    PlayerPrefs.GetInt("Dungeon") == 0? 
-                    pastFloorMat[0]:
-                    futureFloorMat[0];
+            { 
+              var floor = child.GetComponent<MeshRenderer>();
+              floor.material = _dungeon == 0? pastFloor : futurFloor;
             }
         }
     }
@@ -96,9 +105,15 @@ public class Room_Spawner : MonoBehaviour
             Room_Spawner otherSpawner = other.GetComponent<Room_Spawner>();
             if (otherSpawner == null)
             { return; } // si no encuentra el componente, se sale
-            if (spawned==false && otherSpawner.spawned==false)
-            {// si dos spawnrooms chocan, se cierra el pasillo y se elimina el spawn
-                Instantiate(_RM.closedRoom, transform.position + Vector3.up * 5, transform.rotation);
+            // si dos spawnrooms chocan, se cierra el pasillo y se elimina el spawn
+            if (spawned==false && otherSpawner.spawned==false && _dungeon == 0)
+            {
+                Instantiate(_RM.closedPast, transform.position + Vector3.up * 5, transform.rotation);
+                Destroy(gameObject);
+            }
+            if (spawned == false && otherSpawner.spawned == false && _dungeon == 1)
+            {
+                Instantiate(_RM.closedFutur, transform.position + Vector3.up * 5, transform.rotation);
                 Destroy(gameObject);
             }
         }
