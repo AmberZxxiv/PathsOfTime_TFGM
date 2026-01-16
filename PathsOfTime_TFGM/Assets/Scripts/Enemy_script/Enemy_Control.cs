@@ -20,7 +20,7 @@ public class Enemy_Control : MonoBehaviour
         Hydra,
         Angel,
     }
-    #region /// MOVIMIENTO Y TRACKING ///
+    #region /// MOVIMIENTO ///
     NavMeshAgent _agent;
     public Transform target;
     public float agroDistance;
@@ -47,10 +47,11 @@ public class Enemy_Control : MonoBehaviour
     bool _canAttack = true;
     #endregion
 
-    #region /// ATTACK STATS ///
+    #region /// LASER STATS ///
     public LineRenderer laserBeam;
     public LayerMask laserMask;
     public GameObject laserOrigin;
+    public float laserTicks;
     bool _laserActive = false;
     #endregion
 
@@ -247,28 +248,33 @@ public class Enemy_Control : MonoBehaviour
 
     void TrackerTurrem()
     {
-        print("TRACKED!");
-        Vector3 dir = (target.position) - laserOrigin.transform.position;
-        Debug.DrawRay(laserOrigin.transform.position, dir.normalized * attackRange, Color.magenta);
+        Vector3 dir = target.position - laserOrigin.transform.position;
         float distance = dir.magnitude;
-
-        if (distance > attackRange) { DisableLaser(); return; }
+        
+        if (distance > attackRange) 
+        { laserTicks = 0f; DisableLaser(); return; }
 
         RaycastHit hit;
-        if (Physics.Raycast(laserOrigin.transform.position, dir.normalized, out hit, attackRange, laserMask))
+        if (Physics.Raycast(laserOrigin.transform.position, dir.normalized, out hit, attackRange, laserMask, QueryTriggerInteraction.Ignore))
         {
             EnableLaser(hit.point);
             if (hit.collider.CompareTag("Player"))
             {
-                _PC.playerHealth -= attackDamage * Time.deltaTime;
-                _MC.UpdateLives(_PC.playerHealth);
+                laserTicks += Time.deltaTime;
+                if (laserTicks >= attackCooldown)
+                {
+                    _PC.playerHealth -= attackDamage;
+                    _MC.UpdateLives(_PC.playerHealth);
+                    laserTicks = 0f;
+                }
             }
+            else { laserTicks = 0f; DisableLaser(); }
         }
-        else
-        {
-            // Si no golpea nada, apunta hasta el máximo rango
-            EnableLaser(laserOrigin.transform.position + dir.normalized * attackRange);
-        }
+        else { laserTicks = 0f; DisableLaser(); }
+
+        Debug.DrawRay(laserOrigin.transform.position, dir.normalized * attackRange, Color.magenta);
+        Debug.Log( "Laser hit: " + hit.collider.name +
+                   " | Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
     }
 
     void EnableLaser(Vector3 hitPoint)

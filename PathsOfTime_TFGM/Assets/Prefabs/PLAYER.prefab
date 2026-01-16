@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1435152057127675220}
   - component: {fileID: 8799143832044938660}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Sprite2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1443416851907981494}
   - component: {fileID: 211811652309279628}
   - component: {fileID: 444178983877168654}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: FirstCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 2495597366127642284}
   - component: {fileID: 8527697094419343088}
   - component: {fileID: 6002138279317768469}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ThirdCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}

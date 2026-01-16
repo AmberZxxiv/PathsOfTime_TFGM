@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4048415107947427447}
   - component: {fileID: 5478924098898778670}
   - component: {fileID: 7766454580206351369}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gnobot_pref
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -132,6 +132,11 @@ MonoBehaviour:
   attackRange: 3
   attackDamage: 1
   attackForce: 5
+  laserBeam: {fileID: 0}
+  laserMask:
+    serializedVersion: 2
+    m_Bits: 0
+  laserOrigin: {fileID: 0}
   wanderCooldown: 0
   wanderTimer: 2
   attackCooldown: 1
@@ -161,7 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6019465198720560833}
   - component: {fileID: 1759593054512746133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

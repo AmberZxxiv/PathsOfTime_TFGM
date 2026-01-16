@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 830462651980189475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CeilPas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7768646713686092614}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CeilFut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8433873666174196165}
   - component: {fileID: 5994042537890549191}
   - component: {fileID: 229801431135670589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Floor '
   m_TagString: ground
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 4107478208768786829}
   - component: {fileID: 8901162620477107497}
   - component: {fileID: 987571840301721929}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnRoom 3z
   m_TagString: spawnroom
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 8641041728390804007}
   - component: {fileID: 1377482750430836188}
   - component: {fileID: 5314461964030037866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: romDestroy 00
   m_TagString: spawnroom
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8870080754592760596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 8976101423910498151}
   - component: {fileID: 8391553164065688289}
   - component: {fileID: 122851092896028717}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnRoom 1Z
   m_TagString: spawnroom
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -524,7 +524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 587926604693346602}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemySpawn
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 1046360676940572505}
   - component: {fileID: 9016374212017118814}
   - component: {fileID: -9064154535282846902}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BAS_SMOL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 2535867764210668784}
   - component: {fileID: 2916105347493643755}
   - component: {fileID: 3337211655681489663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnRoom 2X
   m_TagString: spawnroom
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 3998213091736994765}
   - component: {fileID: 2495576990904339159}
   - component: {fileID: 5178789644325036067}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnRoom 4x
   m_TagString: spawnroom
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -842,6 +842,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zelling 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
       value: 200.00003
@@ -911,6 +915,10 @@ PrefabInstance:
     - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_Name
       value: Zelling 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
@@ -982,6 +990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zelling 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
       value: 200.00003
@@ -1052,6 +1064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -1118,6 +1134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -1183,6 +1203,10 @@ PrefabInstance:
     - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_Name
       value: Zelling 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
@@ -1253,6 +1277,10 @@ PrefabInstance:
     - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_Name
       value: Zelling 2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
@@ -1325,6 +1353,10 @@ PrefabInstance:
       value: Wall xZ
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -1393,6 +1425,10 @@ PrefabInstance:
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_Name
       value: Wall xz
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1464,6 +1500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -1530,6 +1570,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -1595,6 +1639,10 @@ PrefabInstance:
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_Name
       value: Wall XZ
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1667,6 +1715,10 @@ PrefabInstance:
       value: Wall zX
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -1735,6 +1787,10 @@ PrefabInstance:
     - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_Name
       value: Zelling 1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
@@ -1807,6 +1863,10 @@ PrefabInstance:
       value: Wall ZX
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -1875,6 +1935,10 @@ PrefabInstance:
     - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_Name
       value: Zelling 1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
@@ -1947,6 +2011,10 @@ PrefabInstance:
       value: Wall Xz
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -2016,6 +2084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -2082,6 +2154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -2147,6 +2223,10 @@ PrefabInstance:
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_Name
       value: Wall Zx
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2219,6 +2299,10 @@ PrefabInstance:
       value: Wall zx
       objectReference: {fileID: 0}
     - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558034275329098648, guid: f82f893b0e0ba98499ae98d33da20bfb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -2288,6 +2372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -2354,6 +2442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zeling (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4716626329343815555, guid: 686200843640119498a0c4b5b9019e62, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5349997101637612857, guid: 686200843640119498a0c4b5b9019e62, type: 3}
       propertyPath: m_LocalScale.z
       value: 80
@@ -2419,6 +2511,10 @@ PrefabInstance:
     - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_Name
       value: Zelling 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276457591620191612, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2238481529421784596, guid: 0483c38eb4f2de843ab1ea1ac6822375, type: 3}
       propertyPath: m_LocalScale.x
