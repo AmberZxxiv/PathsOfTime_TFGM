@@ -6,6 +6,11 @@ public class Room_Spawner : MonoBehaviour
 { // script en trigger RoomSpawner de cada puerta abierta
     public Rooms_Manager _RM; //singleton Rooms_Manager
 
+
+    //Suelo, plataformas, paredes, paredes interiores, liquidos, techos
+    public Material[] futureFloorMat;
+    public Material[] pastFloorMat;
+
     // enum para definir la direccion del spawn
     public RoomDirection direction;
     public enum RoomDirection
@@ -28,14 +33,11 @@ public class Room_Spawner : MonoBehaviour
         _RM = Rooms_Manager.instance;
         //compruebo la dungeon escogida
         int dungeon = PlayerPrefs.GetInt("Dungeon");
-        if (dungeon == 0)
-        { Invoke("SpawnPastRoom", spawnTime); }
-        if (dungeon == 1)
-        { Invoke("SpawnFutrRoom", spawnTime); }
+        { Invoke("SpawnRoom", spawnTime); }
 
     }
 
-    void SpawnPastRoom()
+    void SpawnRoom()
     {
         GameObject roomToSpawn = null; //declaro la sala variable
         Vector3 roomPos = Vector3.zero; //declaro la posición de referencia
@@ -68,45 +70,22 @@ public class Room_Spawner : MonoBehaviour
         }
         else { _RM.roomsSpawned++; } // de base, sumo las salas spawneadas
         // instancio la selección y apago el spawn
-        Instantiate(roomToSpawn, transform.position + roomPos, transform.rotation);
+        GameObject roomInstantiated = Instantiate(roomToSpawn, transform.position + roomPos, transform.rotation);
+        FindFloors(roomInstantiated);
         spawned = true;
     }
-
-    void SpawnFutrRoom()
+    void FindFloors(GameObject roomToSearch)
     {
-        GameObject roomToSpawn = null; //declaro la sala variable
-        Vector3 roomPos = Vector3.zero; //declaro la posición de referencia
-        switch (direction) // segun el estado del enum RoomDirection
+        foreach (Transform child in roomToSearch.transform)
         {
-            case RoomDirection.Zplus:// para 1Z need 0z
-                roomToSpawn = _RM.room0z[Random.Range(0, _RM.room0z.Length)];
-                break;
-
-            case RoomDirection.Xplus:// para 1X need 0x
-                roomToSpawn = _RM.room0x[Random.Range(0, _RM.room0x.Length)];
-                break;
-
-            case RoomDirection.Zminus:// para 0z need 1Z
-                roomToSpawn = _RM.room1Z[Random.Range(0, _RM.room1Z.Length)];
-                break;
-
-            case RoomDirection.Xminus:// para 0x need 1X
-                roomToSpawn = _RM.room1X[Random.Range(0, _RM.room1X.Length)];
-                break;
-
-            default: // si no encuentra estado asignado, detiene el SCRIPT
-                Debug.LogWarning("Room Direction no asignada en Room_Spawner");
-                return;
+            if (child.CompareTag("ground"))
+            {
+                child.GetComponent<MeshRenderer>().material = 
+                    PlayerPrefs.GetInt("Dungeon") == 0? 
+                    pastFloorMat[0]:
+                    futureFloorMat[0];
+            }
         }
-        if (_RM.roomsSpawned >= _RM.maxRooms && spawned == false)
-        { // al max de salas, sala cerrada en altura
-            roomToSpawn = _RM.closedRoom;
-            roomPos = Vector3.up * 5;
-        }
-        else { _RM.roomsSpawned++; } // de base, sumo las salas spawneadas
-        // instancio la selección y apago el spawn
-        Instantiate(roomToSpawn, transform.position + roomPos, transform.rotation);
-        spawned = true;
     }
 
     private void OnTriggerEnter(Collider other)
