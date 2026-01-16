@@ -127,7 +127,7 @@ public class Player_Control : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // compruebo haber colisionado con el suelo
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") || (collision.gameObject.CompareTag("plataform")))
         {
             _isGrounded = true;
         }

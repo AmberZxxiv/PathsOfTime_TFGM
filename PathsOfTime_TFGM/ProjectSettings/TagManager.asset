@@ -17,6 +17,11 @@ TagManager:
   - ground
   - portal
   - deadly
+  - plataform
+  - ceiling
+  - wall
+  - rumble
+  - closed
   layers:
   - Default
   - TransparentFX

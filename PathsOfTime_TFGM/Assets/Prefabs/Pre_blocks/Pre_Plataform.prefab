@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8084732642644453050}
   - component: {fileID: 6461581923410454644}
   m_Layer: 0
-  m_Name: Pre_pas_plataforms
-  m_TagString: ground
+  m_Name: Pre_Plataform
+  m_TagString: plataform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
