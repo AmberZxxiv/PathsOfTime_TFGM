@@ -11,6 +11,7 @@ public class Player_Control : MonoBehaviour
  // SINGLETON script
     public Weapon_Control _WC; //pillo SINGLE del WC
     public Menus_Control _MC; //pillo SINGLE del MC
+    public Lobby_Manager _LB; //pillo el Single del LB
 
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
@@ -45,6 +46,7 @@ public class Player_Control : MonoBehaviour
     {
         _WC = Weapon_Control.instance; //pillo SINGLE del WC
         _MC = Menus_Control.instance; //pillo SINGLE del MC
+        _LB = Lobby_Manager.instance; //pillo SINGLE del LB
         _rb = GetComponent<Rigidbody>();
         // centramos el cursos en pantalla y lo ocultamos
         Cursor.lockState = CursorLockMode.Locked;
@@ -100,10 +102,12 @@ public class Player_Control : MonoBehaviour
         if (other.CompareTag("NPCpas")) //conversar con NPC pasado
         {
             print("Lista para dar el paso?");
+            _LB.PastInteracton();
         }
         if (other.CompareTag("NPCfut")) //conversar con NPC futuro
         {
             print("Lista para dar el salto?");
+            _LB.FutrInteracton();
         }
         if (other.CompareTag("PORpas")) //guardamos dungeon pasado y cargamos escena
         {
@@ -123,6 +127,14 @@ public class Player_Control : MonoBehaviour
         {
             _WC.NewWeapon(power.newWeapon);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("NPCpas")) //cerrar NPC pasado
+        { _LB.PastExit(); }
+        if (other.CompareTag("NPCfut")) //cerrar NPC futuro
+        { _LB.FutrExit();}
     }
     private void OnCollisionEnter(Collision collision)
     {

@@ -1,15 +1,18 @@
 using UnityEngine;
 using Unity.AI.Navigation;
 using System.Collections.Generic;
+using System;
 
 public class Lobby_Manager : MonoBehaviour
 {// script en empty padre del LOBBY
  // SINGLETON script
     public static Lobby_Manager instance;
- // SINGLETON script
-  
+    // SINGLETON script
+
     public List<GameObject> powerHands;
     public List<GameObject> powerSpawns;
+    public GameObject futrPanel;
+    public GameObject pastPanel;
 
 
     void Awake()
@@ -30,10 +33,50 @@ public class Lobby_Manager : MonoBehaviour
         {
             if (availablePower.Count == 0) break;
 
-            int randPow = Random.Range(0, availablePower.Count);
+            int randPow = UnityEngine.Random.Range(0, availablePower.Count);
             GameObject prefab = availablePower[randPow];
             Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
             availablePower.RemoveAt(randPow);
         }
+    }
+
+    public void FutrInteracton()
+    { 
+        futrPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+    public void PastInteracton()
+    { 
+        pastPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+    public void FutrExit()
+    { 
+        futrPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void PastExit()
+    { 
+        pastPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void BossMision()
+    {
+        print("Kill the Boss!");
+        //Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
+    }
+    public void TokensMision()
+    {
+        print("Collect the Tokens!");
+        //Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
+    }
+    public void CompanionMision()
+    {
+        print("Escort the Companion!");
+        //Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
     }
 }
