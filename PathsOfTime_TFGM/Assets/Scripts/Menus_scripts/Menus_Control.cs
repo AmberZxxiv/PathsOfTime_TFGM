@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,16 +10,27 @@ public class Menus_Control : MonoBehaviour
   // SINGLETON script
     public Player_Control _PC; //pillo SINGLE del PC
     public Weapon_Control _WC; //pillo SINGLE del WC
+    public Mission_Manager _MM; //pillo SINGLE del MM
 
+    #region /// MENUS BASE ///
     public GameObject deadMenu;
     public GameObject pauseMenu;
     public GameObject victoryMenu;
+    #endregion
 
     #region /// HEARTS UI ///
     public List<Hearts_Eater> actualLives = new List<Hearts_Eater>();
-    public GameObject heartPrefab;
     public GameObject heartContainer;
+    public GameObject heartPrefab;
     public float heartRadio;
+    #endregion
+
+    #region /// MISSIONS UI ///
+    public GameObject missionContainer;
+    public TMP_Text coinText;
+    public GameObject tokenSign;
+    public GameObject bossSign;
+    public GameObject compaSign;
     #endregion
 
     #region /// WEAPONS UI ///
@@ -40,10 +52,19 @@ public class Menus_Control : MonoBehaviour
         // pillo los singles
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
-        Time.timeScale = 1;
-        if (_PC != null) LiveContainer(_PC.playerHealth);
+        _MM = Mission_Manager.instance;
+        // equipo vidas y monedas
+        if (_PC != null)
+        {
+            LiveContainer(_PC.playerHealth);
+            CoinsCounter(_PC.coinsLooted);
+        }
         // equipo arma inicial
-        if (_WC != null) EquipWeapon(_WC.weapon); 
+        if (_WC != null) EquipWeapon(_WC.weapon);
+        // equipo la mision
+        if (_MM != null) MissionDisplay(_MM.mission);
+        // activo el tiempo
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -66,7 +87,7 @@ public class Menus_Control : MonoBehaviour
         { ShowDead(); }
     }
 
-    public void EquipWeapon(Weapon_Control.WeaponType weapon) //llamo Weapon_Control para mostrar arma equipada
+    public void EquipWeapon(Weapon_Control.WeaponType weapon) //llamo desde WC para mostrar arma equipada
     {
         // elimino el marcador del anterior weapon
         foreach (Transform child in weaponContainer.transform)
@@ -82,6 +103,22 @@ public class Menus_Control : MonoBehaviour
             case Weapon_Control.WeaponType.Magic: iconToInstantiate = magicPow; break;
         }
         Instantiate(iconToInstantiate, weaponContainer.transform);
+    }
+    public void MissionDisplay(Mission_Manager.MissionSelect mission) //llamo desde MM para mostrar mision seleccionada
+    {
+        // elimino el anterior display
+        foreach (Transform child in missionContainer.transform)
+        { Destroy(child.gameObject); }
+        // declaro el weapon que voy a instanciar en la UI
+        GameObject displayToInstantiate = null;
+        switch (mission)
+        {
+            case Mission_Manager.MissionSelect.None: return;
+            case Mission_Manager.MissionSelect.BossMis: displayToInstantiate = bossSign; break;
+            case Mission_Manager.MissionSelect.TokenMis: displayToInstantiate = tokenSign; break;
+            case Mission_Manager.MissionSelect.CompaMis: displayToInstantiate = compaSign; break;
+        }
+        Instantiate(displayToInstantiate, missionContainer.transform);
     }
 
     void LiveContainer(float playerHealth)
@@ -120,7 +157,12 @@ public class Menus_Control : MonoBehaviour
         }
     }
 
-    public void ShowVictory() //llamo desde TakeDamage de Enemy Boss
+    public void CoinsCounter(int coinsLooted) //en start y desde collision
+    {
+        coinText.text = "x " + coinsLooted.ToString();
+    }
+
+    public void ShowVictory() //desde Hited en Enemy Boss
     {
         victoryMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
@@ -128,15 +170,13 @@ public class Menus_Control : MonoBehaviour
         Time.timeScale = 0;
 
     }
-
-    public void ShowDead()
+    public void ShowDead() //llamo en este update y deadly player
     {
         deadMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0;
     }
-
     public void QuitPause()
     { 
         Time.timeScale = 1;
@@ -144,17 +184,14 @@ public class Menus_Control : MonoBehaviour
         Cursor.visible = false;
         pauseMenu.SetActive(false);
     }
-
     public void LoadMainScene()
     {
         SceneManager.LoadScene(1);
     }
-
     public void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
     }
-
     public void ExitGameApp()
     {
         print("Quitting Game...");

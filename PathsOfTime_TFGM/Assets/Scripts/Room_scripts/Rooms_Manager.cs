@@ -22,6 +22,7 @@ public class Rooms_Manager : MonoBehaviour
     public int roomsSpawned;
     public int maxRooms;
     public NavMeshSurface surface;
+    public GameObject lootChest;
     #endregion
 
     #region /// ENEMY SPAWNER ///
@@ -42,8 +43,9 @@ public class Rooms_Manager : MonoBehaviour
 
     void Start()
     {
-        Invoke("BakeNavMesh", 2f); //timer bake navmesh
-        Invoke("SpawnEnemy", 2.5f); //timer spawn de enemigos
+        Invoke("BakeNavMesh", 2f);
+        Invoke("SpawnEnemy", 2.5f);
+        Invoke("SpawnChest", 3f);
     }
 
     void BakeNavMesh() //bakea NavMeshSurface de la escena cuando esta completa
@@ -105,6 +107,20 @@ public class Rooms_Manager : MonoBehaviour
                         Instantiate(miniDronlibri, center + offset, transform.rotation);
                     }
                 }
+            }
+        }
+    }
+
+    void SpawnChest()
+    {
+        float chestProbability = 0.1f;
+        for (int i = 0; i < roomMap.Count; i++) // en todas las salas
+        {
+            Transform chestSpawn = roomMap[i].transform.Find("LootSpawn");
+            if (chestSpawn == null) continue;
+            if (Random.value <= chestProbability)
+            {
+                Instantiate(lootChest, chestSpawn.position, Quaternion.identity);
             }
         }
     }

@@ -67,7 +67,9 @@ public class Enemy_Control : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
     public GameObject healCherry;
-    public float dropChance;
+    public float healChance;
+    public GameObject lootCoin;
+    public float coinChance;
     #endregion
 
 
@@ -289,30 +291,34 @@ public class Enemy_Control : MonoBehaviour
 
     public void HITEDenemy(Vector3 force, float damage) //desde WEAPON
     {
+        // le bajo la vida
         StartCoroutine(FlashDamage());
         enemyHealth -= damage;
+        // si muere
         if (enemyHealth <= 0)
         {
-            if (CompareTag("boss"))
+            if (CompareTag("boss")) //es boss, fin de dungeon
             { _MC.ShowVictory(); }
-            if (Random.value <= dropChance)
-            {
-                Instantiate(healCherry, transform.position + Vector3.up * 1, transform.rotation);
-            }
-            Destroy(gameObject);
+            // compruebo el 25% del heal drop
+            if (Random.value <= healChance)
+            { Instantiate(healCherry, transform.position + Vector3.up * 1, transform.rotation);}
+            // compruebo el 10% del coin drop
+            if (Random.value <= coinChance)
+            { Instantiate(lootCoin, transform.position + Vector3.up * 1, transform.rotation);}
+            Destroy(gameObject); //se destruye
         }
-        if (_rb != null)
-        {
-            _rb.linearVelocity = Vector3.zero;
-            _rb.angularVelocity = Vector3.zero;
-            _rb.AddForce(force, ForceMode.Impulse);
-        }
-        switch (enemyType)
+        switch (enemyType) // si tiene NavMesh lo pauso
         {
             case EnemyType.Gnobot:
             case EnemyType.Hydra:
             StartCoroutine(DisableAgentTemporarily(0.2f));
             break;
+        }
+        if (_rb != null) // si tiene RB le empujo
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+            _rb.AddForce(force, ForceMode.Impulse);
         }
     }
     IEnumerator FlashDamage()

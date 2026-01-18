@@ -749,6 +749,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: aXx_ramp
       objectReference: {fileID: 0}
+    - target: {fileID: 7632661638199226831, guid: c7304996b02b74640b9ca9976ee45625, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632661638199226831, guid: c7304996b02b74640b9ca9976ee45625, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8393288260978788982, guid: c7304996b02b74640b9ca9976ee45625, type: 3}
       propertyPath: m_LocalScale.x
       value: 15.75

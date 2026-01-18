@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Weapon_Control : MonoBehaviour
-{// script en el SPRITE dentro del player
+{// script en NON DESTROY EMPTY
  // SINGLETON script
     public static Weapon_Control instance;
  // SINGLETON script
@@ -53,6 +53,7 @@ public class Weapon_Control : MonoBehaviour
         weapon = newWeapon;
         _MC.EquipWeapon(newWeapon); //cambio el UI del Menu_Control
     }
+    // NO PILLABA SINGLES EN START
     void Update()
     {
         //ASEGURO SINGLES AL CAMBIAR ESCENA

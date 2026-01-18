@@ -11,9 +11,9 @@ public class Lobby_Manager : MonoBehaviour
 
     public List<GameObject> powerHands;
     public List<GameObject> powerSpawns;
+    
     public GameObject futrPanel;
     public GameObject pastPanel;
-
 
     void Awake()
     { // awake para instanciar singleton sin superponer varios
@@ -59,24 +59,9 @@ public class Lobby_Manager : MonoBehaviour
         Cursor.visible = false;
     }
     public void PastExit()
-    { 
+    {
         pastPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-    public void BossMision()
-    {
-        print("Kill the Boss!");
-        //Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
-    }
-    public void TokensMision()
-    {
-        print("Collect the Tokens!");
-        //Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
-    }
-    public void CompanionMision()
-    {
-        print("Escort the Companion!");
-        //Instantiate(prefab, spawn.transform.position, prefab.transform.rotation);
     }
 }

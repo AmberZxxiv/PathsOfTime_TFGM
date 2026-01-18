@@ -35,7 +35,10 @@ public class Player_Control : MonoBehaviour
     public Transform cameraTransform;
     #endregion
 
+    #region /// STATS NUMBERS ///
     public float playerHealth;
+    public int coinsLooted;
+    #endregion
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
@@ -154,6 +157,12 @@ public class Player_Control : MonoBehaviour
         {
             playerHealth += 1;
             _MC.UpdateLives(playerHealth);
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("looteable"))
+        {
+            coinsLooted += 1;
+            _MC.CoinsCounter(coinsLooted);
             Destroy(collision.gameObject);
         }
     }

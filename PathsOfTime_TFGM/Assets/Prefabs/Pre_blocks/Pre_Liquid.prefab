@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8182875496677531809}
   - component: {fileID: 4893647539847322623}
   - component: {fileID: 6987899536107626835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pre_Liquid
   m_TagString: deadly
   m_Icon: {fileID: 0}

@@ -137,13 +137,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   laserOrigin: {fileID: 0}
+  laserTicks: 0
   wanderCooldown: 0
   wanderTimer: 2
   attackCooldown: 1
   attackTimer: 0
   enemyHealth: 6
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
-  dropChance: 0.25
+  healChance: 0.25
+  lootCoin: {fileID: 3576113440945831091, guid: f81dc6d600e27d54a905afae05adb3ed, type: 3}
+  coinChance: 0.1
 --- !u!114 &7766454580206351369
 MonoBehaviour:
   m_ObjectHideFlags: 0

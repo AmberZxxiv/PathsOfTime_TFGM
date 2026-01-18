@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6357106638802232060}
   - component: {fileID: 9213253813698647606}
   - component: {fileID: 5914191537784778504}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pre_Rumble
   m_TagString: rumble
   m_Icon: {fileID: 0}

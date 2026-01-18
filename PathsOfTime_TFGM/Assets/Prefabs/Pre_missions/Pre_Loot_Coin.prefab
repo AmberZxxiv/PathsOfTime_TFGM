@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3517831443132686833}
   - component: {fileID: -1454092345837435233}
   m_Layer: 0
-  m_Name: Pre_Cherry_Heal
-  m_TagString: heal
+  m_Name: Pre_Loot_Coin
+  m_TagString: looteable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 47da5048486218544aea6468d5e6682d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe072e5ea5c34bb4ba459da04fe6715b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
