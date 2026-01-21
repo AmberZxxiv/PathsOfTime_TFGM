@@ -10,6 +10,7 @@ public class Mission_Manager : MonoBehaviour
     public static Mission_Manager instance;
  // SINGLETON script
     public Menus_Control _MC; //pillo SINGLE del MC
+    public Player_Control _PC; //pillo SINGLE del PC
 
     public MissionSelect mission;
     public enum MissionSelect
@@ -20,6 +21,9 @@ public class Mission_Manager : MonoBehaviour
         CompaMis
     }
 
+    public GameObject companionPrefab;
+    bool _missionCompleted = false;
+
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
         if (instance == null)
@@ -28,8 +32,32 @@ public class Mission_Manager : MonoBehaviour
     }
     void Start()
     { 
-        // Pillo Single Menu
+        // Pillo Singles
         if (_MC == null) { _MC = Menus_Control.instance; } 
+        if (_PC == null) { _PC = Player_Control.instance; }
+        if (mission == MissionSelect.CompaMis)
+        {
+            Invoke("SpawnCompanion", 2.5f);
+        }
+    }
+    void Update()
+    {
+        // Comprobar TOKENS completada
+        if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !_missionCompleted)
+        {
+            _missionCompleted = true;
+            //Instanciar mision complete o algo asi
+        }
+    }
+
+    void SpawnCompanion()
+    {
+        Instantiate(companionPrefab, new Vector3(0, 3, 0), transform.rotation);
+    }
+
+    public void BossComplete() // lo llamo desde el Boss al morir
+    {
+        //I(nstanciar mision complete o algo asi
     }
 
     public void BossMission()

@@ -7,10 +7,11 @@ using static UnityEngine.UI.ScrollRect;
 
 public class Enemy_Control : MonoBehaviour
 {// script en cada enemigo
- //pillo SINGLEs del PC y MC
+ //pillo SINGLEs del PC, MC y MM
    public Player_Control _PC;
    public Menus_Control _MC;
-   
+   public Mission_Manager _MM;
+
     public EnemyType enemyType;
     public enum EnemyType
     {
@@ -75,9 +76,10 @@ public class Enemy_Control : MonoBehaviour
 
     void Start()
     {
-        //pillo SINGLEs del PC y MC
+        //pillo SINGLEs del PC, MC y MM
         _PC = Player_Control.instance;
         _MC = Menus_Control.instance;
+        _MM = Mission_Manager.instance;
         // pillo NavMesh si tiene Humanoid agent
         switch (enemyType)
         {
@@ -298,7 +300,11 @@ public class Enemy_Control : MonoBehaviour
         if (enemyHealth <= 0)
         {
             if (CompareTag("boss")) //es boss, fin de dungeon
-            { _MC.ShowVictory(); }
+            { 
+                if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
+                { _MM.BossComplete(); }
+                _MC.ShowVictory(); 
+            }
             // compruebo el 25% del heal drop
             if (Random.value <= healChance)
             { Instantiate(healCherry, transform.position + Vector3.up * 1, transform.rotation);}
