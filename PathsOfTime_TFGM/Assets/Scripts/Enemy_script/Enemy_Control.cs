@@ -299,12 +299,8 @@ public class Enemy_Control : MonoBehaviour
         // si muere
         if (enemyHealth <= 0)
         {
-            if (CompareTag("boss")) //es boss, fin de dungeon
-            { 
-                if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
-                { _MM.BossComplete(); }
-                _MC.ShowVictory(); 
-            }
+            if (CompareTag("boss") && _MM.mission == Mission_Manager.MissionSelect.BossMis) //en mision de matar a boss
+            { _MM.BossComplete(); }
             // compruebo el 25% del heal drop
             if (Random.value <= healChance)
             { Instantiate(healCherry, transform.position + Vector3.up * 1, transform.rotation);}

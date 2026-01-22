@@ -15,7 +15,7 @@ public class Menus_Control : MonoBehaviour
     #region /// MENUS BASE ///
     public GameObject deadMenu;
     public GameObject pauseMenu;
-    public GameObject victoryMenu;
+    public GameObject exitMenu;
     #endregion
 
     #region /// HEARTS UI ///
@@ -162,9 +162,9 @@ public class Menus_Control : MonoBehaviour
         coinText.text = "x " + coinsLooted.ToString();
     }
 
-    public void ShowVictory() //desde Hited en Enemy Boss
+    public void ShowExit() //desde Player al chocar portal
     {
-        victoryMenu.SetActive(true);
+        exitMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0;

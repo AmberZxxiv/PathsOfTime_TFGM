@@ -4,8 +4,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Companion_Control : MonoBehaviour
 {// script en el COMPANION pref
- //pillo SINGLE del PC
+ //pillo SINGLEs del PC y MM
     public Player_Control _PC;
+    public Mission_Manager _MM;
+
 
     NavMeshAgent _agent;
     Transform _target;
@@ -16,8 +18,9 @@ public class Companion_Control : MonoBehaviour
 
     void Start()
     {
-        //pillo SINGLE del PC
+        //pillo SINGLEs del PC y MM
         _PC = Player_Control.instance;
+        _MM = Mission_Manager.instance;
         // pillo rigidbody, objetivo y colores
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
@@ -29,5 +32,11 @@ public class Companion_Control : MonoBehaviour
     void Update()
     {
         _agent.SetDestination(_target.position);
+
+        if (companionHealth <= 0)
+        {
+            _MM.CompanionLose();
+            Destroy(this.gameObject);
+        }
     }
 }

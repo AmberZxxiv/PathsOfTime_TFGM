@@ -23,6 +23,7 @@ public class Rooms_Manager : MonoBehaviour
     public int maxRooms;
     public NavMeshSurface surface;
     public GameObject lootChest;
+    public GameObject exitPortal;
     #endregion
 
     #region /// ENEMY SPAWNER ///
@@ -46,6 +47,7 @@ public class Rooms_Manager : MonoBehaviour
         Invoke("BakeNavMesh", 2f);
         Invoke("SpawnEnemy", 2.5f);
         Invoke("SpawnChest", 3f);
+        Invoke("SpawnExit", 3.5f);
     }
 
     void BakeNavMesh() //bakea NavMeshSurface de la escena cuando esta completa
@@ -120,8 +122,15 @@ public class Rooms_Manager : MonoBehaviour
             if (chestSpawn == null) continue;
             if (Random.value <= chestProbability)
             {
-                Instantiate(lootChest, chestSpawn.position, Quaternion.identity);
+                Instantiate(lootChest, chestSpawn.position, transform.rotation);
             }
         }
+    }
+
+    void SpawnExit()
+    {
+        //portal de salida aparece en la ultima sala
+        Transform exitSpawn = roomMap[roomMap.Count - 1].transform.Find("ExitSpawner");
+        Instantiate(exitPortal, exitSpawn.position + Vector3.up * 5f, exitSpawn.rotation);
     }
 }

@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _MC: {fileID: 0}
-  weapon: 3
+  weapon: 4
   attackOrigin: {fileID: 0}
   swordPref: {fileID: 4424006084866504917, guid: 21c83cbbfcb5e7a4f8f9e983876414c1, type: 3}
   punchPref: {fileID: 4424006084866504917, guid: 0c175cc03568c1a4e9b979ef637d4ef2, type: 3}
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MC: {fileID: 0}
   _PC: {fileID: 0}
-  mission: 3
+  mission: 1
   companionPrefab: {fileID: 4948516239128690741, guid: f49b01f9a91f1df479732bb66d43a842, type: 3}
 --- !u!4 &1758663966
 Transform:
@@ -536,6 +536,7 @@ MonoBehaviour:
   maxRooms: 15
   surface: {fileID: 2141270859}
   lootChest: {fileID: 3576113440945831091, guid: 67bbb457f3bcc5e4cb20460a3507e85b, type: 3}
+  exitPortal: {fileID: 1977729573740530613, guid: 1efef7a6c87462f46afe7013525b5df2, type: 3}
   bossHydra: {fileID: 7366125380966331777, guid: 287ac59b96e8ec94fb87d38faeb450a4, type: 3}
   bossAngel: {fileID: 7366125380966331777, guid: 30b3d0305474e60419517d72657b7026, type: 3}
   miniGnobot: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
@@ -633,6 +634,62 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 1291381776}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1809.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -984
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8458909
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.056240216
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.51696205
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.11855752
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 504.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -367
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1.572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 62.655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817598099092989119, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3354890852755276572, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_Name
       value: CANVAS_pre

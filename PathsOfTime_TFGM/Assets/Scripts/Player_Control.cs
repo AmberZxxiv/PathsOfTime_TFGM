@@ -11,7 +11,9 @@ public class Player_Control : MonoBehaviour
  // SINGLETON script
     public Weapon_Control _WC; //pillo SINGLE del WC
     public Menus_Control _MC; //pillo SINGLE del MC
-    public Lobby_Manager _LB; //pillo el Single del LB
+    public Lobby_Manager _LB; //pillo SINGLE del LB
+    public Mission_Manager _MM; //pillo SINGLE del MM
+
 
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
@@ -47,9 +49,11 @@ public class Player_Control : MonoBehaviour
     }
     void Start()
     {
-        _WC = Weapon_Control.instance; //pillo SINGLE del WC
-        _MC = Menus_Control.instance; //pillo SINGLE del MC
-        _LB = Lobby_Manager.instance; //pillo SINGLE del LB
+        // pillo SINGLES de WC, MC, LM, MM
+        _WC = Weapon_Control.instance;
+        _MC = Menus_Control.instance; 
+        _LB = Lobby_Manager.instance;
+        _MM = Mission_Manager.instance;
         _rb = GetComponent<Rigidbody>();
         // centramos el cursos en pantalla y lo ocultamos
         Cursor.lockState = CursorLockMode.Locked;
@@ -112,17 +116,25 @@ public class Player_Control : MonoBehaviour
             print("Lista para dar el salto?");
             _LB.FutrInteracton();
         }
-        if (other.CompareTag("PORpas")) //guardamos dungeon pasado y cargamos escena
+        if (other.CompareTag("PORpas") //si hemos escogido mision y arma, guardamos pasado y cargamos dungeon
+            && _MM.mission != Mission_Manager.MissionSelect.None
+            && _WC.weapon != Weapon_Control.WeaponType.None) 
         {
             PlayerPrefs.SetInt("Dungeon", 0);
             PlayerPrefs.Save();
             SceneManager.LoadScene(2);
         }
-        if (other.CompareTag("PORfut")) //guardamos dungeon futuro y cargamos escena
+        if (other.CompareTag("PORfut") //si hemos escogido mision y arma, guardamos futuro y cargamos dungeon
+            && _MM.mission != Mission_Manager.MissionSelect.None
+            && _WC.weapon != Weapon_Control.WeaponType.None)
         {
             PlayerPrefs.SetInt("Dungeon", 1);
             PlayerPrefs.Save();
             SceneManager.LoadScene(2);
+        }
+        if (other.CompareTag("PORexit")) //salimos al menu de completao
+        {
+            _MC.ShowExit();
         }
 
         Power_Giver power = other.GetComponent<Power_Giver>();

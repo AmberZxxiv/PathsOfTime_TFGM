@@ -46,6 +46,7 @@ public class Mission_Manager : MonoBehaviour
         if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !_missionCompleted)
         {
             _missionCompleted = true;
+            print("MISSION COMPLETE!");
             //Instanciar mision complete o algo asi
         }
     }
@@ -54,10 +55,18 @@ public class Mission_Manager : MonoBehaviour
     {
         Instantiate(companionPrefab, new Vector3(0, 3, 0), transform.rotation);
     }
+    public void CompanionLose() // lo llamo desde Companion al morirse
+    {
+        //Instanciar mision lose o algo asi
+        _missionCompleted = true;
+        print("MISSION LOSED!");
+    }
 
     public void BossComplete() // lo llamo desde el Boss al morir
     {
-        //I(nstanciar mision complete o algo asi
+        //Instanciar mision complete o algo asi
+        _missionCompleted = true;
+        print("MISSION COMPLETE!");
     }
 
     public void BossMission()

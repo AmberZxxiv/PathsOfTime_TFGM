@@ -15,7 +15,6 @@ TagManager:
   - PORfut
   - PORpas
   - ground
-  - portal
   - deadly
   - plataform
   - ceiling
@@ -23,6 +22,7 @@ TagManager:
   - rumble
   - closed
   - looteable
+  - PORexit
   layers:
   - Default
   - TransparentFX
