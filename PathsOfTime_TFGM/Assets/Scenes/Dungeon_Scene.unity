@@ -459,7 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MC: {fileID: 0}
   _PC: {fileID: 0}
-  mission: 1
+  mission: 3
   companionPrefab: {fileID: 4948516239128690741, guid: f49b01f9a91f1df479732bb66d43a842, type: 3}
 --- !u!4 &1758663966
 Transform:

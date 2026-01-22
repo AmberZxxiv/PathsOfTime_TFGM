@@ -30,18 +30,12 @@ public class Mission_Manager : MonoBehaviour
         { instance = this; DontDestroyOnLoad(this.gameObject); }
         else Destroy(gameObject);
     }
-    void Start()
-    { 
-        // Pillo Singles
-        if (_MC == null) { _MC = Menus_Control.instance; } 
-        if (_PC == null) { _PC = Player_Control.instance; }
-        if (mission == MissionSelect.CompaMis)
-        {
-            Invoke("SpawnCompanion", 2.5f);
-        }
-    }
+    
     void Update()
     {
+        //ASEGURO SINGLES AL CAMBIAR ESCENA
+        if (_PC == null) { _PC = Player_Control.instance; }
+        if (_MC == null) { _MC = Menus_Control.instance; }
         // Comprobar TOKENS completada
         if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !_missionCompleted)
         {
@@ -51,11 +45,11 @@ public class Mission_Manager : MonoBehaviour
         }
     }
 
-    void SpawnCompanion()
+    public void SpawnCompanion() //desde Rooms_Manager al iniciar sala
     {
         Instantiate(companionPrefab, new Vector3(0, 3, 0), transform.rotation);
     }
-    public void CompanionLose() // lo llamo desde Companion al morirse
+    public void CompanionLose() //desde Companion al morirse
     {
         //Instanciar mision lose o algo asi
         _missionCompleted = true;

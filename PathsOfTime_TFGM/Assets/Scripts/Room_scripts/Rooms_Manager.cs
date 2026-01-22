@@ -1,12 +1,15 @@
-using UnityEngine;
-using Unity.AI.Navigation;
 using System.Collections.Generic;
+using System.Reflection;
+using Unity.AI.Navigation;
+using UnityEngine;
+using static Mission_Manager;
 
 public class Rooms_Manager : MonoBehaviour
 {// script en el empty ROM_MAN
  // SINGLETON script
     public static Rooms_Manager instance;
  // SINGLETON script
+    public Mission_Manager _MM; //pillo SINGLE del MM
 
     #region /// ROOM MAN LIST ///
     public GameObject[] room1Z;
@@ -44,10 +47,16 @@ public class Rooms_Manager : MonoBehaviour
 
     void Start()
     {
+        //pillo SINGLE del MM
+        _MM = Mission_Manager.instance;
         Invoke("BakeNavMesh", 2f);
         Invoke("SpawnEnemy", 2.5f);
         Invoke("SpawnChest", 3f);
         Invoke("SpawnExit", 3.5f);
+        if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
+        {
+            _MM.Invoke("SpawnCompanion", 2.5f);
+        }
     }
 
     void BakeNavMesh() //bakea NavMeshSurface de la escena cuando esta completa
