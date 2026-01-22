@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1955035900931944435}
   - component: {fileID: -1454092345837435233}
   m_Layer: 0
-  m_Name: Pre_Loot_Chest
+  m_Name: Chest_loot_pre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

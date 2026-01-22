@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8682506529949152334}
   - component: {fileID: 937538730012844604}
   m_Layer: 0
-  m_Name: Pre_Split_Range
+  m_Name: Split_rang_pre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

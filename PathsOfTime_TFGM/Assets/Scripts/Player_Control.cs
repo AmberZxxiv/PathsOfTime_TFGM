@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player_Control : MonoBehaviour
-{// script en el empty padre del PLAYER
+{// script en PREF padre PLAYER
  // SINGLETON script
     public static Player_Control instance;
  // SINGLETON script

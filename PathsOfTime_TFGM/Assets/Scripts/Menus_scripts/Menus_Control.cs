@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menus_Control : MonoBehaviour
-{ // script en el canvas de cada escena
+{ // script en PREF padre CANVAS
   // SINGLETON script
     public static Menus_Control instance;
   // SINGLETON script
@@ -100,7 +100,7 @@ public class Menus_Control : MonoBehaviour
             case Weapon_Control.WeaponType.Sword: iconToInstantiate = swordPow; break;
             case Weapon_Control.WeaponType.Punch: iconToInstantiate = punchPow; break;
             case Weapon_Control.WeaponType.Shot: iconToInstantiate = shotPow; break;
-            case Weapon_Control.WeaponType.Magic: iconToInstantiate = magicPow; break;
+            case Weapon_Control.WeaponType.Spell: iconToInstantiate = magicPow; break;
         }
         Instantiate(iconToInstantiate, weaponContainer.transform);
     }

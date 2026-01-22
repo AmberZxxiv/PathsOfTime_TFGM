@@ -2036,7 +2036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3354890852755276572, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_Name
-      value: CANVAS_pre
+      value: CANVAS
       objectReference: {fileID: 0}
     - target: {fileID: 3523780991929030117, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_IsActive

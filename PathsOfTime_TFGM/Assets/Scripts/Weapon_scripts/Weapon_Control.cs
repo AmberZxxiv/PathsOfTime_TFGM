@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Weapon_Control : MonoBehaviour
-{// script en NON DESTROY EMPTY
+{// script en DONT DESTROY EMPTY
  // SINGLETON script
     public static Weapon_Control instance;
  // SINGLETON script
@@ -19,7 +19,7 @@ public class Weapon_Control : MonoBehaviour
         Sword,
         Punch,
         Shot,
-        Magic
+        Spell
     }
 
     #region /// ATTACK ZONES ///
@@ -76,7 +76,7 @@ public class Weapon_Control : MonoBehaviour
         case WeaponType.Sword: DoSWOSH(); break;
         case WeaponType.Punch:DoPUNCH();break;
         case WeaponType.Shot: DoSHOT(); break;
-        case WeaponType.Magic:DoMAGIC();break;
+        case WeaponType.Spell:DoSPELL();break;
         }
     }
 
@@ -167,7 +167,7 @@ public class Weapon_Control : MonoBehaviour
         Rigidbody rb = bullShot.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * 50f;
     }
-    void DoMAGIC()
+    void DoSPELL()
     {
         print("WIKED!");
         // disparo donde miro con la cam

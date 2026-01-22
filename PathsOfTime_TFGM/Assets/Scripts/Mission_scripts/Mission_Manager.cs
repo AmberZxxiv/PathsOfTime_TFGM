@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Mission_Manager : MonoBehaviour
-{// script en NON DESTROY EMPTY
+{// script en DONT DESTROY EMPTY
  // SINGLETON script
     public static Mission_Manager instance;
  // SINGLETON script
@@ -45,7 +45,7 @@ public class Mission_Manager : MonoBehaviour
         }
     }
 
-    public void SpawnCompanion() //desde Rooms_Manager al iniciar sala
+    public void SpawnCompanion() //desde Room_Manager al iniciar sala
     {
         Instantiate(companionPrefab, new Vector3(0, 3, 0), transform.rotation);
     }

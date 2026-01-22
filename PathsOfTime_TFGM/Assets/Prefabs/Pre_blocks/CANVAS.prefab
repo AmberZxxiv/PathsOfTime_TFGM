@@ -1807,7 +1807,7 @@ GameObject:
   - component: {fileID: 1059581248435784354}
   - component: {fileID: 1702760975148235864}
   m_Layer: 5
-  m_Name: CANVAS_pre
+  m_Name: CANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

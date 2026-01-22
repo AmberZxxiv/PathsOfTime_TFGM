@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Spell_Caster : MonoBehaviour
-{//script en cada prefab de Bullet MAGIC
+{//script en cada PREF Spell Caster
 
     public float damage;
     public float lifeTime;

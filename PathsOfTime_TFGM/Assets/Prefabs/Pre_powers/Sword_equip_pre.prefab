@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3186367245664081287}
   - component: {fileID: 63975454540325391}
   m_Layer: 0
-  m_Name: Pre_Equip_Punch
+  m_Name: Sword_equip_pre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 97163b16520d59745a193ffd35c7b5dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff14d4df988e78849b3cdb6ffb7b7b38, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

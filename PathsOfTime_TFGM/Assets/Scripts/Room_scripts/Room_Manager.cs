@@ -4,10 +4,10 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using static Mission_Manager;
 
-public class Rooms_Manager : MonoBehaviour
-{// script en el empty ROM_MAN
+public class Room_Manager : MonoBehaviour
+{// script en el empty ROOM_MAN
  // SINGLETON script
-    public static Rooms_Manager instance;
+    public static Room_Manager instance;
  // SINGLETON script
     public Mission_Manager _MM; //pillo SINGLE del MM
 

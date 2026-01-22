@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BillBoard_General : MonoBehaviour
+public class BillBoard_Control : MonoBehaviour
 {
     void LateUpdate()
     {

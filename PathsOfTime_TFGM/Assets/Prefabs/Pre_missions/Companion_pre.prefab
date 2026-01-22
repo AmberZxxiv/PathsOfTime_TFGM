@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1796996407320568135}
   - component: {fileID: 28953108647259404}
   m_Layer: 3
-  m_Name: Companion_pref
+  m_Name: Companion_pre
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
-  target: {fileID: 0}
+  _MM: {fileID: 0}
   companionHealth: 10
 --- !u!114 &28953108647259404
 MonoBehaviour:

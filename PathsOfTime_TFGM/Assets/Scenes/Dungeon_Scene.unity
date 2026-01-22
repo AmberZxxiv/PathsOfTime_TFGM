@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7a0dda64b741241a01414cb3d97a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MM: {fileID: 0}
   room1Z:
   - {fileID: 7431631297506144632, guid: dee9a471c864f2f458011fb2f8df4569, type: 3}
   - {fileID: 1581574603929288141, guid: 126123985f0ee8e4395dec3606488bc4, type: 3}
@@ -692,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3354890852755276572, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_Name
-      value: CANVAS_pre
+      value: CANVAS
       objectReference: {fileID: 0}
     - target: {fileID: 8133715859093740274, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_Pivot.x

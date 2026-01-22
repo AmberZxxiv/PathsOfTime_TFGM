@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8945398663940488952}
   - component: {fileID: 5594377873653989127}
   m_Layer: 0
-  m_Name: Pre_Heart_Cake
+  m_Name: Heart_cake_pre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

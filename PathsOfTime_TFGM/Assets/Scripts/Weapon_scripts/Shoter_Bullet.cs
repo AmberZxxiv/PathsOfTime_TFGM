@@ -4,8 +4,8 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Bull_Shoter : MonoBehaviour
-{//script en cada prefab de Bullet SHOT
+public class Shoter_Bullet : MonoBehaviour
+{//script en cada PREF Shot Bull
 
     public float damage;
     public float lifeTime;

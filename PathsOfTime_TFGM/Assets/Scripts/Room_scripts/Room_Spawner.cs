@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room_Spawner : MonoBehaviour
 { // script en trigger RoomSpawner de cada puerta abierta
-    public Rooms_Manager _RM; //singleton Rooms_Manager
+    public Room_Manager _RM; //singleton Room_Manager
 
     // enum para definir la direccion del spawn
     public RoomDirection direction;
@@ -40,7 +40,7 @@ public class Room_Spawner : MonoBehaviour
     void Start()
     {
         //pillo SINGLE del RM
-        _RM = Rooms_Manager.instance;
+        _RM = Room_Manager.instance;
         //compruebo la dungeon escogida
         _dungeon = PlayerPrefs.GetInt("Dungeon");
         { Invoke("SpawnRoom", spawnTime); }

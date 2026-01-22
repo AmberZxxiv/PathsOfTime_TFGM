@@ -4,7 +4,7 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Split_Ranged : MonoBehaviour
-{//script en cada prefab SPLIT RANGED de enemys
+{//script en cada PREF SPLIT RANGED de enemys
 
     public Player_Control _PC; //pillo SINGLE del PC
     public Menus_Control _MC; //pillo SINGLE del MC
