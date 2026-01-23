@@ -72,9 +72,7 @@ public class Menus_Control : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenu.activeSelf)
-            {
-                QuitPause();
-            }
+            { QuitPause();}
             else
             {
                 pauseMenu.SetActive(true);
@@ -121,10 +119,10 @@ public class Menus_Control : MonoBehaviour
         Instantiate(displayToInstantiate, missionContainer.transform);
     }
 
-    void LiveContainer(float playerHealth)
+    void LiveContainer(float playerHealth) //en start instancio total corazones en circulo
     {
         for (int i = 0; i < (_PC.playerHealth*0.5f); i++)
-        { // instancio corazones en circulo
+        {
             GameObject heart = Instantiate(heartPrefab, heartContainer.transform);
             RectTransform rt = heart.GetComponent<RectTransform>();
             float angulo = (360f / (_PC.playerHealth * 0.5f)) * i;
@@ -133,36 +131,26 @@ public class Menus_Control : MonoBehaviour
             float y = Mathf.Sin(rad) * heartRadio;
             rt.anchoredPosition = new Vector2(x, y);
             actualLives.Add(heart.GetComponent<Hearts_Eater>());
+            // añado a la lista el script del corazon
         }
         UpdateLives(_PC.playerHealth);
     }
-    public void UpdateLives(float playerHealth)
+    public void UpdateLives(float playerHealth) // todo lo que varia la vida del player
     {
-        foreach (Hearts_Eater cupcake in actualLives)
+        foreach (Hearts_Eater cupcake in actualLives) //recorro los estados de los corazones
         {
             if (playerHealth >= 2)
-            {
-                cupcake.EatHeart(2);
-                playerHealth -= 2;
-            }
+            { cupcake.EatHeart(2); playerHealth -= 2; }
             else if (playerHealth == 1)
-            {
-                cupcake.EatHeart(1);
-                playerHealth -= 1;
-            }
+            { cupcake.EatHeart(1); playerHealth -= 1;}
             else
-            {
-                cupcake.EatHeart(0);
-            }
+            { cupcake.EatHeart(0); }
         }
     }
+    public void CoinsCounter(int coinsLooted) //en start y Player collision
+    { coinText.text = "x " + coinsLooted.ToString(); }
 
-    public void CoinsCounter(int coinsLooted) //en start y desde collision
-    {
-        coinText.text = "x " + coinsLooted.ToString();
-    }
-
-    public void ShowExit() //desde Player al chocar portal
+    public void ShowExit() //desde Player collision
     {
         exitMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
@@ -170,7 +158,7 @@ public class Menus_Control : MonoBehaviour
         Time.timeScale = 0;
 
     }
-    public void ShowDead() //llamo en este update y deadly player
+    public void ShowDead() //en update y Player collision
     {
         deadMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
@@ -185,16 +173,9 @@ public class Menus_Control : MonoBehaviour
         pauseMenu.SetActive(false);
     }
     public void LoadMainScene()
-    {
-        SceneManager.LoadScene(1);
-    }
+    { SceneManager.LoadScene(1); }
     public void ReturnToMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
+    { SceneManager.LoadScene(0); }
     public void ExitGameApp()
-    {
-        print("Quitting Game...");
-        Application.Quit();
-    }
+    { print("Quitting Game..."); Application.Quit(); }
 }
