@@ -14,7 +14,6 @@ public class Player_Control : MonoBehaviour
     public Lobby_Manager _LB; //pillo SINGLE del LB
     public Mission_Manager _MM; //pillo SINGLE del MM
 
-
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
     public float movSpeed;
