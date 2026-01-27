@@ -23,6 +23,7 @@ TagManager:
   - closed
   - looteable
   - PORexit
+  - portal
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - UI
   - enemyLayer
   - enviro
-  - 
+  - floors
   - 
   - 
   - 

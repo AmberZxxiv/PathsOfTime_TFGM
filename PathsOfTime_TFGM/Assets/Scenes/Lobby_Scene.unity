@@ -376,6 +376,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: _isAiming
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: dashForce
       value: 0
       objectReference: {fileID: 0}

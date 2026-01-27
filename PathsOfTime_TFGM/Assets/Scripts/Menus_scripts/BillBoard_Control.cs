@@ -6,7 +6,7 @@ public class BillBoard_Control : MonoBehaviour
     {
         // Mirar solo en el eje Y (vertical) para mantenerlos erguidos
         Vector3 lookDir = Camera.main.transform.position - transform.position;
-        lookDir.y = 0;
+        //lookDir.y = 0; // esto es pa bloquear rotacion en Y
         transform.rotation = Quaternion.LookRotation(lookDir);
     }
 }

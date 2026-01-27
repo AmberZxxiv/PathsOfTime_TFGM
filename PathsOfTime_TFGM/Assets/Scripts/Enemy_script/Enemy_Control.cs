@@ -23,6 +23,7 @@ public class Enemy_Control : MonoBehaviour
     }
     #region /// MOVIMIENTO BASE ///
     NavMeshAgent _agent;
+    Animator _animator;
     public Transform target;
     public float agroDistance;
     float _targetDistance;
@@ -85,13 +86,15 @@ public class Enemy_Control : MonoBehaviour
             case EnemyType.Hydra:
             _agent = GetComponent<NavMeshAgent>(); break;
         }
-        // pillo rigidbody, origen, objetivo y colores
+        // pillo rigidbody, origen, objetivo, colores y activo animator
         _rb = GetComponent<Rigidbody>();
         _attackOrigin = this.transform;
         _startPoint = transform.position;
         target = _PC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
+        _animator = GetComponentInChildren<Animator>();
+        _animator.SetBool("isMoving", true);
     }
     void Update()
     {
@@ -107,7 +110,8 @@ public class Enemy_Control : MonoBehaviour
             {
                 case EnemyType.Gnobot:
                 case EnemyType.Hydra:
-                _agent.SetDestination(target.position); break;
+                    _agent.SetDestination(target.position); 
+                    break;
 
                 case EnemyType.Dronlibri:
                 case EnemyType.Angel:
@@ -131,7 +135,7 @@ public class Enemy_Control : MonoBehaviour
     {
         wanderTimer -= Time.deltaTime; //empiezo timer para cambiar de posicion
         if (wanderTimer <= 0f) //cuando pasa el tiempo, doy objetivo nuevo y reinicio timer
-        { 
+        {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             _agent.SetDestination(newPos);
             wanderTimer = wanderCooldown;
@@ -208,8 +212,9 @@ public class Enemy_Control : MonoBehaviour
         // limites en anchura, altura, largura y centro
         Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
         Vector3 center = _attackOrigin.position + dir * attackRange;
-        // genero el collider y busco golpeados
+        // genero el collider con su animacion y busco golpeados
         Collider[] hits = Physics.OverlapBox(center,halfExtents,Quaternion.LookRotation(dir));
+        _animator.SetTrigger("isAttacking");
         foreach (Collider hit in hits)
         {
             if (hit.CompareTag("Player"))
@@ -226,7 +231,8 @@ public class Enemy_Control : MonoBehaviour
         // disparo hacia el player
         Vector3 targetPos = target.position + Vector3.up * 1.5f;
         Vector3 dir = (targetPos - _attackOrigin.position).normalized;
-        // instancio el proyectil ( controla su propia collision )
+        // instancio el proyectil con su animacion ( controla su propia collision )
+        _animator.SetTrigger("isAttacking");
         GameObject splitShot = Instantiate(splitPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
         // evito que se choque con él mismo
         Collider enemyCollider = GetComponent<Collider>();

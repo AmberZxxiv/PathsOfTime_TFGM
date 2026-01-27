@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _MC: {fileID: 0}
+  _MM: {fileID: 0}
   enemyType: 0
   target: {fileID: 0}
   agroDistance: 20
@@ -129,7 +130,7 @@ MonoBehaviour:
   flyHeight: 2
   maxRange: 5
   splitPref: {fileID: 8850432258290061902, guid: d1dd525d5a35b60478ce0000e3950354, type: 3}
-  attackRange: 3
+  attackRange: 2
   attackDamage: 1
   attackForce: 5
   laserBeam: {fileID: 0}
@@ -138,14 +139,14 @@ MonoBehaviour:
     m_Bits: 0
   laserOrigin: {fileID: 0}
   laserTicks: 0
-  wanderCooldown: 0
-  wanderTimer: 2
-  attackCooldown: 1
+  wanderCooldown: 2
+  wanderTimer: 0
+  attackCooldown: 1.25
   attackTimer: 0
   enemyHealth: 6
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   healChance: 0.25
-  lootCoin: {fileID: 3576113440945831091, guid: f81dc6d600e27d54a905afae05adb3ed, type: 3}
+  coinLoot: {fileID: 3576113440945831091, guid: f81dc6d600e27d54a905afae05adb3ed, type: 3}
   coinChance: 0.1
 --- !u!114 &7766454580206351369
 MonoBehaviour:
@@ -169,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6019465198720560833}
   - component: {fileID: 1759593054512746133}
+  - component: {fileID: 759707857649492391}
   m_Layer: 6
   m_Name: sprite
   m_TagString: Untagged
@@ -185,8 +187,8 @@ Transform:
   m_GameObject: {fileID: 3760786183897453476}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3058846852766819351}
@@ -235,14 +237,36 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3aa1e9520e20ea747b6f6d9017710801, type: 3}
+  m_Sprite: {fileID: -137977039, guid: c463a96ca52c8524a942f2fb56672ab7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 3.6, y: 5.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &759707857649492391
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760786183897453476}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a4a8e6bfeaf1884db97ef46f40003ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

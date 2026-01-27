@@ -240,6 +240,37 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!1 &6600753080830121955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7016107817501440482}
+  m_Layer: 0
+  m_Name: Feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7016107817501440482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600753080830121955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8154340026326034547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8003714923555854151
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +398,7 @@ Transform:
   - {fileID: 1435152057127675220}
   - {fileID: 8028699948671482168}
   - {fileID: 2495597366127642284}
+  - {fileID: 7016107817501440482}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &4121390181147301613
@@ -383,15 +415,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _WC: {fileID: 0}
   _MC: {fileID: 0}
+  _LB: {fileID: 0}
+  _MM: {fileID: 0}
   movSpeed: 15
   dashForce: 15
   dashCooldown: 0.35
   jumpForce: 15
   jumpSpeed: 2.5
   fallSpeed: 2.5
+  playerFeet: {fileID: 7016107817501440482}
+  floorDistance: 0.25
+  floors:
+    serializedVersion: 2
+    m_Bits: 256
+  coyoteCooldown: 0.25
   mouseSensitivity: 1.5
   cameraTransform: {fileID: 8028699948671482168}
+  _isAiming: 1
   playerHealth: 10
+  coinsLooted: 0
 --- !u!54 &95219399892648931
 Rigidbody:
   m_ObjectHideFlags: 0

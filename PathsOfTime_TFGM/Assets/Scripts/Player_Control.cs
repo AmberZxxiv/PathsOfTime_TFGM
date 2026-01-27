@@ -25,15 +25,24 @@ public class Player_Control : MonoBehaviour
     float _movLateral;
     float _movFrontal;
     public float jumpForce;
-    bool _isGrounded = true;
     public float jumpSpeed;
     public float fallSpeed;
+    #endregion
+
+    #region /// JUMP CONTROL ///
+    public Transform playerFeet;
+    public float floorDistance;
+    public LayerMask floors;
+    bool _isGrounded;
+    public float coyoteCooldown;
+    float _coyoteTimer;
     #endregion
 
     #region /// CAMERA LOCATION ///
     public float mouseSensitivity;
     private float mouseRotation = 0f;
     public Transform cameraTransform;
+    public bool _isAiming;
     #endregion
 
     #region /// STATS NUMBERS ///
@@ -60,13 +69,15 @@ public class Player_Control : MonoBehaviour
     }
     void Update()
     {
-        // cogemos el valor del cursor para poder darlo de vuelta
-        float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(0, horizontalRotation, 0);
-        mouseRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        mouseRotation = Mathf.Clamp(mouseRotation, -90f, 90f);
-        // lo copiamos en la camara y lo bloqueamos en los polos
-        cameraTransform.localRotation = Quaternion.Euler(mouseRotation, 0, 0);
+        if (_isAiming) // en primera persona cogemos cursor y damos a camara
+        { 
+            float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+            transform.Rotate(0, horizontalRotation, 0);
+            mouseRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+            mouseRotation = Mathf.Clamp(mouseRotation, -90f, 90f);
+            // lo copiamos en la camara y lo bloqueamos en los polos
+            cameraTransform.localRotation = Quaternion.Euler(mouseRotation, 0, 0);
+        }
 
         // aqui cogemos los controles del movimiento
         _movLateral = Input.GetAxis("Horizontal");
@@ -77,8 +88,9 @@ public class Player_Control : MonoBehaviour
         // control del DASH
         if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
         { DoDASH(); }
-        // si pulsamos espacio y estamos tocando suelo, aplicamos el salto
-        if (Input.GetButtonDown("Jump") && _isGrounded)
+        // si pulsamos espacio y podemos saltar, saltamos
+        GroundCheck();
+        if (Input.GetButtonDown("Jump") && _coyoteTimer > 0f)
         { DoJUMP(); }
     }
     private void FixedUpdate()
@@ -144,11 +156,6 @@ public class Player_Control : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        // compruebo haber colisionado con el suelo
-        if (collision.gameObject.CompareTag("ground") || (collision.gameObject.CompareTag("plataform")))
-        {
-            _isGrounded = true;
-        }
         // si choco con algo mortal, me quito las vidas
         if (collision.gameObject.CompareTag("deadly"))
         {
@@ -172,10 +179,17 @@ public class Player_Control : MonoBehaviour
     
     void DoJUMP()
     {
-        //actualizamos el estado del salto, la altura y damos la fuerza
-        _isGrounded = false;
+        //actualizamos timer del salto, la altura y damos la fuerza
+        _coyoteTimer = 0f;
         _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
         _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+    void GroundCheck() // raycast para controlar el salto 
+    {
+        _isGrounded = Physics.Raycast(
+        playerFeet.position, Vector3.down, floorDistance, floors );
+        if (_isGrounded) _coyoteTimer = coyoteCooldown;
+        else _coyoteTimer -= Time.deltaTime;
     }
     private void DoDASH()
     {
@@ -193,10 +207,7 @@ public class Player_Control : MonoBehaviour
         Invoke("ResetDASH", dashCooldown);
     }
     void ResetDASH()
-    {
-        _canDash = true;
-        _isDashing = false;
-    }
+    { _canDash = true; _isDashing = false; }
     public IEnumerator StunnKnockback(Vector3 direction, float force) //del enemy al hitearme
     {
         _isStunned = true; //bloqueo el fixed movement
@@ -204,5 +215,10 @@ public class Player_Control : MonoBehaviour
         _rb.AddForce(direction * force, ForceMode.Impulse);
         yield return new WaitForSeconds(0.1f);
         _isStunned = false;
+    }
+    void OnDrawGizmosSelected() // muestro raycast de los pies del player
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(playerFeet.position, playerFeet.position + Vector3.down * floorDistance);
     }
 }
