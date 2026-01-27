@@ -55,7 +55,6 @@ public class Mission_Manager : MonoBehaviour
         _missionCompleted = true;
         print("MISSION LOSED!");
     }
-
     public void BossComplete() // lo llamo desde el Boss al morir
     {
         //Instanciar mision complete o algo asi

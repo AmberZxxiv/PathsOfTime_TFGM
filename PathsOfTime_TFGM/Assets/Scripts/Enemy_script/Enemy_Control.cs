@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using static UnityEngine.UI.ScrollRect;
 
 public class Enemy_Control : MonoBehaviour
-{// script en cada enemigo
+{// script en cada prefab enemigo
  //pillo SINGLEs del PC, MC y MM
    public Player_Control _PC;
    public Menus_Control _MC;
@@ -62,7 +62,7 @@ public class Enemy_Control : MonoBehaviour
     public float attackTimer;
     #endregion
 
-    #region /// HEALTH STATS ///
+    #region /// STATS Y LOOT ///
     public float enemyHealth;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
@@ -71,7 +71,6 @@ public class Enemy_Control : MonoBehaviour
     public GameObject coinLoot;
     public float coinChance;
     #endregion
-
 
     void Start()
     {
@@ -131,7 +130,7 @@ public class Enemy_Control : MonoBehaviour
     void GroundWander() // patrulla de enemigos terrestres
     {
         wanderTimer -= Time.deltaTime; //empiezo timer para cambiar de posicion
-        if (wanderTimer <= 0f) //cuando ha pasado el tiempo, le doy objetivo nuevo y reinicio timer
+        if (wanderTimer <= 0f) //cuando pasa el tiempo, doy objetivo nuevo y reinicio timer
         { 
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             _agent.SetDestination(newPos);
@@ -173,7 +172,7 @@ public class Enemy_Control : MonoBehaviour
         _rb.MovePosition(finalPos);
     }
     Vector3 RandomFlyPoint(Vector3 origin, float radius)
-    { // genero Vector3 en radio del enemigo y lo devuelve como objetivo
+    { // genero Vector3 en radio del volador y lo devuelve como punto objetivo
         Vector2 randCircle = Random.insideUnitCircle * radius;
         Vector3 point = new Vector3(origin.x + randCircle.x, flyHeight, origin.z + randCircle.y);
         return point;
@@ -224,10 +223,10 @@ public class Enemy_Control : MonoBehaviour
     }
     void DoRANGE()
     {
-        // disparo hacia el pecho del player
+        // disparo hacia el player
         Vector3 targetPos = target.position + Vector3.up * 1.5f;
         Vector3 dir = (targetPos - _attackOrigin.position).normalized;
-        // instancio el proyectil ( controla su propia colision )
+        // instancio el proyectil ( controla su propia collision )
         GameObject splitShot = Instantiate(splitPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
         // evito que se choque con él mismo
         Collider enemyCollider = GetComponent<Collider>();
@@ -243,16 +242,16 @@ public class Enemy_Control : MonoBehaviour
         // compruebo la distancia con el player
         Vector3 dir = target.position - laserOrigin.transform.position;
         float distance = dir.magnitude;
-        // si esta fuera de rango, apago el laser
+        // si esta fuera de rango, apago laser
         if (distance > attackRange) 
         { laserTicks = 0f; DisableLaser(); return; }
-        // si esta dentro de rango y me impacta, activo el laser
+        // si esta dentro de rango y me impacta, activo laser
         RaycastHit hit;
         if (Physics.Raycast(laserOrigin.transform.position, dir.normalized, out hit, attackRange, laserMask, QueryTriggerInteraction.Ignore))
         {
             EnableLaser(hit.point);
             if (hit.collider.CompareTag("Player"))
-            { // al golpear al player, activo el cooldown y aplico el daño al PC y al MC
+            { // al golpear al player, activo cooldown y aplico daño en PC y al MC
                 laserTicks += Time.deltaTime;
                 if (laserTicks >= attackCooldown)
                 {
@@ -261,21 +260,21 @@ public class Enemy_Control : MonoBehaviour
                     laserTicks = 0f;
                 }
             }
-            else { laserTicks = 0f; DisableLaser(); } // si golpea a otro objeto, lo apago
+            else { laserTicks = 0f; DisableLaser(); } // si golpea a otro objeto, apago laser
         }
-        else { laserTicks = 0f; DisableLaser(); } // si me salgo de rango, lo apago
-        // dibujo el laser en el visor y leo donde impacta
+        else { laserTicks = 0f; DisableLaser(); } // si me salgo de rango, apago laser
+        // dibujo laser en el visor y leo donde impacta
         Debug.DrawRay(laserOrigin.transform.position, dir.normalized * attackRange, Color.magenta);
         Debug.Log( "Laser hit: " + hit.collider.name +
                    " | Layer: " + LayerMask.LayerToName(hit.collider.gameObject.layer));
     }
-    void EnableLaser(Vector3 hitPoint) // activo el laser desde su origen al player
+    void EnableLaser(Vector3 hitPoint) // activo laser desde su origen al player
     {
         laserBeam.enabled = true;
         laserBeam.SetPosition(0, laserOrigin.transform.position);
         laserBeam.SetPosition(1, hitPoint);
     }
-    void DisableLaser() { laserBeam.enabled = false; } // apago el laser
+    void DisableLaser() { laserBeam.enabled = false; } // apago laser
 
     public void HITEDenemy(Vector3 force, float damage) //desde WEAPON cuando golpeo a enemigos
     {

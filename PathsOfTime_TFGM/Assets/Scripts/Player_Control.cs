@@ -106,15 +106,10 @@ public class Player_Control : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("NPCpas")) //conversar con NPC pasado
-        {
-            print("Lista para dar el paso?");
-            _LB.PastInteracton();
-        }
+        { _LB.PastInteracton(); }
         if (other.CompareTag("NPCfut")) //conversar con NPC futuro
-        {
-            print("Lista para dar el salto?");
-            _LB.FutrInteracton();
-        }
+        { _LB.FutrInteracton(); }
+       
         if (other.CompareTag("PORpas") //si hemos escogido mision y arma, guardamos pasado y cargamos dungeon
             && _MM.mission != Mission_Manager.MissionSelect.None
             && _WC.weapon != Weapon_Control.WeaponType.None) 
@@ -131,16 +126,13 @@ public class Player_Control : MonoBehaviour
             PlayerPrefs.Save();
             SceneManager.LoadScene(2);
         }
+
         if (other.CompareTag("PORexit")) //salimos al menu de completao
-        {
-            _MC.ShowExit();
-        }
+        { _MC.ShowExit(); }
 
         Power_Giver power = other.GetComponent<Power_Giver>();
-        if (power != null) //si es un PowUp, lo equipo en WEAPON
-        {
-            _WC.NewWeapon(power.newWeapon);
-        }
+        if (power != null) //si es PowUp, equipo en WEAPON
+        { _WC.NewWeapon(power.newWeapon); }
     }
 
     private void OnTriggerExit(Collider other)
