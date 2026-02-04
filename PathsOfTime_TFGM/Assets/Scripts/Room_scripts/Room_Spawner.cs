@@ -44,7 +44,6 @@ public class Room_Spawner : MonoBehaviour
         //compruebo la dungeon escogida
         _dungeon = PlayerPrefs.GetInt("Dungeon");
         { Invoke("SpawnRoom", spawnTime); }
-
     }
 
     void SpawnRoom()
