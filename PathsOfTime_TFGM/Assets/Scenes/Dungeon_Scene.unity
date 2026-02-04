@@ -459,7 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MC: {fileID: 0}
   _PC: {fileID: 0}
-  mission: 1
+  mission: 3
   companionPrefab: {fileID: 4948516239128690741, guid: f49b01f9a91f1df479732bb66d43a842, type: 3}
 --- !u!4 &1758663966
 Transform:
@@ -569,6 +569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141270860}
   - component: {fileID: 2141270859}
+  - component: {fileID: 2141270861}
   m_Layer: 0
   m_Name: NavMesh Surface
   m_TagString: Untagged
@@ -603,11 +604,11 @@ MonoBehaviour:
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.083333336
-  m_MinRegionArea: 2
+  m_OverrideVoxelSize: 1
+  m_VoxelSize: 0.08
+  m_MinRegionArea: 0.05
   m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
+  m_BuildHeightMesh: 1
 --- !u!4 &2141270860
 Transform:
   m_ObjectHideFlags: 0
@@ -623,6 +624,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2141270861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141270858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 1
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: -2.5}
+  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_StartTransform: {fileID: 0}
+  m_EndTransform: {fileID: 0}
+  m_Activated: 1
+  m_Width: 0
+  m_CostModifier: 1
+  m_IsOverridingCost: 0
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1001 &4778910720161528936
 PrefabInstance:
   m_ObjectHideFlags: 0
