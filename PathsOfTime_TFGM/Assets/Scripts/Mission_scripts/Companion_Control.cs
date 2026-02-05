@@ -8,15 +8,15 @@ public class Companion_Control : MonoBehaviour
     public Player_Control _PC;
     public Mission_Manager _MM;
 
-    #region /// PLAYER MOVEMENT ///
+    #region /// MOVEMENT ///
     NavMeshAgent _agent;
     Transform _target;
     Rigidbody _rb;
     public float minDistance;
     public float maxDistance;
-    public float patrolRadius;
-    public float patrolCooldown;
-    float patrolTimer;
+    public float orbitRadius;
+    public float orbitSpeed;
+    float orbitAngle;
     #endregion
 
     public float companionHealth;
@@ -34,35 +34,47 @@ public class Companion_Control : MonoBehaviour
         _target = _PC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
-        patrolTimer = patrolCooldown;
+        orbitAngle = Random.Range(0f, 360f);
     }
 
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, _target.position);
-
-        patrolTimer += Time.deltaTime;
-
-        if (distanceToPlayer > maxDistance)
-        {
-            MoveToPatrolPoint();
-        }
-        else if (distanceToPlayer > minDistance && patrolTimer >= patrolCooldown)
-        {
-            MoveToPatrolPoint();
-        }
         if (companionHealth <= 0)
         {
             _MM.CompanionLose();
             Destroy(gameObject);
         }
-    }
-    void MoveToPatrolPoint()
-    {
-        Vector2 randomOffset = Random.insideUnitCircle * patrolRadius;
-        Vector3 patrolPoint = _target.position + new Vector3(randomOffset.x, 0, randomOffset.y);
+        float distanceToPlayer = Vector3.Distance(transform.position, _target.position);
 
-        _agent.SetDestination(patrolPoint);
-        patrolTimer = 0f;
+        if (distanceToPlayer > maxDistance)
+        {
+            // demasiado lejos sigue al player
+            _agent.SetDestination(_target.position);
+        }
+        else if (distanceToPlayer < minDistance)
+        {
+            // demasiado cerca retrocede un poco para mantener espacio
+            Vector3 dir = (transform.position - _target.position).normalized;
+            Vector3 targetPos = _target.position + dir * orbitRadius;
+            _agent.SetDestination(targetPos);
+        }
+        else
+        {
+            // dentro del rango de orbita
+            OrbitAroundPlayer();
+        }
+    }
+    void OrbitAroundPlayer()
+    {
+        // Incrementa el ángulo en función del tiempo y la velocidad
+        orbitAngle += orbitSpeed * Time.deltaTime;
+        if (orbitAngle >= 360f) orbitAngle -= 360f;
+
+        // Calcula la posición en la circunferencia
+        float rad = orbitAngle * Mathf.Deg2Rad;
+        Vector3 orbitPos = _target.position + new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * orbitRadius;
+
+        // Mueve al companion hacia esa posición
+        _agent.SetDestination(orbitPos);
     }
 }

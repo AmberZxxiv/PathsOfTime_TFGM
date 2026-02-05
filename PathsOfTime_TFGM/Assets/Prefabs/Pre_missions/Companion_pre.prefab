@@ -121,10 +121,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
   _MM: {fileID: 0}
-  minDistance: 3.5
-  maxDistance: 3.5
-  patrolRadius: 3
-  patrolCooldown: 3
+  minDistance: 2
+  maxDistance: 5
+  orbitRadius: 3
+  orbitSpeed: 50
   companionHealth: 10
 --- !u!114 &28953108647259404
 MonoBehaviour:
