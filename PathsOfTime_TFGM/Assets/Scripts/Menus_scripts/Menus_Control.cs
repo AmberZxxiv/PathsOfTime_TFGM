@@ -9,6 +9,7 @@ public class Menus_Control : MonoBehaviour
     public static Menus_Control instance;
   // SINGLETON script
     public Player_Control _PC; //pillo SINGLE del PC
+    public Companion_Control _CC; //pillo SINGLE del CC
     public Weapon_Control _WC; //pillo SINGLE del WC
     public Mission_Manager _MM; //pillo SINGLE del MM
 
@@ -20,9 +21,14 @@ public class Menus_Control : MonoBehaviour
 
     #region /// HEARTS UI ///
     public List<Hearts_Eater> actualLives = new List<Hearts_Eater>();
-    public GameObject heartContainer;
+    public List<Hearts_Eater> companionLives = new List<Hearts_Eater>();
     public GameObject heartPrefab;
+
+    public GameObject heartContainer;
     public float heartRadio;
+
+    public GameObject companionContainer;
+    public float companionRadio;
     #endregion
 
     #region /// MISSIONS UI ///
@@ -63,12 +69,17 @@ public class Menus_Control : MonoBehaviour
         if (_WC != null) EquipWeapon(_WC.weapon);
         // equipo la mision
         if (_MM != null) MissionDisplay(_MM.mission);
+        if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
+        {
+            Invoke("LiveCompanier", 3f);
+        }
         // activo el tiempo
         Time.timeScale = 1;
     }
 
     void Update()
     {
+        _CC = Companion_Control.instance; //aseguro pillar al compa cuando aparezca
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenu.activeSelf)
@@ -145,6 +156,37 @@ public class Menus_Control : MonoBehaviour
             { cupcake.EatHeart(1); playerHealth -= 1;}
             else
             { cupcake.EatHeart(0); }
+        }
+    }
+
+    void LiveCompanier()
+    {
+        float compaCakes = _CC.companionHealth;
+        for (int i = 0; i < (compaCakes * 0.5f); i++)
+        {
+            GameObject heart = Instantiate(heartPrefab, companionContainer.transform);
+            RectTransform rt = heart.GetComponent<RectTransform>();
+            float angulo = (360f / (compaCakes * 0.5f)) * i;
+            float rad = angulo * Mathf.Deg2Rad;
+            float x = Mathf.Cos(rad) * companionRadio;
+            float y = Mathf.Sin(rad) * companionRadio;
+            rt.anchoredPosition = new Vector2(x, y);
+            rt.localScale = Vector3.one * 0.5f;
+            companionLives.Add(heart.GetComponent<Hearts_Eater>());
+        }
+        UpdateCompaniers(compaCakes);
+    }
+
+    public void UpdateCompaniers(float companionHealth) // todo lo que varia la vida del compa
+    {
+        foreach (Hearts_Eater heart in companionLives)
+        {
+            if (companionHealth >= 2)
+            { heart.EatHeart(2); companionHealth -= 2; }
+            else if (companionHealth == 1)
+            { heart.EatHeart(1); companionHealth -= 1; }
+            else
+            { heart.EatHeart(0); }
         }
     }
     public void CoinsCounter(int coinsLooted) //en start y Player collision

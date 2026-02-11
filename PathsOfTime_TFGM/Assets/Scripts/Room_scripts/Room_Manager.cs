@@ -50,8 +50,8 @@ public class Room_Manager : MonoBehaviour
         //pillo SINGLE del MM
         _MM = Mission_Manager.instance;
         Invoke("BakeNavMesh", 2f);
-        Invoke("SpawnEnemy", 2.5f);
-        Invoke("SpawnChest", 3f);
+        Invoke("SpawnEnemy", 3f);
+        Invoke("SpawnChest", 3.5f);
         Invoke("SpawnExit", 3.5f);
         if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
         {

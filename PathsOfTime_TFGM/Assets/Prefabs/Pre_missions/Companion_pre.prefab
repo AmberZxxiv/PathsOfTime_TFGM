@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 28953108647259404}
   m_Layer: 3
   m_Name: Companion_pre
-  m_TagString: Player
+  m_TagString: companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   maxDistance: 5
   orbitRadius: 3
   orbitSpeed: 50
-  companionHealth: 10
+  companionHealth: 12
 --- !u!114 &28953108647259404
 MonoBehaviour:
   m_ObjectHideFlags: 0

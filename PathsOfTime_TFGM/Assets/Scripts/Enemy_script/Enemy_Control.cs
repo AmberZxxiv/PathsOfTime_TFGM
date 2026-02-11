@@ -9,6 +9,7 @@ public class Enemy_Control : MonoBehaviour
 {// script en cada prefab enemigo
  //pillo SINGLEs del PC, MC y MM
    public Player_Control _PC;
+   public Companion_Control _CC;
    public Menus_Control _MC;
    public Mission_Manager _MM;
 
@@ -47,6 +48,8 @@ public class Enemy_Control : MonoBehaviour
     public float attackDamage;
     public float attackForce;
     bool _canAttack = true;
+    public Transform companionTarget;
+    public float companionAgroChance;
     #endregion
 
     #region /// LASER STATS ///
@@ -75,8 +78,9 @@ public class Enemy_Control : MonoBehaviour
 
     void Start()
     {
-        //pillo SINGLEs del PC, MC y MM
+        //pillo SINGLEs
         _PC = Player_Control.instance;
+        _CC = Companion_Control.instance;
         _MC = Menus_Control.instance;
         _MM = Mission_Manager.instance;
         // pillo NavMesh si usan Agent Humanoid
@@ -91,6 +95,7 @@ public class Enemy_Control : MonoBehaviour
         _attackOrigin = this.transform;
         _startPoint = transform.position;
         target = _PC.transform;
+        if (_CC != null) companionTarget = _CC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
         _animator = GetComponentInChildren<Animator>();
@@ -100,8 +105,18 @@ public class Enemy_Control : MonoBehaviour
     {
         // si es Torrem, uso su sistema
         if (enemyType == EnemyType.Torrem) { TrackerTurrem(); return; }
-        
-        //compruebo distancia de los móviles con el player
+
+        //compruebo que objetivo esta mas cerca
+        if (companionTarget != null)
+        {
+            float rand = Random.value;
+            if (rand < companionAgroChance && Vector3.Distance(transform.position, companionTarget.position) <= agroDistance)
+            { target = companionTarget;}
+            else target = _PC.transform;
+        }
+        else target = _PC.transform;
+
+        // calculo la distancia al target correspondiente
         _targetDistance = Vector3.Distance(transform.position, target.position);
         // cuando pillan agro, van hacia el player
         if (_targetDistance <= agroDistance)
@@ -218,11 +233,19 @@ public class Enemy_Control : MonoBehaviour
         foreach (Collider hit in hits)
         {
             if (hit.CompareTag("Player"))
-            { // aplico el daño al PC y al MC
+            {
                 _PC.playerHealth -= attackDamage;
                 _MC.UpdateLives(_PC.playerHealth);
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
+            }
+            else if (hit.CompareTag("companion"))
+            {
+                _CC.companionHealth -= attackDamage;
+                _MC.UpdateCompaniers(_CC.companionHealth);
+                Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
+                _CC.HITcompa(transform.forward * 5f, attackDamage); 
+                
             }
         }
     }
@@ -257,12 +280,24 @@ public class Enemy_Control : MonoBehaviour
         {
             EnableLaser(hit.point);
             if (hit.collider.CompareTag("Player"))
-            { // al golpear al player, activo cooldown y aplico daño en PC y al MC
+            {
                 laserTicks += Time.deltaTime;
                 if (laserTicks >= attackCooldown)
                 {
                     _PC.playerHealth -= attackDamage;
                     _MC.UpdateLives(_PC.playerHealth);
+                    laserTicks = 0f;
+                }
+            }
+            if (hit.collider.CompareTag("companion"))
+            {
+                laserTicks += Time.deltaTime;
+                if (laserTicks >= attackCooldown)
+                {
+                    _CC.companionHealth -= attackDamage;
+                    _MC.UpdateCompaniers(_CC.companionHealth);
+                    Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
+                    _CC.HITcompa(transform.forward * 0f, attackDamage);
                     laserTicks = 0f;
                 }
             }

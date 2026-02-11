@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using static UnityEngine.GraphicsBuffer;
 
 public class Companion_Control : MonoBehaviour
 {// script en el COMPANION pref
- //pillo SINGLEs del PC y MM
+    // SINGLETON script
+    public static Companion_Control instance;
+    //pillo SINGLEs del PC y MM
     public Player_Control _PC;
     public Mission_Manager _MM;
 
@@ -22,7 +27,11 @@ public class Companion_Control : MonoBehaviour
     public float companionHealth;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
-
+    void Awake()// singleton sin superponer y no destruir al cambiar escena
+    {
+        if (instance == null) { instance = this; }
+        else Destroy(gameObject);
+    }
     void Start()
     {
         //pillo SINGLEs del PC y MM
@@ -39,13 +48,7 @@ public class Companion_Control : MonoBehaviour
 
     void Update()
     {
-        if (companionHealth <= 0)
-        {
-            _MM.CompanionLose();
-            Destroy(gameObject);
-        }
         float distanceToPlayer = Vector3.Distance(transform.position, _target.position);
-
         if (distanceToPlayer > maxDistance)
         {
             // demasiado lejos sigue al player
@@ -66,15 +69,44 @@ public class Companion_Control : MonoBehaviour
     }
     void OrbitAroundPlayer()
     {
-        // Incrementa el ángulo en función del tiempo y la velocidad
+        // varia el ángulo y la velocidad en función del tiempo
         orbitAngle += orbitSpeed * Time.deltaTime;
         if (orbitAngle >= 360f) orbitAngle -= 360f;
-
-        // Calcula la posición en la circunferencia
         float rad = orbitAngle * Mathf.Deg2Rad;
         Vector3 orbitPos = _target.position + new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * orbitRadius;
-
-        // Mueve al companion hacia esa posición
         _agent.SetDestination(orbitPos);
+    }
+
+    public void HITcompa(Vector3 force, float damage) //desde ENEMYS al golpear
+    {
+        // le impacto visualmente y le bajo la vida
+        StartCoroutine(FlashDamage());
+        companionHealth -= damage;
+        // si muere
+        if (companionHealth <= 0)
+        {
+            _MM.CompanionLose();
+            Destroy(gameObject);
+        }
+        // desactivo agente para aplicar fisicas
+        StartCoroutine(DisableAgentTemporarily(0.2f));
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _rb.AddForce(force, ForceMode.Impulse);
+        
+    }
+    IEnumerator FlashDamage() // cambio su color a rojo al recibir daño
+    {
+        _spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(1f);
+        _spriteRenderer.color = _originalColor;
+    }
+    IEnumerator DisableAgentTemporarily(float delay) // pauso los NavMesh para afectar a _rb
+    {
+        if (_agent != null && _agent.isOnNavMesh)
+            _agent.isStopped = true;
+        yield return new WaitForSeconds(delay);
+        if (_agent != null && _agent.isOnNavMesh)
+            _agent.isStopped = false;
     }
 }

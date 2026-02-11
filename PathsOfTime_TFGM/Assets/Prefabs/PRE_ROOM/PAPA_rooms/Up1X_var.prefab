@@ -96,6 +96,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Up1X_var
       objectReference: {fileID: 0}
+    - target: {fileID: 2180780909702875854, guid: 932ca19462164b447bca35543f92e0cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180780909702875854, guid: 932ca19462164b447bca35543f92e0cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180780909702875854, guid: 932ca19462164b447bca35543f92e0cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180780909702875854, guid: 932ca19462164b447bca35543f92e0cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071058
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180780909702875854, guid: 932ca19462164b447bca35543f92e0cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 2804810259033545873, guid: 932ca19462164b447bca35543f92e0cf, type: 3}
       propertyPath: m_LocalScale.x
       value: 250

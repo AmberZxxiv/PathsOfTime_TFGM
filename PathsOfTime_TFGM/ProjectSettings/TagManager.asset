@@ -24,6 +24,7 @@ TagManager:
   - looteable
   - PORexit
   - portal
+  - companion
   layers:
   - Default
   - TransparentFX

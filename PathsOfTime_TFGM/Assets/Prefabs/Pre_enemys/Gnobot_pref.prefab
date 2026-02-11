@@ -133,6 +133,8 @@ MonoBehaviour:
   attackRange: 2
   attackDamage: 1
   attackForce: 5
+  companionTarget: {fileID: 0}
+  companionAgroChance: 0.5
   laserBeam: {fileID: 0}
   laserMask:
     serializedVersion: 2
