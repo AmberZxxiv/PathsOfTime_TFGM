@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fe072e5ea5c34bb4ba459da04fe6715b
+guid: d9b24d4d03e6b2a49a98240cb58adf0c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,12 +108,100 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: armas_SKETCH_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 500
+        width: 365
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc732e70c13222c4ba29cef5303d6580
+      internalID: 1408872593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: armas_SKETCH_2
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 500
+        width: 365
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e01dae11e2219e4eb193ecae34dba60
+      internalID: 1676641705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: armas_SKETCH_3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 45
+        width: 340
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32a142cf0e8244049855fc5193261e38
+      internalID: 1180588531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: armas_SKETCH_4
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 38
+        width: 370
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78411ef697dfd77408bec3a1b1123e25
+      internalID: 764143081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 961505a9c194d0a448359edc45c33d7a
     internalID: 0
     vertices: []
     indices: 
@@ -122,7 +210,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      armas_SKETCH_0: -2083152888
+      armas_SKETCH_1: 1408872593
+      armas_SKETCH_2: 1676641705
+      armas_SKETCH_3: 1180588531
+      armas_SKETCH_4: 764143081
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
