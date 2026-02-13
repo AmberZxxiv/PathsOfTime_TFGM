@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using static Mission_Manager;
 
 public class Weapon_Control : MonoBehaviour
 {// script en DONT DESTROY EMPTY
@@ -42,24 +45,46 @@ public class Weapon_Control : MonoBehaviour
     public float lastAttackTimer;
     #endregion
 
-    void Awake()// singleton sin superponer y no destruir al cambiar escena
+    void Awake()
     {
-        if (instance == null) 
+        if (instance == null) // si no hay singleton, esta instancia persiste
         { instance = this; DontDestroyOnLoad(this.gameObject); }
-        else Destroy(gameObject);
+        else if (instance != this) // si la instancia no es esta
+        {
+            // y estamos en lobby, destruimos la persistente y priorizamos nuevo inicio
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                Destroy(instance.gameObject); // destruye instancia antigua
+                instance = this; // asigna nueva instancia persistente
+                DontDestroyOnLoad(this.gameObject);
+            }
+            else // y no estamos en el lobby, persistimos?
+            { Destroy(gameObject); }
+        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo arma al cambiar a escena lobby
+    {
+        // ASEGURO SINGLES AL CAMBIAR ESCENA
+        if (_PC == null) { _PC = Player_Control.instance; }
+        if (_MC == null) { _MC = Menus_Control.instance; }
+        if (attackOrigin == null && _PC != null) { attackOrigin = _PC.transform; }
+        if (scene.buildIndex == 1)
+        {
+            weapon = WeaponType.None;
+            _MC.EquipWeapon(WeaponType.None);
+        }
+    }
+   
     public void NewWeapon(WeaponType newWeapon) //llamo en el POW_GIVER
     {
         weapon = newWeapon;
         _MC.EquipWeapon(newWeapon); //cambio el UI del Menu_Control
     }
-    // NO PILLABA SINGLES EN START
+
     void Update()
     {
-        //ASEGURO SINGLES AL CAMBIAR ESCENA
-        if (_PC == null) { _PC = Player_Control.instance; }
-        if (_MC == null) { _MC = Menus_Control.instance; }
-        if (attackOrigin == null) { attackOrigin = _PC.transform; }
         // clic IZD ataca
         if (Input.GetMouseButton(0))
         { AttackFunction(); }

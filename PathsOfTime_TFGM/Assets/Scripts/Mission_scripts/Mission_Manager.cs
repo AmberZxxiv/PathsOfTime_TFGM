@@ -25,28 +25,41 @@ public class Mission_Manager : MonoBehaviour
     public GameObject companionPrefab;
     bool _missionCompleted = false;
 
-    void Awake()// singleton sin superponer y no destruir al cambiar escena
+    void Awake()
     {
-        if (instance == null)
+        if (instance == null) // si no hay singleton, esta instancia persiste
         { instance = this; DontDestroyOnLoad(this.gameObject); }
-        else Destroy(gameObject);
+        else if (instance != this) // si la instancia no es esta
+        {
+            // y estamos en lobby, destruimos la persistente y priorizamos nuevo inicio
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                Destroy(instance.gameObject); // destruye instancia antigua
+                instance = this; // asigna nueva instancia persistente
+                DontDestroyOnLoad(this.gameObject);
+            }
+            else // y no estamos en el lobby, persistimos?
+            { Destroy(gameObject); }
+        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo mision al cambiar a escena lobby
     {
-        if (scene.buildIndex == 1 && mission != MissionSelect.None)
+        //ASEGURO SINGLES AL CAMBIAR ESCENA
+        if (_PC == null) { _PC = Player_Control.instance; }
+        if (_MC == null) { _MC = Menus_Control.instance; }
+        if (scene.buildIndex == 1)
         {
             mission = MissionSelect.None;
+            _missionCompleted = false;
             _MC.MissionDisplay(mission);
         }
     }
 
     void Update()
     {
-        //ASEGURO SINGLES AL CAMBIAR ESCENA
-        if (_PC == null) { _PC = Player_Control.instance; }
-        if (_MC == null) { _MC = Menus_Control.instance; }
+        
         // Comprobar TOKENS completada
         if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !_missionCompleted)
         {

@@ -1914,6 +1914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
+  _CC: {fileID: 0}
   _WC: {fileID: 0}
   _MM: {fileID: 0}
   deadMenu: {fileID: 7889678030725262922}
@@ -1931,6 +1932,8 @@ MonoBehaviour:
   tokenSign: {fileID: 5857481253972021794, guid: 08f3e5561a2389b4bb7a15f68a7d271e, type: 3}
   bossSign: {fileID: 5857481253972021794, guid: 139536329750e76448a5f2eb397ced81, type: 3}
   compaSign: {fileID: 5857481253972021794, guid: f9b8953167de1b24781ea279e31973b7, type: 3}
+  futrPanel: {fileID: 7800300086317293651}
+  pastPanel: {fileID: 817206838952588009}
   weaponContainer: {fileID: 7890955137806242}
   swordPow: {fileID: 5857481253972021794, guid: 01e6ca1ca5954a341a3e55f1c92af89d, type: 3}
   punchPow: {fileID: 5857481253972021794, guid: c8db5872919b06242a080f80f9c6d507, type: 3}

@@ -37,6 +37,8 @@ public class Menus_Control : MonoBehaviour
     public GameObject tokenSign;
     public GameObject bossSign;
     public GameObject compaSign;
+    public GameObject futrPanel;
+    public GameObject pastPanel;
     #endregion
 
     #region /// WEAPONS UI ///
@@ -158,7 +160,30 @@ public class Menus_Control : MonoBehaviour
             { cupcake.EatHeart(0); }
         }
     }
-
+    public void FutrInteracton()
+    {
+        futrPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+    public void PastInteracton()
+    {
+        pastPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+    public void FutrExit()
+    {
+        futrPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void PastExit()
+    {
+        pastPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void LiveCompanier()
     {
         float compaCakes = _CC.companionHealth;

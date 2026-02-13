@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.UI.ScrollRect;
+using static Weapon_Control;
 
 public class Enemy_Control : MonoBehaviour
 {// script en cada prefab enemigo
@@ -50,6 +51,11 @@ public class Enemy_Control : MonoBehaviour
     public float attackForce;
     public Transform companionTarget;
     public float companionAgroChance;
+    #endregion
+
+    #region /// GIZDRAW MARKERS ///
+    private bool showAttackGizmos = false;
+    private List<(Vector3 center, Vector3 halfExtents, Quaternion rotation)> currentHitboxes = new();
     #endregion
 
     #region /// LASER STATS ///
@@ -123,8 +129,8 @@ public class Enemy_Control : MonoBehaviour
             {
                 case EnemyType.Gnobot:
                 case EnemyType.Hydra:
-                    _agent.SetDestination(target.position); 
-                    break;
+                _agent.SetDestination(target.position); 
+                break;
 
                 case EnemyType.Dronlibri:
                 case EnemyType.Angel:
@@ -211,8 +217,9 @@ public class Enemy_Control : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Gnobot:
-            case EnemyType.Hydra:
             DoMELE(); break;
+            case EnemyType.Hydra:
+            DoMultiheads(); break;
 
             case EnemyType.Dronlibri:
             DoRANGE(); break;
@@ -228,6 +235,11 @@ public class Enemy_Control : MonoBehaviour
         // limites en anchura, altura, largura y centro
         Vector3 halfExtents = new Vector3(1f, 1f, attackRange);
         Vector3 center = _attackOrigin.position + dir * attackRange;
+        // copio los datos para darselos al gizdraw durante el ataque
+        currentHitboxes.Clear();
+        currentHitboxes.Add((center, halfExtents, Quaternion.LookRotation(dir)));
+        showAttackGizmos = true;
+        StartCoroutine(HideGizmos(0.5f));
         // genero el collider con su animacion y busco golpeados
         Collider[] hits = Physics.OverlapBox(center,halfExtents,Quaternion.LookRotation(dir));
         _animator.SetTrigger("isAttacking");
@@ -247,6 +259,52 @@ public class Enemy_Control : MonoBehaviour
                 Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
                 _CC.HITcompa(transform.forward * 5f, attackDamage); 
                 
+            }
+        }
+    }
+    void DoMultiheads()
+    {
+        // dirección hacia el frente del player
+        Vector3 forwardDir = (target.position - _attackOrigin.position).normalized;
+        forwardDir.y = 0;
+        // distancia del barrido
+        float spacing = 3f;
+        float range = attackRange;
+        Vector3 halfExtents = new Vector3(0.5f, 1f, range);
+        // colocamos cada cabeza de izquierda a derecha
+        Vector3[] offsets = new Vector3[]
+        { Vector3.left * spacing, Vector3.zero, Vector3.right * spacing };
+        // copio los datos de cada una para el gizdraw durante los ataques
+        currentHitboxes.Clear();
+        foreach (Vector3 offset in offsets)
+        {
+            Vector3 center = _attackOrigin.position + forwardDir * range + offset;
+            currentHitboxes.Add((center, halfExtents, Quaternion.LookRotation(forwardDir)));
+        }
+        showAttackGizmos = true;
+        StartCoroutine(HideGizmos(0.5f));
+        // activo animacion y genero cada collider 
+        _animator.SetTrigger("isAttacking");
+        foreach (Vector3 offset in offsets)
+        {
+            Vector3 center = _attackOrigin.position + forwardDir * range + offset;
+            Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(forwardDir));
+            foreach (Collider hit in hits)
+            {
+                if (hit.CompareTag("Player"))
+                {
+                    _PC.playerHealth -= attackDamage;
+                    _MC.UpdateLives(_PC.playerHealth);
+                    Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
+                    _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
+                }
+                else if (hit.CompareTag("companion"))
+                {
+                    _CC.companionHealth -= attackDamage;
+                    _MC.UpdateCompaniers(_CC.companionHealth);
+                    Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
+                    _CC.HITcompa(transform.forward * 5f, attackDamage);
+                }
             }
         }
     }
@@ -382,6 +440,25 @@ public class Enemy_Control : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (_agent != null && _agent.isOnNavMesh)
             _agent.isStopped = false;
+    }
+    private void OnDrawGizmos()
+    {
+        if (showAttackGizmos && currentHitboxes.Count > 0)
+        {
+            Gizmos.color = Color.magenta;
+            foreach (var hitbox in currentHitboxes)
+            {
+                Gizmos.matrix = Matrix4x4.TRS(hitbox.center, hitbox.rotation, Vector3.one);
+                Gizmos.DrawWireCube(Vector3.zero, hitbox.halfExtents * 2);
+            }
+            Gizmos.matrix = Matrix4x4.identity;
+        }
+    }
+    IEnumerator HideGizmos(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        showAttackGizmos = false;
+        currentHitboxes.Clear();
     }
 }
 

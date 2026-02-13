@@ -12,7 +12,6 @@ public class Player_Control : MonoBehaviour
  // SINGLETON script
     public Weapon_Control _WC; //pillo SINGLE del WC
     public Menus_Control _MC; //pillo SINGLE del MC
-    public Lobby_Manager _LB; //pillo SINGLE del LB
     public Mission_Manager _MM; //pillo SINGLE del MM
 
     #region /// PLAYER MOVEMENT ///
@@ -60,8 +59,7 @@ public class Player_Control : MonoBehaviour
     {
         // pillo SINGLES de WC, MC, LM, MM
         _WC = Weapon_Control.instance;
-        _MC = Menus_Control.instance; 
-        _LB = Lobby_Manager.instance;
+        _MC = Menus_Control.instance;
         _MM = Mission_Manager.instance;
         _rb = GetComponent<Rigidbody>();
         // centramos el cursos en pantalla y lo ocultamos
@@ -119,9 +117,9 @@ public class Player_Control : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("NPCpas")) //conversar con NPC pasado
-        { _LB.PastInteracton(); }
+        { _MC.PastInteracton(); }
         if (other.CompareTag("NPCfut")) //conversar con NPC futuro
-        { _LB.FutrInteracton(); }
+        { _MC.FutrInteracton(); }
        
         if (other.CompareTag("PORpas") //si hemos escogido mision y arma, guardamos pasado y cargamos dungeon
             && _MM.mission != Mission_Manager.MissionSelect.None
@@ -151,9 +149,9 @@ public class Player_Control : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("NPCpas")) //cerrar NPC pasado
-        { _LB.PastExit(); }
+        { _MC.PastExit(); }
         if (other.CompareTag("NPCfut")) //cerrar NPC futuro
-        { _LB.FutrExit();}
+        { _MC.FutrExit();}
     }
     private void OnCollisionEnter(Collision collision)
     {
