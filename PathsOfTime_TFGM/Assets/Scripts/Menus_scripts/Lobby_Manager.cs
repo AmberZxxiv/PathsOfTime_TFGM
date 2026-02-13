@@ -20,7 +20,7 @@ public class Lobby_Manager : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
-
+    
     private void Start()
     {
         SpawnPowerUPs(); // spawnea las powerUPs

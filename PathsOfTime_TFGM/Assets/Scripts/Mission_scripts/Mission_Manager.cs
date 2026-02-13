@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Mission_Manager : MonoBehaviour
 {// script en DONT DESTROY EMPTY
@@ -29,8 +30,18 @@ public class Mission_Manager : MonoBehaviour
         if (instance == null)
         { instance = this; DontDestroyOnLoad(this.gameObject); }
         else Destroy(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo mision al cambiar a escena lobby
+    {
+        if (scene.buildIndex == 1 && mission != MissionSelect.None)
+        {
+            mission = MissionSelect.None;
+            _MC.MissionDisplay(mission);
+        }
+    }
+
     void Update()
     {
         //ASEGURO SINGLES AL CAMBIAR ESCENA

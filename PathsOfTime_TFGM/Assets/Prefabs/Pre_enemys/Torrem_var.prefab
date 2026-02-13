@@ -116,6 +116,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: laserTicks
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: attackForce
       value: 1
       objectReference: {fileID: 0}
@@ -142,6 +146,10 @@ PrefabInstance:
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: attackCooldown
       value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: wanderCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: laserMask.m_Bits

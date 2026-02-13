@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PC: {fileID: 0}
+  _CC: {fileID: 0}
   _MC: {fileID: 0}
   _MM: {fileID: 0}
   enemyType: 0
@@ -130,6 +131,7 @@ MonoBehaviour:
   flyHeight: 2
   maxRange: 5
   splitPref: {fileID: 8850432258290061902, guid: d1dd525d5a35b60478ce0000e3950354, type: 3}
+  explosivPref: {fileID: 8850432258290061902, guid: 0788dd585e0077b4b84837000e16c152, type: 3}
   attackRange: 2
   attackDamage: 1
   attackForce: 5

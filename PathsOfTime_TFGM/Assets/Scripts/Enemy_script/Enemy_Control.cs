@@ -38,16 +38,16 @@ public class Enemy_Control : MonoBehaviour
     bool _hasPoint = false;
     public float flySpeed;
     public float flyHeight;
-    public float maxRange;
+    public float flyRange;
     #endregion
 
     #region /// ATTACK STATS ///
     public GameObject splitPref;
+    public GameObject explosivPref;
     Transform _attackOrigin;
     public float attackRange;
     public float attackDamage;
     public float attackForce;
-    bool _canAttack = true;
     public Transform companionTarget;
     public float companionAgroChance;
     #endregion
@@ -56,14 +56,14 @@ public class Enemy_Control : MonoBehaviour
     public LineRenderer laserBeam;
     public LayerMask laserMask;
     public GameObject laserOrigin;
-    public float laserTicks;
+    float _laserTicks = 0;
     #endregion
 
     #region /// COOLDOWN CONTROL ///
     public float wanderCooldown; 
-    public float wanderTimer; 
+    float _wanderTimer = 0; 
     public float attackCooldown;
-    public float attackTimer;
+    float _attackTimer = 0;
     #endregion
 
     #region /// STATS Y LOOT ///
@@ -116,8 +116,6 @@ public class Enemy_Control : MonoBehaviour
         }
         else target = _PC.transform;
 
-        // calculo la distancia al target correspondiente
-        _targetDistance = Vector3.Distance(transform.position, target.position);
         // cuando pillan agro, van hacia el player
         if (_targetDistance <= agroDistance)
         {
@@ -148,12 +146,12 @@ public class Enemy_Control : MonoBehaviour
     }
     void GroundWander() // patrulla de enemigos terrestres
     {
-        wanderTimer -= Time.deltaTime; //empiezo timer para cambiar de posicion
-        if (wanderTimer <= 0f) //cuando pasa el tiempo, doy objetivo nuevo y reinicio timer
+        _wanderTimer -= Time.deltaTime; //empiezo timer para cambiar de posicion
+        if (_wanderTimer <= 0f) //cuando pasa el tiempo, doy objetivo nuevo y reinicio timer
         {
             Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
             _agent.SetDestination(newPos);
-            wanderTimer = wanderCooldown;
+            _wanderTimer = wanderCooldown;
         }
     }
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
@@ -164,10 +162,10 @@ public class Enemy_Control : MonoBehaviour
         bool found = NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
         return !found ? origin : navHit.position;
     }
-    void FlyToTarget() // trackeo de voladores al player
+    void FlyToTarget() // trackeo voladores a player con distancia maxima
     {
         Vector3 playerRange = (transform.position - target.position).normalized;
-        Vector3 targetPos = target.position + playerRange * maxRange;
+        Vector3 targetPos = target.position + playerRange * flyRange;
         targetPos.y = flyHeight;
         Vector3 finalPos = Vector3.MoveTowards
         (_rb.position, targetPos, flySpeed * Time.deltaTime);
@@ -199,14 +197,16 @@ public class Enemy_Control : MonoBehaviour
 
     private void FixedUpdate() // ataco en fixed para contar en segundos y no en frames
     {
+        // calculo la distancia al target correspondiente
+        _targetDistance = Vector3.Distance(transform.position, target.position);
         // si esta a rango de ataque y puedo, ataco
-        if (_targetDistance <= attackRange && _canAttack) { AttackFunction(); }
+        if (_targetDistance <= attackRange) { AttackFunction(); }
     }
     void AttackFunction() // funcion de ataque común
     {
-        // compruebo el tiempo del cooldown
-        if (Time.time < attackTimer + attackCooldown) return;
-        attackTimer = Time.time;
+        // ataco cuando haya pasado el tiempo de cooldawn
+        if (Time.time < _attackTimer + attackCooldown) return;
+        _attackTimer = Time.time;
         // activo el ataque correspondiente al enemigo
         switch (enemyType)
         {
@@ -215,8 +215,9 @@ public class Enemy_Control : MonoBehaviour
             DoMELE(); break;
 
             case EnemyType.Dronlibri:
-            case EnemyType.Angel:
             DoRANGE(); break;
+            case EnemyType.Angel:
+            DoExplosion(); break;
         }
     }
     void DoMELE()
@@ -251,12 +252,14 @@ public class Enemy_Control : MonoBehaviour
     }
     void DoRANGE()
     {
-        // disparo hacia el player
-        Vector3 targetPos = target.position + Vector3.up * 1.5f;
+        // disparo siempre al centro del objetivo
+        Collider playerCollider = target.GetComponent<Collider>();
+        Vector3 targetPos = target.position + Vector3.up * (playerCollider.bounds.size.y / 2f);
         Vector3 dir = (targetPos - _attackOrigin.position).normalized;
         // instancio el proyectil con su animacion ( controla su propia collision )
         _animator.SetTrigger("isAttacking");
-        GameObject splitShot = Instantiate(splitPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
+        GameObject splitShot = Instantiate
+        (splitPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
         // evito que se choque con él mismo
         Collider enemyCollider = GetComponent<Collider>();
         Collider splitCollider = splitShot.GetComponent<Collider>();
@@ -264,6 +267,24 @@ public class Enemy_Control : MonoBehaviour
         //doy fuerza al proyectil
         Rigidbody rb = splitShot.GetComponent<Rigidbody>();
         rb.linearVelocity = dir * 50f;
+    }
+    void DoExplosion()
+    {
+        // disparo siempre al centro del objetivo
+        Collider playerCollider = target.GetComponent<Collider>();
+        Vector3 targetPos = target.position + Vector3.up * (playerCollider.bounds.size.y / 2f);
+        Vector3 dir = (targetPos - _attackOrigin.position).normalized;
+        // instancio el proyectil con su animacion ( controla su propia collision )
+        _animator.SetTrigger("isAttacking");
+        GameObject explosiveShot = Instantiate
+        (explosivPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * explosivPref.transform.rotation);
+        // evito que se choque con él mismo
+        Collider enemyCollider = GetComponent<Collider>();
+        Collider shotCollider = explosiveShot.GetComponent<Collider>();
+        Physics.IgnoreCollision(shotCollider, enemyCollider);
+        //doy fuerza al proyectil
+        Rigidbody rb = explosiveShot.GetComponent<Rigidbody>();
+        rb.linearVelocity = dir * 25f;
     }
 
     void TrackerTurrem()
@@ -273,37 +294,40 @@ public class Enemy_Control : MonoBehaviour
         float distance = dir.magnitude;
         // si esta fuera de rango, apago laser
         if (distance > attackRange) 
-        { laserTicks = 0f; DisableLaser(); return; }
+        { _laserTicks = 0f; DisableLaser(); return; }
         // si esta dentro de rango y me impacta, activo laser
         RaycastHit hit;
         if (Physics.Raycast(laserOrigin.transform.position, dir.normalized, out hit, attackRange, laserMask, QueryTriggerInteraction.Ignore))
         {
             EnableLaser(hit.point);
+            bool didDamage = false;
             if (hit.collider.CompareTag("Player"))
             {
-                laserTicks += Time.deltaTime;
-                if (laserTicks >= attackCooldown)
+                _laserTicks += Time.deltaTime;
+                if (_laserTicks >= attackCooldown)
                 {
                     _PC.playerHealth -= attackDamage;
                     _MC.UpdateLives(_PC.playerHealth);
-                    laserTicks = 0f;
+                    _laserTicks = 0f;
                 }
+                didDamage = true;
             }
-            if (hit.collider.CompareTag("companion"))
+            else if (hit.collider.CompareTag("companion"))
             {
-                laserTicks += Time.deltaTime;
-                if (laserTicks >= attackCooldown)
+                _laserTicks += Time.deltaTime;
+                if (_laserTicks >= attackCooldown)
                 {
                     _CC.companionHealth -= attackDamage;
                     _MC.UpdateCompaniers(_CC.companionHealth);
                     Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
                     _CC.HITcompa(transform.forward * 0f, attackDamage);
-                    laserTicks = 0f;
+                    _laserTicks = 0f;
                 }
+                didDamage = true;
             }
-            else { laserTicks = 0f; DisableLaser(); } // si golpea a otro objeto, apago laser
+            if(!didDamage) { _laserTicks = 0f; DisableLaser(); } // si golpea a otro objeto, apago laser
         }
-        else { laserTicks = 0f; DisableLaser(); } // si me salgo de rango, apago laser
+        else { _laserTicks = 0f; DisableLaser(); } // si me salgo de rango, apago laser
         // dibujo laser en el visor y leo donde impacta
         Debug.DrawRay(laserOrigin.transform.position, dir.normalized * attackRange, Color.magenta);
         Debug.Log( "Laser hit: " + hit.collider.name +
