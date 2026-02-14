@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3146089454538997953}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39,6 +39,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 759707857649492391, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 759707857649492391, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4c14436b4be4eea42b9b8c3dbc0adde7, type: 2}
     - target: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_Name
       value: Torrem_var
@@ -46,7 +54,7 @@ PrefabInstance:
     - target: {fileID: 1759593054512746133, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9482c2dd2c4a6e44b8f7e5a82044e9b5, type: 3}
+      objectReference: {fileID: 21300000, guid: 50df5d9bae09a7b46b2be04db3672718, type: 3}
     - target: {fileID: 3058846852766819351, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -167,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6019465198720560833, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4048415107947427447, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
     - {fileID: 202304687226869781, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
@@ -253,8 +265,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.77647066, g: 0.37647063, b: 0.909804, a: 1}
-      key1: {r: 0.31132078, g: 0.08664116, b: 0.30828294, a: 1}
+      key0: {r: 0.91372555, g: 0.7411765, b: 0.7294118, a: 1}
+      key1: {r: 0.9921569, g: 0.015686275, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
