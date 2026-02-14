@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.Rendering.DebugUI.Table;
 using static UnityEngine.UI.ScrollRect;
 using static Weapon_Control;
 
@@ -54,6 +55,7 @@ public class Enemy_Control : MonoBehaviour
     #endregion
 
     #region /// GIZDRAW MARKERS ///
+    public GameObject bitePref;
     private bool showAttackGizmos = false;
     private List<(Vector3 center, Vector3 halfExtents, Quaternion rotation)> currentHitboxes = new();
     #endregion
@@ -219,7 +221,7 @@ public class Enemy_Control : MonoBehaviour
             case EnemyType.Gnobot:
             DoMELE(); break;
             case EnemyType.Hydra:
-            DoMultiheads(); break;
+            DoMultiBites(); break;
 
             case EnemyType.Dronlibri:
             DoRANGE(); break;
@@ -262,16 +264,18 @@ public class Enemy_Control : MonoBehaviour
             }
         }
     }
-    void DoMultiheads()
+    void DoMultiBites()
     {
         // dirección hacia el frente del player
         Vector3 forwardDir = (target.position - _attackOrigin.position).normalized;
-        forwardDir.y = 0;
-        // distancia del barrido
-        float spacing = 3f;
+        forwardDir.y = 0; forwardDir.Normalize();
+        Quaternion rot = Quaternion.LookRotation(forwardDir);
+        // parametros del espaciado y el barrido
+        float spacing = 5f;
         float range = attackRange;
         Vector3 halfExtents = new Vector3(0.5f, 1f, range);
         // colocamos cada cabeza de izquierda a derecha
+        Vector3 rightDir = rot * Vector3.right;
         Vector3[] offsets = new Vector3[]
         { Vector3.left * spacing, Vector3.zero, Vector3.right * spacing };
         // copio los datos de cada una para el gizdraw durante los ataques
@@ -279,15 +283,22 @@ public class Enemy_Control : MonoBehaviour
         foreach (Vector3 offset in offsets)
         {
             Vector3 center = _attackOrigin.position + forwardDir * range + offset;
-            currentHitboxes.Add((center, halfExtents, Quaternion.LookRotation(forwardDir)));
+            currentHitboxes.Add((center, halfExtents, rot));
         }
+        //activo el gizmos y la animacion
         showAttackGizmos = true;
         StartCoroutine(HideGizmos(0.5f));
-        // activo animacion y genero cada collider 
         _animator.SetTrigger("isAttacking");
         foreach (Vector3 offset in offsets)
         {
+            // primero instancio el sprite ajustado a las zonas
             Vector3 center = _attackOrigin.position + forwardDir * range + offset;
+            GameObject biteZone = Instantiate(bitePref, center, rot);
+            biteZone.transform.Rotate(90f, 0f, 90f);
+            Vector3 baseScale = biteZone.transform.localScale;
+            biteZone.transform.localScale = Vector3.Scale(baseScale, halfExtents * 2f);
+            Destroy(biteZone, 0.5f);
+            //ahora genero los impactos
             Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(forwardDir));
             foreach (Collider hit in hits)
             {

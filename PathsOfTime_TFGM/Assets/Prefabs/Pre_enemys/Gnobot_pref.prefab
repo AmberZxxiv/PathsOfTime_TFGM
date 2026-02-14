@@ -129,7 +129,7 @@ MonoBehaviour:
   wanderRadius: 10
   flySpeed: 10
   flyHeight: 2
-  maxRange: 5
+  flyRange: 0
   splitPref: {fileID: 8850432258290061902, guid: d1dd525d5a35b60478ce0000e3950354, type: 3}
   explosivPref: {fileID: 8850432258290061902, guid: 0788dd585e0077b4b84837000e16c152, type: 3}
   attackRange: 2
@@ -137,16 +137,14 @@ MonoBehaviour:
   attackForce: 5
   companionTarget: {fileID: 0}
   companionAgroChance: 0.5
+  bitePref: {fileID: 4424006084866504917, guid: 5b30322c516413243bdfc9cfb4af25fa, type: 3}
   laserBeam: {fileID: 0}
   laserMask:
     serializedVersion: 2
     m_Bits: 0
   laserOrigin: {fileID: 0}
-  laserTicks: 0
   wanderCooldown: 2
-  wanderTimer: 0
   attackCooldown: 1.25
-  attackTimer: 0
   enemyHealth: 6
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   healChance: 0.25
