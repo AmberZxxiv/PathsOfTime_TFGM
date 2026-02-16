@@ -48,7 +48,7 @@ public class Enemy_Control : MonoBehaviour
     public GameObject explosivPref;
     Transform _attackOrigin;
     public float attackRange;
-    public float attackDamage;
+    public int attackDamage;
     public float attackForce;
     public Transform companionTarget;
     public float companionAgroChance;

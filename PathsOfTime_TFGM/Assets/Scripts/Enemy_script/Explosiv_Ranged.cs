@@ -9,7 +9,7 @@ public class Explosiv_Ranged : MonoBehaviour
     public Player_Control _PC; //pillo SINGLE del PC
     public Companion_Control _CC; //pillo SINGLE del CC
     public Menus_Control _MC; //pillo SINGLE del MC
-    public float damageExplosiv;
+    public int damageExplosiv;
     public float radiusExplosiv;
     public float lifetimeExplosive;
     public float delayExplosive;

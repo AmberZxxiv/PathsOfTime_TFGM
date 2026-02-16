@@ -28,6 +28,7 @@ public class Menus_Control : MonoBehaviour
     public float heartRadio;
 
     public GameObject companionContainer;
+    public GameObject companionDead;
     public float companionRadio;
     #endregion
 
@@ -132,7 +133,7 @@ public class Menus_Control : MonoBehaviour
         Instantiate(displayToInstantiate, missionContainer.transform);
     }
 
-    void LiveContainer(float playerHealth) //en start instancio total corazones en circulo
+    void LiveContainer(int playerHealth) //en start instancio total corazones en circulo
     {
         for (int i = 0; i < (_PC.playerHealth*0.5f); i++)
         {
@@ -148,7 +149,7 @@ public class Menus_Control : MonoBehaviour
         }
         UpdateLives(_PC.playerHealth);
     }
-    public void UpdateLives(float playerHealth) // todo lo que varia la vida del player
+    public void UpdateLives(int playerHealth) // todo lo que varia la vida del player
     {
         foreach (Hearts_Eater cupcake in actualLives) //recorro los estados de los corazones
         {
@@ -160,6 +161,39 @@ public class Menus_Control : MonoBehaviour
             { cupcake.EatHeart(0); }
         }
     }
+    
+    void LiveCompanier()
+    {
+        int compaCakes = _CC.companionHealth;
+        for (int i = 0; i < (compaCakes * 0.5f); i++)
+        {
+            GameObject heart = Instantiate(heartPrefab, companionContainer.transform);
+            RectTransform rt = heart.GetComponent<RectTransform>();
+            float angulo = (360f / (compaCakes * 0.5f)) * i;
+            float rad = angulo * Mathf.Deg2Rad;
+            float x = Mathf.Cos(rad) * companionRadio;
+            float y = Mathf.Sin(rad) * companionRadio;
+            rt.anchoredPosition = new Vector2(x, y);
+            rt.localScale = Vector3.one * 0.5f;
+            companionLives.Add(heart.GetComponent<Hearts_Eater>());
+        }
+        UpdateCompaniers(compaCakes);
+    }
+
+    public void UpdateCompaniers(int companionHealth) // todo lo que varia la vida del compa
+    {
+        foreach (Hearts_Eater heart in companionLives)
+        {
+            if (companionHealth >= 2)
+            { heart.EatHeart(2); companionHealth -= 2; }
+            else if (companionHealth == 1)
+            { heart.EatHeart(1); companionHealth -= 1; }
+            else
+            { heart.EatHeart(0); }
+        }
+    }
+    public void CoinsCounter(int coinsLooted) //en start y Player collision
+    { coinText.text = "x " + coinsLooted.ToString(); }
     public void FutrInteracton()
     {
         futrPanel.SetActive(true);
@@ -184,39 +218,6 @@ public class Menus_Control : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    void LiveCompanier()
-    {
-        float compaCakes = _CC.companionHealth;
-        for (int i = 0; i < (compaCakes * 0.5f); i++)
-        {
-            GameObject heart = Instantiate(heartPrefab, companionContainer.transform);
-            RectTransform rt = heart.GetComponent<RectTransform>();
-            float angulo = (360f / (compaCakes * 0.5f)) * i;
-            float rad = angulo * Mathf.Deg2Rad;
-            float x = Mathf.Cos(rad) * companionRadio;
-            float y = Mathf.Sin(rad) * companionRadio;
-            rt.anchoredPosition = new Vector2(x, y);
-            rt.localScale = Vector3.one * 0.5f;
-            companionLives.Add(heart.GetComponent<Hearts_Eater>());
-        }
-        UpdateCompaniers(compaCakes);
-    }
-
-    public void UpdateCompaniers(float companionHealth) // todo lo que varia la vida del compa
-    {
-        foreach (Hearts_Eater heart in companionLives)
-        {
-            if (companionHealth >= 2)
-            { heart.EatHeart(2); companionHealth -= 2; }
-            else if (companionHealth == 1)
-            { heart.EatHeart(1); companionHealth -= 1; }
-            else
-            { heart.EatHeart(0); }
-        }
-    }
-    public void CoinsCounter(int coinsLooted) //en start y Player collision
-    { coinText.text = "x " + coinsLooted.ToString(); }
-
     public void ShowExit() //desde Player collision
     {
         exitMenu.SetActive(true);

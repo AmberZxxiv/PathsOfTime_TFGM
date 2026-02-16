@@ -24,7 +24,7 @@ public class Companion_Control : MonoBehaviour
     float orbitAngle;
     #endregion
 
-    public float companionHealth;
+    public int companionHealth;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
     void Awake()// singleton sin superponer y no destruir al cambiar escena
@@ -77,7 +77,7 @@ public class Companion_Control : MonoBehaviour
         _agent.SetDestination(orbitPos);
     }
 
-    public void HITcompa(Vector3 force, float damage) //desde ENEMYS al golpear
+    public void HITcompa(Vector3 force, int damage) //desde ENEMYS al golpear
     {
         // le impacto visualmente y le bajo la vida
         StartCoroutine(FlashDamage());

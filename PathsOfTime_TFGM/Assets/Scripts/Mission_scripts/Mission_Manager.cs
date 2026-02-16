@@ -75,7 +75,12 @@ public class Mission_Manager : MonoBehaviour
     }
     public void CompanionLose() //desde Companion al morirse
     {
-        //Instanciar mision lose o algo asi
+        // limpio los restos de los cupcakes
+        Transform container = _MC.companionContainer.transform;
+        for (int i = container.childCount - 1; i >= 0; i--)
+        { Destroy(container.GetChild(i).gameObject); }
+        // instancio mision lose
+        Instantiate(_MC.companionDead, container);
         _missionCompleted = true;
         print("MISSION LOSED!");
     }

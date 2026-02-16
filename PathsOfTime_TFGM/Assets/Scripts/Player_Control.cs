@@ -46,7 +46,7 @@ public class Player_Control : MonoBehaviour
     #endregion
 
     #region /// STATS NUMBERS ///
-    public float playerHealth;
+    public int playerHealth;
     public int coinsLooted;
     #endregion
 

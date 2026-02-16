@@ -9,7 +9,7 @@ public class Split_Ranged : MonoBehaviour
     public Player_Control _PC; //pillo SINGLE del PC
     public Companion_Control _CC; //pillo SINGLE del CC
     public Menus_Control _MC; //pillo SINGLE del MC
-    public float damageSplit;
+    public int damageSplit;
     public float lifetimeSplit;
     public float delaySplit;
 

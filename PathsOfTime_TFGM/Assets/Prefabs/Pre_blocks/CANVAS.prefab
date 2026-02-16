@@ -1926,6 +1926,7 @@ MonoBehaviour:
   heartContainer: {fileID: 7570305798516121414}
   heartRadio: 110
   companionContainer: {fileID: 6984187329184261389}
+  companionDead: {fileID: 5544477635962534840, guid: 2dc47ab97da0ae24bbbcaab76272c758, type: 3}
   companionRadio: 55
   missionContainer: {fileID: 1518229546960443165}
   coinText: {fileID: 2975046020388557772}
