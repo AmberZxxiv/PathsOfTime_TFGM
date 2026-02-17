@@ -271,9 +271,9 @@ public class Enemy_Control : MonoBehaviour
         forwardDir.y = 0; forwardDir.Normalize();
         Quaternion rot = Quaternion.LookRotation(forwardDir);
         // parametros del espaciado y el barrido
-        float spacing = 5f;
+        float spacing = 10f;
         float range = attackRange;
-        Vector3 halfExtents = new Vector3(0.5f, 1f, range);
+        Vector3 halfExtents = new Vector3(1f, 1f, range);
         // colocamos cada cabeza de izquierda a derecha
         Vector3 rightDir = rot * Vector3.right;
         Vector3[] offsets = new Vector3[]
@@ -294,7 +294,7 @@ public class Enemy_Control : MonoBehaviour
             // primero instancio el sprite ajustado a las zonas
             Vector3 center = _attackOrigin.position + forwardDir * range + offset;
             GameObject biteZone = Instantiate(bitePref, center, rot);
-            biteZone.transform.Rotate(90f, 0f, 90f);
+            biteZone.transform.Rotate(90f, 0f, 0f);
             Vector3 baseScale = biteZone.transform.localScale;
             biteZone.transform.localScale = Vector3.Scale(baseScale, halfExtents * 2f);
             Destroy(biteZone, 0.5f);

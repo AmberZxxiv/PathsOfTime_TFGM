@@ -29,15 +29,17 @@ public class Split_Ranged : MonoBehaviour
                 _MC.UpdateLives(_PC.playerHealth);
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, 2f));
-            }
+                 ImpactDestroy();
+        }
        if (other.collider.CompareTag("companion"))
             {
               _CC.companionHealth -= damageSplit;
               _MC.UpdateCompaniers(_CC.companionHealth);
               Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
               _CC.HITcompa(transform.forward * 5f, damageSplit);
-            }
-       else ImpactDestroy();
+              Destroy(gameObject);
+        }
+       else Destroy(gameObject);
     }
     IEnumerator ImpactDestroy()
     {

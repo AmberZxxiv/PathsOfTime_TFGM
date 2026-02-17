@@ -119,7 +119,7 @@ public class Weapon_Control : MonoBehaviour
 
         // instancio prefab para visualizar la zona
         GameObject swoshZone = Instantiate(swordPref, attackCenter, Quaternion.LookRotation(dir));
-        swoshZone.transform.Rotate(90f, 0f, -45f);
+        swoshZone.transform.Rotate(90f, 0f, 0f);
         Vector3 baseScale = swoshZone.transform.localScale;
         swoshZone.transform.localScale = baseScale * (radius-2f);
         Destroy(swoshZone, 0.5f);
@@ -158,7 +158,7 @@ public class Weapon_Control : MonoBehaviour
 
         // instancio prefab para visualizar la zona
         GameObject punchZone = Instantiate(punchPref, attackCenter, attackRot);
-        punchZone.transform.Rotate(90f, 0f, -45f);
+        punchZone.transform.Rotate(90f, 0f, 0f);
         Vector3 baseScale = punchZone.transform.localScale;
         punchZone.transform.localScale = Vector3.Scale(baseScale, halfExtents * 2f);
         Destroy(punchZone, 0.5f);

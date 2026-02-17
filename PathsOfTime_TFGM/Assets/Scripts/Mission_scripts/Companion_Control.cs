@@ -12,6 +12,7 @@ public class Companion_Control : MonoBehaviour
     //pillo SINGLEs del PC y MM
     public Player_Control _PC;
     public Mission_Manager _MM;
+    public Menus_Control _MC;
 
     #region /// MOVEMENT ///
     NavMeshAgent _agent;
@@ -24,9 +25,13 @@ public class Companion_Control : MonoBehaviour
     float orbitAngle;
     #endregion
 
+    #region /// HEALTH ///
     public int companionHealth;
+    public int _lastPlayerHeal;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
+    #endregion
+
     void Awake()// singleton sin superponer y no destruir al cambiar escena
     {
         if (instance == null) { instance = this; }
@@ -34,9 +39,10 @@ public class Companion_Control : MonoBehaviour
     }
     void Start()
     {
-        //pillo SINGLEs del PC y MM
+        //pillo SINGLEs del PC, MM, MC
         _PC = Player_Control.instance;
         _MM = Mission_Manager.instance;
+        _MC = Menus_Control.instance;
         // pillo rigidbody, objetivo y colores
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
@@ -48,6 +54,12 @@ public class Companion_Control : MonoBehaviour
 
     void Update()
     {
+        if (_PC.playerHealth > _lastPlayerHeal && companionHealth < 12)
+        {
+         companionHealth += 2;
+         _MC.UpdateCompaniers(companionHealth);
+        }
+        _lastPlayerHeal = _PC.playerHealth;
         float distanceToPlayer = Vector3.Distance(transform.position, _target.position);
         if (distanceToPlayer > maxDistance)
         {
