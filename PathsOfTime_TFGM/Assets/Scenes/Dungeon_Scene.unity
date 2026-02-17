@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1star_var
       objectReference: {fileID: 0}
+    - target: {fileID: 4285079833609864620, guid: 496953a260d48d74080d28c593a1e65f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4696506767781012113, guid: 496953a260d48d74080d28c593a1e65f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -356,6 +360,10 @@ PrefabInstance:
     - target: {fileID: 7690499457174642150, guid: 496953a260d48d74080d28c593a1e65f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097411157342904878, guid: 496953a260d48d74080d28c593a1e65f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1810402435970475233, guid: 496953a260d48d74080d28c593a1e65f, type: 3}
@@ -459,7 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MC: {fileID: 0}
   _PC: {fileID: 0}
-  mission: 1
+  mission: 3
   companionPrefab: {fileID: 4948516239128690741, guid: f49b01f9a91f1df479732bb66d43a842, type: 3}
 --- !u!4 &1758663966
 Transform:

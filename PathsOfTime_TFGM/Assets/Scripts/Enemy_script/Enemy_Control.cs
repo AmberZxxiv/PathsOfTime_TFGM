@@ -43,7 +43,7 @@ public class Enemy_Control : MonoBehaviour
     public float flyRange;
     #endregion
 
-    #region /// ATTACK STATS ///
+    #region /// BASE ATTACKS ///
     public GameObject splitPref;
     public GameObject explosivPref;
     Transform _attackOrigin;
@@ -114,7 +114,7 @@ public class Enemy_Control : MonoBehaviour
         // si es Torrem, uso su sistema
         if (enemyType == EnemyType.Torrem) { TrackerTurrem(); return; }
 
-        //compruebo que objetivo esta mas cerca
+        //compruebo si el companion es elegible y está cerca
         if (companionTarget != null)
         {
             float rand = Random.value;
@@ -170,7 +170,7 @@ public class Enemy_Control : MonoBehaviour
         bool found = NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
         return !found ? origin : navHit.position;
     }
-    void FlyToTarget() // trackeo voladores a player con distancia maxima
+    void FlyToTarget() // trackeo voladores a player con distancia de seguridad
     {
         Vector3 playerRange = (transform.position - target.position).normalized;
         Vector3 targetPos = target.position + playerRange * flyRange;
@@ -222,7 +222,6 @@ public class Enemy_Control : MonoBehaviour
             DoMELE(); break;
             case EnemyType.Hydra:
             DoMultiBites(); break;
-
             case EnemyType.Dronlibri:
             DoRANGE(); break;
             case EnemyType.Angel:
@@ -364,7 +363,7 @@ public class Enemy_Control : MonoBehaviour
         // si esta fuera de rango, apago laser
         if (distance > attackRange) 
         { _laserTicks = 0f; DisableLaser(); return; }
-        // si esta dentro de rango y me impacta, activo laser
+        // si esta dentro de rango y me impacta, activo laser y los ticks de daño
         RaycastHit hit;
         if (Physics.Raycast(laserOrigin.transform.position, dir.normalized, out hit, attackRange, laserMask, QueryTriggerInteraction.Ignore))
         {
@@ -452,7 +451,7 @@ public class Enemy_Control : MonoBehaviour
         if (_agent != null && _agent.isOnNavMesh)
             _agent.isStopped = false;
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() // dibujo los hitboxes de los ataques a mele
     {
         if (showAttackGizmos && currentHitboxes.Count > 0)
         {
@@ -465,7 +464,7 @@ public class Enemy_Control : MonoBehaviour
             Gizmos.matrix = Matrix4x4.identity;
         }
     }
-    IEnumerator HideGizmos(float seconds)
+    IEnumerator HideGizmos(float seconds) // escondo los ataques tras el cooldown
     {
         yield return new WaitForSeconds(seconds);
         showAttackGizmos = false;
