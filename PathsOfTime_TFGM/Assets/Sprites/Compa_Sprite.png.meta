@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 65763de767f78b64fab6eef089f1ab30
+guid: 3f4e8f0021b5ea14b80552e49fe4a099
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,93 +106,62 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: companionn_SKETCH_0
+      name: Compa_Sprite_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 292
-        width: 490
-        height: 490
+        x: 0
+        y: 0
+        width: 437
+        height: 536
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef5a400255870934d9253a6cfe1b9f13
-      internalID: 1378609517
+      spriteID: fac4aa68805a193408359e223d9030e3
+      internalID: -1726816784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: companionn_SKETCH_1
+      name: Compa_Sprite_1
       rect:
         serializedVersion: 2
-        x: 476
-        y: 291
-        width: 490
-        height: 490
+        x: 437
+        y: 0
+        width: 437
+        height: 536
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1087d79744f86b84aa559713d725f4fa
-      internalID: 613605998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: companionn_SKETCH_2
-      rect:
-        serializedVersion: 2
-        x: 940
-        y: 292
-        width: 490
-        height: 490
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f0d4ab6d99ad3b4593d916adc25d904
-      internalID: -984093909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: companionn_SKETCH_3
-      rect:
-        serializedVersion: 2
-        x: 1392
-        y: 290
-        width: 490
-        height: 490
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6e38df6ea18183d41988a420d9da96ae
-      internalID: -180532436
+      spriteID: 23c2acc4254c0724b9ca66453838f3ea
+      internalID: 1162214148
       vertices: []
       indices: 
       edges: []
@@ -201,7 +170,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 21090d8a5cd3bff4596cb8b3e8a35661
+    spriteID: fd1e9b7bf92ef1b41a9411fa2fc2ec22
     internalID: 0
     vertices: []
     indices: 
@@ -209,12 +178,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":1.0},"gridSpriteSize":{"x":437.0,"y":536.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      companionn_SKETCH_0: 1378609517
-      companionn_SKETCH_1: 613605998
-      companionn_SKETCH_2: -984093909
-      companionn_SKETCH_3: -180532436
+      Compa_Sprite_0: -1726816784
+      Compa_Sprite_1: 1162214148
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
