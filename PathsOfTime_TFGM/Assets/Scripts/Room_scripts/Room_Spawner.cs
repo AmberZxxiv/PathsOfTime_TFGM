@@ -23,21 +23,9 @@ public class Room_Spawner : MonoBehaviour
     int _dungeon;
     public bool spawned = false;
 
-    // declaro todas las variables de materiales
-    public Material futurFloor;
-    public Material pastFloor;
-    public Material futurWall;
-    public Material pastWall;
-    public Material futurCeiling;
-    public Material pastCeiling;
-    public Material futurPlataform;
-    public Material pastPlataform;
-    public Material futurRumble;
-    public Material pastRumble;
-    public Material futurLiquid;
-    public Material pastLiquid;
-
-    public Mesh futurWallMesh;
+    // declaro scriptable dungeon model 
+    public Dungeon_Models pastModel;
+    public Dungeon_Models futurModel;
 
 
     void Start()
@@ -84,78 +72,50 @@ public class Room_Spawner : MonoBehaviour
         else { _RM.roomsSpawned++; }
         // instancio la selección y apago el spawn
         GameObject roomInstantiated = Instantiate(roomToSpawn, transform.position + roomPos, transform.rotation);
-        FindFloors(roomInstantiated);
-        FindPlataforms(roomInstantiated);
-        FindCeilings(roomInstantiated);
-        FindWalls(roomInstantiated);
-        FindRumbles(roomInstantiated);
-        FindLiquids(roomInstantiated);
+        FindElements(roomInstantiated);
         spawned = true;
     }
-    void FindFloors(GameObject roomToSearch)
+
+
+    void FindElements(GameObject roomToSearch)
     {
         foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
         {
-            if (child.CompareTag("ground"))
-            { 
-              var floor = child.GetComponent<MeshRenderer>();
-              floor.material = _dungeon == 0? pastFloor : futurFloor;
-            }
-        }
-    }
-    void FindPlataforms(GameObject roomToSearch)
-    {
-        foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
-        {
-            if (child.CompareTag("plataform"))
+            var elementMat = child.GetComponent<MeshRenderer>();
+            var elementMesh = child.GetComponent<MeshFilter>();
+            Material newMat = null;
+            Mesh newMesh = null;
+            Dungeon_Models model = _dungeon == 0 ? pastModel : futurModel;
+
+            switch (child.tag)
             {
-                var floor = child.GetComponent<MeshRenderer>();
-                floor.material = _dungeon == 0? pastPlataform : futurPlataform;
+                case "ground":
+                    newMat = model.floorMat;
+                    newMesh = model.floorMesh;
+                    break;
+                case "plataform":
+                    newMat = model.platMat;
+                    newMesh = model.platMesh;
+                    break;
+                case "ceiling":
+                    newMat = model.cellMat;
+                    newMesh = model.cellMesh;
+                    break;
+                case "wall":
+                    newMat = model.wallMat;
+                    newMesh = model.wallMesh;
+                    break;
+                case "rumble":
+                    newMat = model.rumbMat;
+                    newMesh = model.rumbMesh;
+                    break;
+                case "deadly":
+                    newMat = model.liquidMat;
+                    newMesh = model.liquidMesh;
+                    break;
             }
-        }
-    }
-    void FindCeilings(GameObject roomToSearch)
-    {
-        foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
-        {
-            if (child.CompareTag("ceiling"))
-            {
-                var floor = child.GetComponent<MeshRenderer>();
-                floor.material = _dungeon == 0 ? pastCeiling : futurCeiling;
-            }
-        }
-    }
-    void FindWalls(GameObject roomToSearch)
-    {
-        foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
-        {
-            if (child.CompareTag("wall"))
-            {
-                var floor = child.GetComponent<MeshRenderer>();
-                floor.material = _dungeon == 0 ? pastWall : futurWall;
-            }
-        }
-    }
-    void FindRumbles(GameObject roomToSearch)
-    {
-        foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
-        {
-            if (child.CompareTag("rumble"))
-            {
-                var floor = child.GetComponent<MeshRenderer>();
-                floor.material = _dungeon == 0 ? pastRumble : futurRumble;
-            }
-        }
-    }
-    void FindLiquids(GameObject roomToSearch)
-    {
-        foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
-        {
-            if (child.CompareTag("deadly"))
-            {
-                var floor = child.GetComponent<MeshRenderer>();
-                floor.material = _dungeon == 0 ? pastLiquid : futurLiquid;
-            }
+            if (newMat != null) elementMat.material = newMat;
+            if (newMesh != null) elementMesh.mesh = newMesh;
         }
     }
 

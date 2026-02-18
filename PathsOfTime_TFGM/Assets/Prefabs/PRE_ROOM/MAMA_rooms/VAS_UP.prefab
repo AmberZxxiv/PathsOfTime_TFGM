@@ -239,6 +239,8 @@ MonoBehaviour:
   pastRumble: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
   futurLiquid: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
   pastLiquid: {fileID: 2100000, guid: 6bdf7add1c035e24399cb4e94252477b, type: 2}
+  pastModel: {fileID: 11400000, guid: bf8d8805840163e42a3cb4a46035ff82, type: 2}
+  futurModel: {fileID: 11400000, guid: fa97fa33cbec8a44bbad15d636b4aced, type: 2}
 --- !u!1 &6687140874971776461
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +390,8 @@ MonoBehaviour:
   pastRumble: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
   futurLiquid: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
   pastLiquid: {fileID: 2100000, guid: 6bdf7add1c035e24399cb4e94252477b, type: 2}
+  pastModel: {fileID: 11400000, guid: bf8d8805840163e42a3cb4a46035ff82, type: 2}
+  futurModel: {fileID: 11400000, guid: fa97fa33cbec8a44bbad15d636b4aced, type: 2}
 --- !u!1 &7824342390046302867
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +541,8 @@ MonoBehaviour:
   pastRumble: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
   futurLiquid: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
   pastLiquid: {fileID: 2100000, guid: 6bdf7add1c035e24399cb4e94252477b, type: 2}
+  pastModel: {fileID: 11400000, guid: bf8d8805840163e42a3cb4a46035ff82, type: 2}
+  futurModel: {fileID: 11400000, guid: fa97fa33cbec8a44bbad15d636b4aced, type: 2}
 --- !u!1 &8619929475290741450
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +697,8 @@ MonoBehaviour:
   pastRumble: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
   futurLiquid: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
   pastLiquid: {fileID: 2100000, guid: 6bdf7add1c035e24399cb4e94252477b, type: 2}
+  pastModel: {fileID: 11400000, guid: bf8d8805840163e42a3cb4a46035ff82, type: 2}
+  futurModel: {fileID: 11400000, guid: fa97fa33cbec8a44bbad15d636b4aced, type: 2}
 --- !u!1001 &55097982745596143
 PrefabInstance:
   m_ObjectHideFlags: 0

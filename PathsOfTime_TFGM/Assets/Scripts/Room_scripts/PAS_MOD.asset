@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b229b972d15150549b4e7cd4fd29d724, type: 3}
+  m_Name: PAS_MOD
+  m_EditorClassIdentifier: Assembly-CSharp::Dungeon_Models
+  floorMat: {fileID: 2100000, guid: d36d3222a3042c94eaf37250520d76f2, type: 2}
+  floorMesh: {fileID: 0}
+  wallMat: {fileID: 2100000, guid: 1f8d7f2b387aa8e46b9925b1117c4063, type: 2}
+  wallMesh: {fileID: -3491089970105686941, guid: 353cb58ef42e5244393da5595a450d18, type: 3}
+  cellMat: {fileID: 2100000, guid: 66141cbe1b1624d48a2ec8c90712bff9, type: 2}
+  cellMesh: {fileID: 7315242269385843767, guid: c244698c2c89ce64c8f123c9295e7213, type: 3}
+  platMat: {fileID: 2100000, guid: f72b3cec1fb577c41a2b1462d5c24845, type: 2}
+  platMesh: {fileID: 0}
+  rumbMat: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
+  rumbMesh: {fileID: 0}
+  liquidMat: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
+  liquidMesh: {fileID: 0}
