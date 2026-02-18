@@ -37,6 +37,9 @@ public class Room_Spawner : MonoBehaviour
     public Material futurLiquid;
     public Material pastLiquid;
 
+    public Mesh futurWallMesh;
+
+
     void Start()
     {
         //pillo SINGLE del RM
