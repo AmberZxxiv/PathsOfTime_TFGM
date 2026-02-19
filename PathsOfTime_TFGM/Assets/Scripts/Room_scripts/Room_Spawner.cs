@@ -101,6 +101,10 @@ public class Room_Spawner : MonoBehaviour
                     newMat = model.cellMat;
                     newMesh = model.cellMesh;
                     break;
+                case "intermid":
+                    newMat = model.interMat;
+                    newMesh = model.interMesh;
+                    break;
                 case "wall":
                     newMat = model.wallMat;
                     newMesh = model.wallMesh;

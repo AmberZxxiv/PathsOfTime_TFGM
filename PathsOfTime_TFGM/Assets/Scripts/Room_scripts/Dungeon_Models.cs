@@ -8,6 +8,8 @@ public class Dungeon_Models : ScriptableObject
     public Mesh floorMesh;
     public Material wallMat;
     public Mesh wallMesh;
+    public Material interMat;
+    public Mesh interMesh;
     public Material cellMat;
     public Mesh cellMesh;
     public Material platMat;

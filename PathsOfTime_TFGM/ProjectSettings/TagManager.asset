@@ -25,6 +25,7 @@ TagManager:
   - PORexit
   - portal
   - companion
+  - intermid
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,8 @@ MonoBehaviour:
   floorMesh: {fileID: 0}
   wallMat: {fileID: 2100000, guid: 1f8d7f2b387aa8e46b9925b1117c4063, type: 2}
   wallMesh: {fileID: -3491089970105686941, guid: 353cb58ef42e5244393da5595a450d18, type: 3}
+  interMat: {fileID: 2100000, guid: 1f8d7f2b387aa8e46b9925b1117c4063, type: 2}
+  interMesh: {fileID: 9019894626782459550, guid: cdb216b0e48582a4b9fced2029f83bc8, type: 3}
   cellMat: {fileID: 2100000, guid: 66141cbe1b1624d48a2ec8c90712bff9, type: 2}
   cellMesh: {fileID: 7315242269385843767, guid: c244698c2c89ce64c8f123c9295e7213, type: 3}
   platMat: {fileID: 2100000, guid: f72b3cec1fb577c41a2b1462d5c24845, type: 2}
