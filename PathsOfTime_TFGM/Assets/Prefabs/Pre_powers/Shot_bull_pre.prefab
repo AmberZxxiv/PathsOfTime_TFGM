@@ -155,5 +155,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  lifeTime: 1.5
-  delay: 0.3
+  delay: 0.25

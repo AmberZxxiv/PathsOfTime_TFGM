@@ -5,6 +5,7 @@ using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using static Mission_Manager;
 
 public class Weapon_Control : MonoBehaviour
@@ -41,7 +42,7 @@ public class Weapon_Control : MonoBehaviour
     #endregion
 
     #region /// COOLDOWN CONTROL ///
-    public float attackCooldown;
+    Dictionary<WeaponType, float> cooldowns = new Dictionary<WeaponType, float>();
     public float lastAttackTimer;
     #endregion
 
@@ -61,7 +62,13 @@ public class Weapon_Control : MonoBehaviour
             else // y no estamos en el lobby, persistimos?
             { Destroy(gameObject); }
         }
+        // me subscribo al evento de cambio de escena para resetear el arma al volver al lobby
         SceneManager.sceneLoaded += OnSceneLoaded;
+        // declaro los valores de los cooldowns en el diccionario
+        cooldowns.Add(WeaponType.Sword, 0.75f);
+        cooldowns.Add(WeaponType.Punch, 0.25f);
+        cooldowns.Add(WeaponType.Shot, 0.5f);
+        cooldowns.Add(WeaponType.Spell, 0.5f);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo arma al cambiar a escena lobby
@@ -91,8 +98,10 @@ public class Weapon_Control : MonoBehaviour
     }
     void AttackFunction()
     {
-        // compruebo el tiempo del cooldown
-        if (Time.time < lastAttackTimer + attackCooldown) return;
+        if (weapon == WeaponType.None) return;
+        // ataco cuando haya pasado el cooldown correspondiente
+        float actualCooldown = cooldowns[weapon];
+        if (Time.time < lastAttackTimer + actualCooldown) return;
         lastAttackTimer = Time.time;
         // activo el ataque correspondiente al weapon equipado
         switch (weapon)
@@ -132,7 +141,7 @@ public class Weapon_Control : MonoBehaviour
                 print("HITTED!");
                 //cojo el script del enemigo
                 Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
-                enemy.HITEDenemy(transform.forward * 7f, 2f);
+                enemy.HITEDenemy(transform.forward * 2.5f, 2f);
             }
         }
     }
@@ -144,7 +153,7 @@ public class Weapon_Control : MonoBehaviour
         Vector3 dir = cam.forward.normalized;
 
         // limites del rectangulo en anchura, altura y largura
-        Vector3 halfExtents = new Vector3(0.75f, 0.75f, 3.5f);
+        Vector3 halfExtents = new Vector3(0.75f, 0.75f, 5f);
         // centro el box del ataque a mitad distancia
         float attackLength = halfExtents.z;
         Vector3 attackCenter = attackOrigin.position + dir * attackLength;
@@ -171,7 +180,7 @@ public class Weapon_Control : MonoBehaviour
                 print("HITTED!");
                 //cojo el script del enemigo
                 Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
-                enemy.HITEDenemy(transform.forward * 10f, 2f);
+                enemy.HITEDenemy(transform.forward * 7.5f, 1f);
             }
         }
     }
@@ -203,7 +212,7 @@ public class Weapon_Control : MonoBehaviour
         GameObject spellCast = Instantiate(magicPref, attackOrigin.position + dir * 2f, Quaternion.LookRotation(dir, Vector3.up) * magicPref.transform.rotation);
         // le doy fuerza a la bala pa lanzarla
         Rigidbody rb = spellCast.GetComponent<Rigidbody>();
-        rb.linearVelocity = dir * 15f;
+        rb.linearVelocity = dir * 25f;
     }
 
     IEnumerator ResumeAgent(NavMeshAgent agent, float delay)

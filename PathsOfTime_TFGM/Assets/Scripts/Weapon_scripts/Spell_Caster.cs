@@ -7,13 +7,12 @@ using UnityEngine.AI;
 public class Spell_Caster : MonoBehaviour
 {//script en cada PREF Spell Caster
 
-    public float damage;
-    public float lifeTime;
-    public float delay;
+    float _lifeTime = 1f;
+    float _delay = 1f;
 
     void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, _lifeTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +22,7 @@ public class Spell_Caster : MonoBehaviour
             print("HITTED!");
             //cojo el script del enemigo
             Enemy_Control enemy = other.gameObject.GetComponent<Enemy_Control>();
-            enemy.HITEDenemy(transform.forward * 2f, damage);
+            enemy.HITEDenemy(transform.forward * 5f, 1f);
             StartCoroutine(ImpactDestroy());
         }
        
@@ -31,7 +30,7 @@ public class Spell_Caster : MonoBehaviour
     IEnumerator ImpactDestroy()
     {
         // espero y elimino
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(_delay);
         Destroy(gameObject);
     }
 }

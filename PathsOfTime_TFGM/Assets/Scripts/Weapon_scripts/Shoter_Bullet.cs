@@ -7,13 +7,12 @@ using UnityEngine.AI;
 public class Shoter_Bullet : MonoBehaviour
 {//script en cada PREF Shot Bull
 
-    public float damage;
-    public float lifeTime;
-    public float delay;
+    float _lifeTime = 0.75f;
+    float _delay = 0.25f;
 
     void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, _lifeTime);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -23,7 +22,7 @@ public class Shoter_Bullet : MonoBehaviour
             print("HITTED!");
             //cojo el script del enemigo
             Enemy_Control enemy = other.gameObject.GetComponent<Enemy_Control>();
-            enemy.HITEDenemy(transform.forward * 2f, damage);
+            enemy.HITEDenemy(transform.forward * 5f, 2f);
         }
         StartCoroutine(ImpactDestroy());
     }
@@ -36,7 +35,7 @@ public class Shoter_Bullet : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null) rb.linearVelocity = Vector3.zero;
         // espero y elimino
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(_delay);
         Destroy(gameObject);
     }
 }

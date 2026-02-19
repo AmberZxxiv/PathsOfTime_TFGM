@@ -145,7 +145,7 @@ MonoBehaviour:
   laserOrigin: {fileID: 0}
   wanderCooldown: 2
   attackCooldown: 1.25
-  enemyHealth: 6
+  enemyHealth: 8
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   healChance: 0.25
   coinLoot: {fileID: 3576113440945831091, guid: f81dc6d600e27d54a905afae05adb3ed, type: 3}

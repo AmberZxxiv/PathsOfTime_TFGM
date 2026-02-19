@@ -212,7 +212,7 @@ public class Enemy_Control : MonoBehaviour
     }
     void AttackFunction() // funcion de ataque común
     {
-        // ataco cuando haya pasado el tiempo de cooldawn
+        // ataco cuando haya pasado el tiempo de cooldown
         if (Time.time < _attackTimer + attackCooldown) return;
         _attackTimer = Time.time;
         // activo el ataque correspondiente al enemigo
@@ -426,7 +426,7 @@ public class Enemy_Control : MonoBehaviour
             // compruebo el 10% del coin drop
             if (Random.value <= coinChance)
             { Instantiate(coinLoot, transform.position + Vector3.up * 1, transform.rotation);}
-            Destroy(gameObject); //se destruye
+            Destroy(gameObject); return;//se destruye
         }
         if (_agent != null) // si tiene NavMesh lo pauso
         { StartCoroutine(DisableAgentTemporarily(0.2f)); }

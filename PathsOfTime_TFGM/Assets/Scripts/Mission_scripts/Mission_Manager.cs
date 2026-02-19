@@ -71,7 +71,7 @@ public class Mission_Manager : MonoBehaviour
 
     public void SpawnCompanion() //desde Room_Manager al iniciar sala
     {
-        Instantiate(companionPrefab, new Vector3(0, 3, 0), transform.rotation);
+        Instantiate(companionPrefab, new Vector3(0, 2, 0), transform.rotation);
     }
     public void CompanionLose() //desde Companion al morirse
     {

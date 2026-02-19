@@ -50,8 +50,8 @@ public class Room_Manager : MonoBehaviour
         //pillo SINGLE del MM
         _MM = Mission_Manager.instance;
         Invoke("BakeNavMesh", 2f);
-        Invoke("SpawnEnemy", 3f);
-        Invoke("SpawnChest", 3.5f);
+        Invoke("SpawnEnemy", 4f);
+        Invoke("SpawnChest", 3f);
         Invoke("SpawnExit", 3.5f);
         if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
         {
@@ -70,8 +70,8 @@ public class Room_Manager : MonoBehaviour
         {
             //Hydra aparece en ultima sala en su 00
             Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
-            // spawneo gnobots o torrems en las salas menos la ultima
-            for (int i = 0; i < roomMap.Count - 1; i++)
+            // spawneo gnobots o torrems en las salas menos la primera y ultima
+            for (int i = 1; i < roomMap.Count - 1; i++)
             {
                 Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
                 Vector3 center = enemySpawn.position + Vector3.up * 0.5f;
@@ -97,8 +97,8 @@ public class Room_Manager : MonoBehaviour
         {
             //Angel aparece en ultima sala en su 00
             Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
-            // spawneo dronlibris o torrems en las salas menos la ultima
-            for (int i = 0; i < roomMap.Count - 1; i++)
+            // spawneo dronlibris o torrems en las salas menos la primera y ultima
+            for (int i = 1; i < roomMap.Count - 1; i++)
             {
                 Transform enemySpawn = roomMap[i].transform.Find("EnemySpawn");
                 Vector3 center = enemySpawn.position + Vector3.up * 0.5f;
@@ -125,7 +125,7 @@ public class Room_Manager : MonoBehaviour
     void SpawnChest()
     {
         float chestProbability = 0.1f;
-        for (int i = 0; i < roomMap.Count; i++) // en todas las salas
+        for (int i = 1; i < roomMap.Count; i++) // en todas las salas menos la primera
         {
             Transform chestSpawn = roomMap[i].transform.Find("LootSpawn");
             if (chestSpawn == null) continue;
@@ -136,9 +136,8 @@ public class Room_Manager : MonoBehaviour
         }
     }
 
-    void SpawnExit()
+    void SpawnExit() //portal de salida aparece en la ultima sala
     {
-        //portal de salida aparece en la ultima sala
         Transform exitSpawn = roomMap[roomMap.Count - 1].transform.Find("ExitSpawner");
         Instantiate(exitPortal, exitSpawn.position + Vector3.up * 5f, exitSpawn.rotation);
     }

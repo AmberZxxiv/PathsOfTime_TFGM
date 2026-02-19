@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6198221032468046463}
   - component: {fileID: 7727511129975298828}
   - component: {fileID: 5786679564463037721}
-  - component: {fileID: 873657075816119699}
   - component: {fileID: 3176713138617566126}
+  - component: {fileID: 873657075816119699}
   m_Layer: 0
   m_Name: Spell_cast_pre
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,21 +121,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &873657075816119699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4424006084866504917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21c5ec0ac49e6ce41beed941b757416c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2
-  lifeTime: 1
-  delay: 0.5
 --- !u!65 &3176713138617566126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -157,3 +142,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9981256, y: 2.6477065, z: 0.20375146}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &873657075816119699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424006084866504917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c5ec0ac49e6ce41beed941b757416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
