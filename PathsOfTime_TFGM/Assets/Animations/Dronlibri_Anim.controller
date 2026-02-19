@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mov_Gnobot
+  m_Name: Mov_Dronlibri
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 05ab00832c1a99a498846f8a93b01547, type: 2}
+  m_Motion: {fileID: 7400000, guid: b013a8455eb0dd543ac8ee1dd92ddea8, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -90,7 +90,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_Gnobot
+  m_Name: Attack_Dronlibri
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -104,7 +104,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2a2e78b02389b81498e18b499a26624c, type: 2}
+  m_Motion: {fileID: 7400000, guid: 50b61ccf4a77478439a3220af5b37d0e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -195,7 +195,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Gnobot
+  m_Name: Idle_Dronlibri
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -209,7 +209,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6e5426ec9c1e1e541b0cddeee6a8499f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2dd62ec230ebef64f96b53cf47945ce9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

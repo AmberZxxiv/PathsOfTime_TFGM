@@ -559,7 +559,7 @@ MonoBehaviour:
   closedFutur: {fileID: 3577886435829724, guid: 76cc13588430f6c4b95ace66ed912f77, type: 3}
   roomMap: []
   roomsSpawned: 0
-  maxRooms: 15
+  maxRooms: 10
   surface: {fileID: 2141270859}
   lootChest: {fileID: 3576113440945831091, guid: 67bbb457f3bcc5e4cb20460a3507e85b, type: 3}
   exitPortal: {fileID: 1977729573740530613, guid: 1efef7a6c87462f46afe7013525b5df2, type: 3}

@@ -18,6 +18,7 @@ public class Companion_Control : MonoBehaviour
     NavMeshAgent _agent;
     Transform _target;
     Rigidbody _rb;
+    Animator _animator;
     public float minDistance;
     public float maxDistance;
     public float orbitRadius;
@@ -43,13 +44,15 @@ public class Companion_Control : MonoBehaviour
         _PC = Player_Control.instance;
         _MM = Mission_Manager.instance;
         _MC = Menus_Control.instance;
-        // pillo rigidbody, objetivo y colores
+        // pillo rigidbody, objetivo, colores y activo animator
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
         _target = _PC.transform;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
         orbitAngle = Random.Range(0f, 360f);
+        _animator = GetComponentInChildren<Animator>();
+        _animator.SetBool("isMoving", true);
     }
 
     void Update()
