@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.UI;
 using static Mission_Manager;
 
 public class Room_Manager : MonoBehaviour
@@ -50,9 +51,9 @@ public class Room_Manager : MonoBehaviour
         //pillo SINGLE del MM
         _MM = Mission_Manager.instance;
         Invoke("BakeNavMesh", 2f);
-        Invoke("SpawnEnemy", 4f);
-        Invoke("SpawnChest", 3f);
-        Invoke("SpawnExit", 3.5f);
+        Invoke("SpawnEnemy", 3f);
+        Invoke("SpawnChest", 2.5f);
+        Invoke("SpawnExit", 2.5f);
         if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
         {
             _MM.Invoke("SpawnCompanion", 2.5f);

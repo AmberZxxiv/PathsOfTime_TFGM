@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,7 +10,7 @@ using static Weapon_Control;
 
 public class Enemy_Control : MonoBehaviour
 {// script en cada prefab enemigo
- //pillo SINGLEs del PC, MC y MM
+ //pillo SINGLEs del PC, CC, MC y MM
    public Player_Control _PC;
    public Companion_Control _CC;
    public Menus_Control _MC;
@@ -98,7 +99,7 @@ public class Enemy_Control : MonoBehaviour
             case EnemyType.Hydra:
             _agent = GetComponent<NavMeshAgent>(); break;
         }
-        // pillo rigidbody, origen, objetivo, colores y activo animator
+        // pillo rigidbody, origen, objetivos, colores y activo animator
         _rb = GetComponent<Rigidbody>();
         _attackOrigin = this.transform;
         _startPoint = transform.position;
@@ -117,14 +118,14 @@ public class Enemy_Control : MonoBehaviour
         //compruebo si el companion es elegible y está cerca
         if (companionTarget != null)
         {
-            float rand = Random.value;
+            float rand = UnityEngine.Random.value;
             if (rand < companionAgroChance && Vector3.Distance(transform.position, companionTarget.position) <= agroDistance)
             { target = companionTarget;}
             else target = _PC.transform;
         }
         else target = _PC.transform;
 
-        // cuando pillan agro, van hacia el player
+        // cuando pillan agro, van hacia el objetivo
         if (_targetDistance <= agroDistance)
         {
             switch (enemyType)
@@ -164,13 +165,13 @@ public class Enemy_Control : MonoBehaviour
     }
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     { // genero Vector3 en radio del enemigo y lo devuelve como objetivo
-        Vector3 randDirection = Random.insideUnitSphere * dist;
+        Vector3 randDirection = UnityEngine.Random.insideUnitSphere * dist;
         randDirection += origin;
         NavMeshHit navHit;
         bool found = NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
         return !found ? origin : navHit.position;
     }
-    void FlyToTarget() // trackeo voladores a player con distancia de seguridad
+    void FlyToTarget() // trackeo voladores a objetivo con distancia de seguridad
     {
         Vector3 playerRange = (transform.position - target.position).normalized;
         Vector3 targetPos = target.position + playerRange * flyRange;
@@ -198,16 +199,16 @@ public class Enemy_Control : MonoBehaviour
     }
     Vector3 RandomFlyPoint(Vector3 origin, float radius)
     { // genero Vector3 en radio del volador y lo devuelve como punto objetivo
-        Vector2 randCircle = Random.insideUnitCircle * radius;
+        Vector2 randCircle = UnityEngine.Random.insideUnitCircle * radius;
         Vector3 point = new Vector3(origin.x + randCircle.x, flyHeight, origin.z + randCircle.y);
         return point;
     }
 
-    private void FixedUpdate() // ataco en fixed para contar en segundos y no en frames
+    private void FixedUpdate() // fixed para contar en segundos y no en frames
     {
         // calculo la distancia al target correspondiente
         _targetDistance = Vector3.Distance(transform.position, target.position);
-        // si esta a rango de ataque y puedo, ataco
+        // si esta a rango de ataque, compruebo el ataque
         if (_targetDistance <= attackRange) { AttackFunction(); }
     }
     void AttackFunction() // funcion de ataque común
@@ -257,48 +258,54 @@ public class Enemy_Control : MonoBehaviour
             {
                 _CC.companionHealth -= attackDamage;
                 _MC.UpdateCompaniers(_CC.companionHealth);
-                Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
                 _CC.HITcompa(transform.forward * 5f, attackDamage); 
                 
             }
         }
     }
-    void DoMultiBites()
+    void DoMultiBites() // llamo a la rutina de mordiscos 
+    { StartCoroutine(MultiBiteRoutine()); }
+    IEnumerator MultiBiteRoutine()
     {
-        // dirección hacia el frente del player
-        Vector3 forwardDir = (target.position - _attackOrigin.position).normalized;
-        forwardDir.y = 0; forwardDir.Normalize();
-        Quaternion rot = Quaternion.LookRotation(forwardDir);
-        // parametros del espaciado y el barrido
-        float spacing = 10f;
+        // parametros del barrido y animación
+        float spacing = 5f;
         float range = attackRange;
         Vector3 halfExtents = new Vector3(1f, 1f, range);
-        // colocamos cada cabeza de izquierda a derecha
-        Vector3 rightDir = rot * Vector3.right;
-        Vector3[] offsets = new Vector3[]
-        { Vector3.left * spacing, Vector3.zero, Vector3.right * spacing };
-        // copio los datos de cada una para el gizdraw durante los ataques
-        currentHitboxes.Clear();
-        foreach (Vector3 offset in offsets)
-        {
-            Vector3 center = _attackOrigin.position + forwardDir * range + offset;
-            currentHitboxes.Add((center, halfExtents, rot));
-        }
-        //activo el gizmos y la animacion
-        showAttackGizmos = true;
-        StartCoroutine(HideGizmos(0.5f));
+        float delay = 0.25f;
+        float predict = 0.25f;
         _animator.SetTrigger("isAttacking");
-        foreach (Vector3 offset in offsets)
+
+        for(int i = 0; i < 3; i++) //lanzo los 3 mordiscos
         {
-            // primero instancio el sprite ajustado a las zonas
-            Vector3 center = _attackOrigin.position + forwardDir * range + offset;
-            GameObject biteZone = Instantiate(bitePref, center, rot);
-            biteZone.transform.Rotate(90f, 0f, 0f);
-            Vector3 baseScale = biteZone.transform.localScale;
-            biteZone.transform.localScale = Vector3.Scale(baseScale, halfExtents * 2f);
-            Destroy(biteZone, 0.5f);
-            //ahora genero los impactos
-            Collider[] hits = Physics.OverlapBox(center, halfExtents, Quaternion.LookRotation(forwardDir));
+            // cojo el movimiento del player
+            Vector3 playerVelocity = Vector3.zero;
+            _PC.TryGetComponent<Rigidbody>(out Rigidbody rb);
+            playerVelocity = rb.linearVelocity;
+            playerVelocity.y = 0f;
+            Vector3 movDir = playerVelocity.normalized;
+            movDir.y = 0f;
+            if (movDir == Vector3.zero) // si esta quieto, cogemos foward
+                movDir = (target.position - _attackOrigin.position).normalized;
+            // coloco cada mordisco en la posicion de la direccion del player
+            Vector3 predictPos = target.position + playerVelocity * predict;
+            Vector3 bitePos = predictPos + movDir * spacing * i;
+            Vector3 atacDir = (bitePos - _attackOrigin.position).normalized;
+            atacDir.y = 0f;
+            Quaternion atacRot = Quaternion.LookRotation(atacDir);
+            Vector3 center = bitePos;
+            // le doy los datos al gizmos para visualizarlo
+            currentHitboxes.Clear();
+            currentHitboxes.Add((center, halfExtents, atacRot));
+            showAttackGizmos = true;
+            StartCoroutine(HideGizmos(0.25f));
+            // instancio el sprite visual sobre las zonas
+            GameObject biteZone = Instantiate(bitePref, center, atacRot);
+            biteZone.transform.Rotate(90f, 0f, 180f);
+            Vector3 scale = biteZone.transform.localScale;
+            biteZone.transform.localScale = Vector3.Scale(scale, halfExtents * 2f);
+            Destroy(biteZone, 0.25f);
+            // detecto los impactos y aplico el ataque
+            Collider[] hits = Physics.OverlapBox(center, halfExtents, atacRot);
             foreach (Collider hit in hits)
             {
                 if (hit.CompareTag("Player"))
@@ -312,10 +319,10 @@ public class Enemy_Control : MonoBehaviour
                 {
                     _CC.companionHealth -= attackDamage;
                     _MC.UpdateCompaniers(_CC.companionHealth);
-                    Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
                     _CC.HITcompa(transform.forward * 5f, attackDamage);
                 }
             }
+            yield return new WaitForSeconds(delay);
         }
     }
     void DoRANGE()
@@ -324,7 +331,7 @@ public class Enemy_Control : MonoBehaviour
         Collider playerCollider = target.GetComponent<Collider>();
         Vector3 targetPos = target.position + Vector3.up * (playerCollider.bounds.size.y / 2f);
         Vector3 dir = (targetPos - _attackOrigin.position).normalized;
-        // instancio el proyectil con su animacion ( controla su propia collision )
+        // instancio el proyectil y hago la animacion ( controla su propia collision )
         _animator.SetTrigger("isAttacking");
         GameObject splitShot = Instantiate
         (splitPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * splitPref.transform.rotation);
@@ -342,7 +349,7 @@ public class Enemy_Control : MonoBehaviour
         Collider playerCollider = target.GetComponent<Collider>();
         Vector3 targetPos = target.position + Vector3.up * (playerCollider.bounds.size.y / 2f);
         Vector3 dir = (targetPos - _attackOrigin.position).normalized;
-        // instancio el proyectil con su animacion ( controla su propia collision )
+        // instancio el proyectil y hago la animacion ( controla su propia collision )
         _animator.SetTrigger("isAttacking");
         GameObject explosiveShot = Instantiate
         (explosivPref, _attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir) * explosivPref.transform.rotation);
@@ -352,7 +359,7 @@ public class Enemy_Control : MonoBehaviour
         Physics.IgnoreCollision(shotCollider, enemyCollider);
         //doy fuerza al proyectil
         Rigidbody rb = explosiveShot.GetComponent<Rigidbody>();
-        rb.linearVelocity = dir * 25f;
+        rb.linearVelocity = dir * 20f;
     }
 
     void TrackerTurrem()
@@ -387,7 +394,6 @@ public class Enemy_Control : MonoBehaviour
                 {
                     _CC.companionHealth -= attackDamage;
                     _MC.UpdateCompaniers(_CC.companionHealth);
-                    Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
                     _CC.HITcompa(transform.forward * 0f, attackDamage);
                     _laserTicks = 0f;
                 }
@@ -421,10 +427,10 @@ public class Enemy_Control : MonoBehaviour
             if (CompareTag("boss") && _MM.mission == Mission_Manager.MissionSelect.BossMis)
             { _MM.BossComplete(); }
             // compruebo el 25% del heal drop
-            if (Random.value <= healChance)
+            if (UnityEngine.Random.value <= healChance)
             { Instantiate(healCherry, transform.position + Vector3.up * 1, transform.rotation);}
             // compruebo el 10% del coin drop
-            if (Random.value <= coinChance)
+            if (UnityEngine.Random.value <= coinChance)
             { Instantiate(coinLoot, transform.position + Vector3.up * 1, transform.rotation);}
             Destroy(gameObject); return;//se destruye
         }

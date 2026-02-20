@@ -35,7 +35,6 @@ public class Split_Ranged : MonoBehaviour
             {
               _CC.companionHealth -= damageSplit;
               _MC.UpdateCompaniers(_CC.companionHealth);
-              Vector3 hitDir = (_CC.transform.position - transform.position).normalized;
               _CC.HITcompa(transform.forward * 5f, damageSplit);
               Destroy(gameObject);
         }

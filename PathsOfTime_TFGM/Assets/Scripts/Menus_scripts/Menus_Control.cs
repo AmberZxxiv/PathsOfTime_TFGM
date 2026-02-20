@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class Menus_Control : MonoBehaviour
     public GameObject deadMenu;
     public GameObject pauseMenu;
     public GameObject exitMenu;
+    public GameObject loadScreen;
     #endregion
 
     #region /// HEARTS UI ///
@@ -55,13 +57,30 @@ public class Menus_Control : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
-
-    void Start()
+    void OnEnable()
+    {SceneManager.sceneLoaded += OnSceneLoaded;}
+    void OnDisable()
+    {SceneManager.sceneLoaded -= OnSceneLoaded;}
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Time.timeScale = 1;
         // pillo los singles
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
         _MM = Mission_Manager.instance;
+        if (scene.buildIndex == 2)
+        { StartCoroutine(DungeonLoadScreen()); }
+    }
+    IEnumerator DungeonLoadScreen()
+    {
+        _PC.enabled = false;
+        loadScreen.SetActive(true);
+        yield return new WaitForSecondsRealtime(3f);
+        loadScreen.SetActive(false);
+        _PC.enabled = true;
+    }
+    void Start()
+    {
         // equipo vidas y monedas
         if (_PC != null)
         {
@@ -76,8 +95,6 @@ public class Menus_Control : MonoBehaviour
         {
             Invoke("LiveCompanier", 3f);
         }
-        // activo el tiempo
-        Time.timeScale = 1;
     }
 
     void Update()
@@ -102,6 +119,7 @@ public class Menus_Control : MonoBehaviour
     public void EquipWeapon(Weapon_Control.WeaponType weapon) //llamo desde WC para mostrar arma equipada
     {
         // elimino el marcador del anterior weapon
+        if (weaponContainer == null) return;
         foreach (Transform child in weaponContainer.transform)
         { Destroy(child.gameObject); }
         // declaro el weapon que voy a instanciar en la UI
@@ -119,6 +137,7 @@ public class Menus_Control : MonoBehaviour
     public void MissionDisplay(Mission_Manager.MissionSelect mission) //llamo desde MM para mostrar mision seleccionada
     {
         // elimino el anterior display
+        if (missionContainer == null) return;
         foreach (Transform child in missionContainer.transform)
         { Destroy(child.gameObject); }
         // declaro el weapon que voy a instanciar en la UI

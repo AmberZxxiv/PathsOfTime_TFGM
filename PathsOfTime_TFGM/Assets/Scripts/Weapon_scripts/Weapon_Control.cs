@@ -48,6 +48,8 @@ public class Weapon_Control : MonoBehaviour
 
     void Awake()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        { Destroy(gameObject); return; }
         if (instance == null) // si no hay singleton, esta instancia persiste
         { instance = this; DontDestroyOnLoad(this.gameObject); }
         else if (instance != this) // si la instancia no es esta
@@ -70,7 +72,6 @@ public class Weapon_Control : MonoBehaviour
         cooldowns.Add(WeaponType.Shot, 0.5f);
         cooldowns.Add(WeaponType.Spell, 0.5f);
     }
-
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo arma al cambiar a escena lobby
     {
         // ASEGURO SINGLES AL CAMBIAR ESCENA
@@ -82,8 +83,14 @@ public class Weapon_Control : MonoBehaviour
             weapon = WeaponType.None;
             _MC.EquipWeapon(WeaponType.None);
         }
+        if (scene.buildIndex == 0)
+        {
+            Destroy(gameObject);
+        }
     }
-   
+    private void OnDestroy()
+    { SceneManager.sceneLoaded -= OnSceneLoaded; } // desubscribimos de evento
+
     public void NewWeapon(WeaponType newWeapon) //llamo en el POW_GIVER
     {
         weapon = newWeapon;
