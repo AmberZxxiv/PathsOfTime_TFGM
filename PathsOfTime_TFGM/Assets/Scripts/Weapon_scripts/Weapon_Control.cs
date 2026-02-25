@@ -97,13 +97,7 @@ public class Weapon_Control : MonoBehaviour
         _MC.EquipWeapon(newWeapon); //cambio el UI del Menu_Control
     }
 
-    void Update()
-    {
-        // clic IZD ataca
-        if (Input.GetMouseButton(0))
-        { AttackFunction(); }
-    }
-    void AttackFunction()
+    void OnAttack() // llamamos Attack ActionMap en LeftClic y RightTrigger
     {
         if (weapon == WeaponType.None) return;
         // ataco cuando haya pasado el cooldown correspondiente

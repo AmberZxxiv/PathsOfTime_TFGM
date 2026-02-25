@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Player_Control : MonoBehaviour
@@ -27,6 +28,7 @@ public class Player_Control : MonoBehaviour
     public float jumpForce;
     public float jumpSpeed;
     public float fallSpeed;
+    public float driftControl;
     #endregion
 
     #region /// JUMP CONTROL ///
@@ -40,6 +42,7 @@ public class Player_Control : MonoBehaviour
 
     #region /// CAMERA LOCATION ///
     public float mouseSensitivity;
+    public float joystickSensitivity;
     private float mouseRotation = 0f;
     public Transform cameraTransform;
     public bool _isAiming;
@@ -68,13 +71,34 @@ public class Player_Control : MonoBehaviour
     }
     void Update()
     {
-        if (_isAiming) // en primera persona cogemos cursor y damos a camara
-        { 
-            float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+        if (_isAiming) // en primera persona cogemos MouseDelta y RightStick
+        {
+            InputAction playerLook = GetComponent<PlayerInput>().actions["Look"];
+            Vector2 lookInput = playerLook.ReadValue<Vector2>();
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            float horizontalRotation = 0f;
+            float verticalRotation = 0f;
+            // deadzone para joystick
+            if (playerInput.currentControlScheme != "Keyboard&Mouse" && lookInput.magnitude < driftControl)
+            { lookInput = Vector2.zero; }
+            
+            if (playerInput.currentControlScheme == "Keyboard&Mouse")
+            { // MouseDelta pequeño (en ActionMap)
+                horizontalRotation = lookInput.x * mouseSensitivity;
+                verticalRotation = lookInput.y * mouseSensitivity;
+            }
+            else
+            { // RightStick grande (este realmente esta bien)
+                horizontalRotation = lookInput.x * joystickSensitivity;
+                verticalRotation = lookInput.y * joystickSensitivity;
+            }
+
+            // rotación del jugador
             transform.Rotate(0, horizontalRotation, 0);
-            mouseRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+            // rotación vertical de la cámara
+            mouseRotation -= verticalRotation;
             mouseRotation = Mathf.Clamp(mouseRotation, -90f, 90f);
-            // lo copiamos en la camara y lo bloqueamos en los polos
             cameraTransform.localRotation = Quaternion.Euler(mouseRotation, 0, 0);
         }
 
@@ -84,13 +108,8 @@ public class Player_Control : MonoBehaviour
         // hacemos que el personaje se mueva a donde mira
         if (_movLateral != 0)
         { transform.localScale = new Vector3(_movLateral > 0 ? -1 : 1, 1, 1); }
-        // control del DASH
-        if (Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
-        { DoDASH(); }
-        // si pulsamos espacio y podemos saltar, saltamos
+        // chequeamos el raycast del salto
         GroundCheck();
-        if (Input.GetButtonDown("Jump") && _coyoteTimer > 0f)
-        { DoJUMP(); }
     }
     private void FixedUpdate()
     {
@@ -176,12 +195,16 @@ public class Player_Control : MonoBehaviour
         }
     }
     
-    void DoJUMP()
+    void OnJump() // llamamos Jump ActionMap en Space y LeftTrigger
     {
-        //actualizamos timer del salto, la altura y damos la fuerza
-        _coyoteTimer = 0f;
-        _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
-        _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (_coyoteTimer > 0f)
+        {
+            //actualizamos timer del salto, la altura y damos la fuerza
+            _coyoteTimer = 0f;
+            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        
     }
     void GroundCheck() // raycast para controlar el salto 
     {
@@ -190,8 +213,10 @@ public class Player_Control : MonoBehaviour
         if (_isGrounded) _coyoteTimer = coyoteCooldown;
         else _coyoteTimer -= Time.deltaTime;
     }
-    private void DoDASH()
+    void OnDash() // llamamos Dash ActionMap en Shift y LeftShoulder
     {
+        if (_canDash) // si puedo, hago el dash
+        { 
         // impulso en la direccion del movimiento
         Vector3 dashDirection = (transform.right * _movLateral + transform.forward * _movFrontal).normalized;
         if (dashDirection == Vector3.zero)
@@ -204,6 +229,7 @@ public class Player_Control : MonoBehaviour
         _isDashing = true;
         _canDash = false;
         Invoke("ResetDASH", dashCooldown);
+        }
     }
     void ResetDASH()
     { _canDash = true; _isDashing = false; }

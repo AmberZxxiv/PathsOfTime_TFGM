@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 4121390181147301613}
   - component: {fileID: 95219399892648931}
   - component: {fileID: 269193977980307163}
+  - component: {fileID: 3763016404000650611}
   m_Layer: 3
   m_Name: PLAYER
   m_TagString: Player
@@ -426,13 +427,15 @@ MonoBehaviour:
   jumpForce: 12.5
   jumpSpeed: 2.5
   fallSpeed: 2.5
+  driftControl: 0.15
   playerFeet: {fileID: 7016107817501440482}
   floorDistance: 0.25
   floors:
     serializedVersion: 2
     m_Bits: 256
   coyoteCooldown: 0.25
-  mouseSensitivity: 1.5
+  mouseSensitivity: 0.1
+  joystickSensitivity: 1.75
   cameraTransform: {fileID: 8028699948671482168}
   _isAiming: 1
   playerHealth: 10
@@ -487,3 +490,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3763016404000650611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9003942537866728742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 048002569c5e65f4387d0fdd2b1a711c, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
