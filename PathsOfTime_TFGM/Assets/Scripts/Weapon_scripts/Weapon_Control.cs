@@ -68,9 +68,9 @@ public class Weapon_Control : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         // declaro los valores de los cooldowns en el diccionario
         cooldowns.Add(WeaponType.Sword, 0.75f);
-        cooldowns.Add(WeaponType.Punch, 0.25f);
+        cooldowns.Add(WeaponType.Punch, 0.5f);
         cooldowns.Add(WeaponType.Shot, 0.5f);
-        cooldowns.Add(WeaponType.Spell, 0.5f);
+        cooldowns.Add(WeaponType.Spell, 0.75f);
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo arma al cambiar a escena lobby
     {
@@ -148,7 +148,7 @@ public class Weapon_Control : MonoBehaviour
                 print("HITTED!");
                 //cojo el script del enemigo
                 Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
-                enemy.HITEDenemy(transform.forward * 2.5f, 2f);
+                enemy.HITEDenemy(transform.forward * 2.5f, 2f); // DAÑO
             }
         }
     }
@@ -187,7 +187,7 @@ public class Weapon_Control : MonoBehaviour
                 print("HITTED!");
                 //cojo el script del enemigo
                 Enemy_Control enemy = hit.gameObject.GetComponent<Enemy_Control>();
-                enemy.HITEDenemy(transform.forward * 7.5f, 1f);
+                enemy.HITEDenemy(transform.forward * 7.5f, 2f); // DAÑO
             }
         }
     }

@@ -420,10 +420,10 @@ MonoBehaviour:
   _WC: {fileID: 0}
   _MC: {fileID: 0}
   _MM: {fileID: 0}
-  movSpeed: 15
-  dashForce: 15
-  dashCooldown: 0.35
-  jumpForce: 15
+  movSpeed: 12.75
+  dashForce: 10
+  dashCooldown: 0.45
+  jumpForce: 12.5
   jumpSpeed: 2.5
   fallSpeed: 2.5
   playerFeet: {fileID: 7016107817501440482}
@@ -471,7 +471,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9003942537866728742}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2dccb4b371ca2de4ebb990d3f6532875, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

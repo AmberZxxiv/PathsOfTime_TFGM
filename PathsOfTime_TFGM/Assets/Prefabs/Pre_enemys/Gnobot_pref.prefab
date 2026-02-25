@@ -95,7 +95,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 12
   m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -125,14 +125,14 @@ MonoBehaviour:
   _MM: {fileID: 0}
   enemyType: 0
   target: {fileID: 0}
-  agroDistance: 20
+  agroDistance: 25
   wanderRadius: 10
   flySpeed: 10
   flyHeight: 2
   flyRange: 0
   splitPref: {fileID: 8850432258290061902, guid: d1dd525d5a35b60478ce0000e3950354, type: 3}
   explosivPref: {fileID: 8850432258290061902, guid: 0788dd585e0077b4b84837000e16c152, type: 3}
-  attackRange: 2
+  attackRange: 2.75
   attackDamage: 1
   attackForce: 5
   companionTarget: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   healChance: 0.25
   coinLoot: {fileID: 3576113440945831091, guid: f81dc6d600e27d54a905afae05adb3ed, type: 3}
-  coinChance: 0.1
+  coinChance: 0.25
 --- !u!114 &7766454580206351369
 MonoBehaviour:
   m_ObjectHideFlags: 0

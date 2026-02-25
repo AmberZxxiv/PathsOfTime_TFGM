@@ -5053,10 +5053,10 @@ MonoBehaviour:
   _PC: {fileID: 0}
   _CC: {fileID: 0}
   _MC: {fileID: 0}
-  damageExplosiv: 2
-  radiusExplosiv: 7
+  damageExplosiv: 1
+  radiusExplosiv: 7.75
   lifetimeExplosive: 5
-  delayExplosive: 0.5
+  delayExplosive: 0.25
   particles: {fileID: 2296898445320665111}
 --- !u!114 &937538730012844604
 MonoBehaviour:

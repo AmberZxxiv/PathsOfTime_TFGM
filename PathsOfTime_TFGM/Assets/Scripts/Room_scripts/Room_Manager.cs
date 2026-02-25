@@ -125,7 +125,7 @@ public class Room_Manager : MonoBehaviour
 
     void SpawnChest()
     {
-        float chestProbability = 0.1f;
+        float chestProbability = 0.25f;
         for (int i = 1; i < roomMap.Count; i++) // en todas las salas menos la primera
         {
             Transform chestSpawn = roomMap[i].transform.Find("LootSpawn");

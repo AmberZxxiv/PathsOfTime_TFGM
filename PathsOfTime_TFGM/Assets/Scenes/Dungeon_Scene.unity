@@ -568,7 +568,7 @@ MonoBehaviour:
   miniGnobot: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
   miniDronlibri: {fileID: 468121702110529948, guid: b696394931073f247b7c804dd6d2cb34, type: 3}
   miniTurrem: {fileID: 714076751192314245, guid: 34122415ff50ea541944444b04520ed5, type: 3}
-  minionCount: 5
+  minionCount: 4
 --- !u!4 &1765574036
 Transform:
   m_ObjectHideFlags: 0
@@ -927,14 +927,6 @@ PrefabInstance:
     - target: {fileID: 1636398930028487654, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
-      propertyPath: fallSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
-      propertyPath: jumpSpeed
-      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4196726406899913745, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: m_TagString

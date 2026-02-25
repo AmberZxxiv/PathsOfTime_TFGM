@@ -22,7 +22,7 @@ public class Shoter_Bullet : MonoBehaviour
             print("HITTED!");
             //cojo el script del enemigo
             Enemy_Control enemy = other.gameObject.GetComponent<Enemy_Control>();
-            enemy.HITEDenemy(transform.forward * 5f, 2f);
+            enemy.HITEDenemy(transform.forward * 5f, 2f); // DAÑO
         }
         StartCoroutine(ImpactDestroy());
     }

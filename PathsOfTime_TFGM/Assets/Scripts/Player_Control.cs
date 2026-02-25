@@ -162,9 +162,9 @@ public class Player_Control : MonoBehaviour
             _MC.UpdateLives(playerHealth);
             _MC.ShowDead();
         }
-        if (collision.gameObject.CompareTag("heal") && playerHealth != 10) // pillo heal si no estoy a tope
+        if (collision.gameObject.CompareTag("heal") && playerHealth <= 8) // pillo heal si no estoy a tope
         {
-            playerHealth += 1;
+            playerHealth += 2;
             _MC.UpdateLives(playerHealth);
             Destroy(collision.gameObject);
         }
