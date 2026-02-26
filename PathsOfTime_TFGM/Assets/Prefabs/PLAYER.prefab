@@ -434,7 +434,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   coyoteCooldown: 0.25
-  mouseSensitivity: 0.1
+  mouseSensitivity: 0.05
   joystickSensitivity: 1.75
   cameraTransform: {fileID: 8028699948671482168}
   _isAiming: 1

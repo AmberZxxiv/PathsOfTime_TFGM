@@ -59,7 +59,6 @@ public class Mission_Manager : MonoBehaviour
 
     void Update()
     {
-        
         // Comprobar TOKENS completada
         if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !_missionCompleted)
         {

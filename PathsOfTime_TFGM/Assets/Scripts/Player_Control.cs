@@ -73,9 +73,9 @@ public class Player_Control : MonoBehaviour
     {
         if (_isAiming) // en primera persona cogemos MouseDelta y RightStick
         {
+            PlayerInput playerInput = GetComponent<PlayerInput>();
             InputAction playerLook = GetComponent<PlayerInput>().actions["Look"];
             Vector2 lookInput = playerLook.ReadValue<Vector2>();
-            PlayerInput playerInput = GetComponent<PlayerInput>();
             float horizontalRotation = 0f;
             float verticalRotation = 0f;
             // deadzone para joystick
@@ -92,10 +92,8 @@ public class Player_Control : MonoBehaviour
                 horizontalRotation = lookInput.x * joystickSensitivity;
                 verticalRotation = lookInput.y * joystickSensitivity;
             }
-
             // rotación del jugador
             transform.Rotate(0, horizontalRotation, 0);
-
             // rotación vertical de la cámara
             mouseRotation -= verticalRotation;
             mouseRotation = Mathf.Clamp(mouseRotation, -90f, 90f);

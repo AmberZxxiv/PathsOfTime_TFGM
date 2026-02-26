@@ -71,7 +71,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948516239128690741}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2dccb4b371ca2de4ebb990d3f6532875, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

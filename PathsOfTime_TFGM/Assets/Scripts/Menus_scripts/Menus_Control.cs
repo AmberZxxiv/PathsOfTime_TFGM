@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Menus_Control : MonoBehaviour
 { // script en PREF padre CANVAS
@@ -57,6 +58,7 @@ public class Menus_Control : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
+   // uso sistema de eventos para cambios de escena
     void OnEnable()
     {SceneManager.sceneLoaded += OnSceneLoaded;}
     void OnDisable()
@@ -68,6 +70,7 @@ public class Menus_Control : MonoBehaviour
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
         _MM = Mission_Manager.instance;
+        // menu de carga para la dungeon
         if (scene.buildIndex == 2)
         { StartCoroutine(DungeonLoadScreen()); }
     }
@@ -92,27 +95,13 @@ public class Menus_Control : MonoBehaviour
         // equipo la mision
         if (_MM != null) MissionDisplay(_MM.mission);
         if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
-        {
-            Invoke("LiveCompanier", 3f);
-        }
+        { Invoke("LiveCompanier", 3f);}
     }
 
     void Update()
     {
         _CC = Companion_Control.instance; //aseguro pillar al compa cuando aparezca
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (pauseMenu.activeSelf)
-            { QuitPause();}
-            else
-            {
-                pauseMenu.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                Time.timeScale = 0;
-            }
-        }
-        if (_PC != null && _PC.playerHealth <= 0)
+        if (_PC != null && _PC.playerHealth <= 0) // panel de muerte al morir
         { ShowDead(); }
     }
 
@@ -180,7 +169,6 @@ public class Menus_Control : MonoBehaviour
             { cupcake.EatHeart(0); }
         }
     }
-    
     void LiveCompanier()
     {
         int compaCakes = _CC.companionHealth;
@@ -198,7 +186,6 @@ public class Menus_Control : MonoBehaviour
         }
         UpdateCompaniers(compaCakes);
     }
-
     public void UpdateCompaniers(int companionHealth) // todo lo que varia la vida del compa
     {
         foreach (Hearts_Eater heart in companionLives)
@@ -251,6 +238,18 @@ public class Menus_Control : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         Time.timeScale = 0;
+    }
+    void OnPause()
+    {
+        if (pauseMenu.activeSelf)
+            { QuitPause();}
+        else
+            {
+                pauseMenu.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                Time.timeScale = 0;
+            }
     }
     public void QuitPause()
     { 

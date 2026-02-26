@@ -7,6 +7,15 @@
             "id": "7a2a30a5-3dec-46a8-bce4-7ff982072f4c",
             "actions": [
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "733eb1ca-3e90-413f-829c-bea78d7be21e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "21864fd0-5cfd-49ac-b6c4-70ad468b3551",
@@ -52,13 +61,22 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Cursor",
+                    "name": "Point",
                     "type": "Value",
-                    "id": "943b6834-b9fd-4a89-9b35-6afa1ed9a38c",
+                    "id": "e824fae6-92e1-4853-8b9e-e69baad0728b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Clic",
+                    "type": "Button",
+                    "id": "429339fb-f684-48f4-8f7c-c59cca88759f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -210,7 +228,7 @@
                     "id": "0c348a54-3a58-45d1-9772-b98b5512000a",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=0.1,y=0.1)",
+                    "processors": "ScaleVector2(x=0.05,y=0.05)",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,
@@ -218,23 +236,45 @@
                 },
                 {
                     "name": "",
-                    "id": "8888f39a-cb18-44e0-b9dc-3ddf2ff99fbf",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "93531e1b-e885-413d-befe-7af1e06da6f3",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cursor",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "776dd50e-b1be-4e2b-9d9d-b281d87379c6",
-                    "path": "<Mouse>/position",
+                    "id": "b733203a-4419-4b04-a54c-1758c227416d",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cursor",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2201cac0-3938-46de-9894-b2f11cfa2a11",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a5fc00f-f0f1-4b64-b22d-d1e63978e22e",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clic",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
