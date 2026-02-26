@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2603244147957007561}
   - component: {fileID: 271451327887273987}
   - component: {fileID: 135050468147098076}
+  - component: {fileID: 3584725832759502840}
   m_Layer: 7
   m_Name: FutCell_V1
   m_TagString: ceiling
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 49.780003, y: 4.4814973, z: 49.79737}
   m_Center: {x: 0.22439194, y: -0.2713902, z: 2.736619}
+--- !u!114 &3584725832759502840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784727254109573590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

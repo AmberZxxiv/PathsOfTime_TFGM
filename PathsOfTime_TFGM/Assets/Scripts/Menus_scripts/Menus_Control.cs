@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class Menus_Control : MonoBehaviour
@@ -20,6 +22,9 @@ public class Menus_Control : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject exitMenu;
     public GameObject loadScreen;
+    public GameObject mainMenu;
+    public GameObject currentMenu;
+    PlayerInput _playerInput;
     #endregion
 
     #region /// HEARTS UI ///
@@ -70,6 +75,11 @@ public class Menus_Control : MonoBehaviour
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
         _MM = Mission_Manager.instance;
+        // pilla el Input Action
+        _playerInput = GetComponent<PlayerInput>(); ;
+        // menu principal seleccionable
+       if (scene.buildIndex == 0)
+        { currentMenu = mainMenu; }
         // menu de carga para la dungeon
         if (scene.buildIndex == 2)
         { StartCoroutine(DungeonLoadScreen()); }
@@ -97,14 +107,36 @@ public class Menus_Control : MonoBehaviour
         if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
         { Invoke("LiveCompanier", 3f);}
     }
-
     void Update()
     {
         _CC = Companion_Control.instance; //aseguro pillar al compa cuando aparezca
         if (_PC != null && _PC.playerHealth <= 0) // panel de muerte al morir
         { ShowDead(); }
+        // SOLO detectar movimiento de joystick si hay un menú activo
+        if (currentMenu != null && currentMenu.activeInHierarchy)
+        {
+            // al mover RightStik si no hay botón seleccionado 
+            InputAction playerLook = _playerInput.actions["Point"];
+            Vector2 moveInput = playerLook.ReadValue<Vector2>();
+            if ((moveInput.x != 0 || moveInput.y != 0) &&
+                EventSystem.current.currentSelectedGameObject == null)
+            { SelectFirstActiveButtonInMenu(currentMenu);}
+        }
     }
-
+    void SelectFirstActiveButtonInMenu(GameObject menu)
+    {
+        if (menu == null) return;
+        Button[] buttons = menu.GetComponentsInChildren<Button>(true);
+        foreach (Button btn in buttons)
+        {
+            if (btn.gameObject.activeInHierarchy)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(btn.gameObject);
+                return;
+            }
+        }
+    }
     public void EquipWeapon(Weapon_Control.WeaponType weapon) //llamo desde WC para mostrar arma equipada
     {
         // elimino el marcador del anterior weapon
@@ -200,25 +232,29 @@ public class Menus_Control : MonoBehaviour
     }
     public void CoinsCounter(int coinsLooted) //en start y Player collision
     { coinText.text = "x " + coinsLooted.ToString(); }
-    public void FutrInteracton()
+    public void FutrInteracton() //desde Player collision
     {
         futrPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        currentMenu = futrPanel;
+        SelectFirstActiveButtonInMenu(currentMenu);
     }
-    public void PastInteracton()
+    public void PastInteracton() //desde Player collision
     {
         pastPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        currentMenu = pastPanel;
+        SelectFirstActiveButtonInMenu(currentMenu);
     }
-    public void FutrExit()
+    public void FutrExit() //desde Player collision
     {
         futrPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    public void PastExit()
+    public void PastExit() //desde Player collision
     {
         pastPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -237,6 +273,8 @@ public class Menus_Control : MonoBehaviour
         deadMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        currentMenu = deadMenu;
+        SelectFirstActiveButtonInMenu(currentMenu);
         Time.timeScale = 0;
     }
     void OnPause()
@@ -245,10 +283,12 @@ public class Menus_Control : MonoBehaviour
             { QuitPause();}
         else
             {
-                pauseMenu.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            currentMenu = pauseMenu;
+            SelectFirstActiveButtonInMenu(currentMenu);
+            Time.timeScale = 0;
             }
     }
     public void QuitPause()
