@@ -23,7 +23,7 @@ public class Mission_Manager : MonoBehaviour
     }
 
     public GameObject companionPrefab;
-    bool _missionCompleted = false;
+    public bool missionCompleted = false;
 
     void Awake()
     {
@@ -52,7 +52,7 @@ public class Mission_Manager : MonoBehaviour
         if (scene.buildIndex == 1)
         {
             mission = MissionSelect.None;
-            _missionCompleted = false;
+            missionCompleted = false;
             _MC.MissionDisplay(mission);
         }
     }
@@ -60,17 +60,14 @@ public class Mission_Manager : MonoBehaviour
     void Update()
     {
         // Comprobar TOKENS completada
-        if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !_missionCompleted)
-        {
-            _missionCompleted = true;
-            print("MISSION COMPLETE!");
-            //Instanciar mision complete o algo asi
-        }
+        if (_PC.coinsLooted >= 5 && mission == MissionSelect.TokenMis && !missionCompleted)
+        { missionCompleted = true; }
     }
 
     public void SpawnCompanion() //desde Room_Manager al iniciar sala
     {
         Instantiate(companionPrefab, new Vector3(0, 2, 0), transform.rotation);
+        missionCompleted = true;
     }
     public void CompanionLose() //desde Companion al morirse
     {
@@ -79,16 +76,11 @@ public class Mission_Manager : MonoBehaviour
         for (int i = container.childCount - 1; i >= 0; i--)
         { Destroy(container.GetChild(i).gameObject); }
         // instancio mision lose
+        missionCompleted = false;
         Instantiate(_MC.companionDead, container);
-        _missionCompleted = true;
-        print("MISSION LOSED!");
     }
-    public void BossComplete() // lo llamo desde el Boss al morir
-    {
-        //Instanciar mision complete o algo asi
-        _missionCompleted = true;
-        print("MISSION COMPLETE!");
-    }
+    public void BossComplete() // actualizo mision desde Boss al morir
+    { missionCompleted = true; }
 
     public void BossMission()
     {

@@ -67,10 +67,10 @@ public class Weapon_Control : MonoBehaviour
         // me subscribo al evento de cambio de escena para resetear el arma al volver al lobby
         SceneManager.sceneLoaded += OnSceneLoaded;
         // declaro los valores de los cooldowns en el diccionario
-        cooldowns.Add(WeaponType.Sword, 0.75f);
-        cooldowns.Add(WeaponType.Punch, 0.5f);
-        cooldowns.Add(WeaponType.Shot, 0.5f);
-        cooldowns.Add(WeaponType.Spell, 0.75f);
+        cooldowns.Add(WeaponType.Sword, 0.5f);
+        cooldowns.Add(WeaponType.Punch, 0.25f);
+        cooldowns.Add(WeaponType.Shot, 0.25f);
+        cooldowns.Add(WeaponType.Spell, 0.5f);
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //reseteo arma al cambiar a escena lobby
     {

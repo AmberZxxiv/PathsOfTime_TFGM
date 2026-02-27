@@ -438,7 +438,7 @@ MonoBehaviour:
   joystickSensitivity: 1.75
   cameraTransform: {fileID: 8028699948671482168}
   _isAiming: 1
-  playerHealth: 10
+  playerHealth: 12
   coinsLooted: 0
 --- !u!54 &95219399892648931
 Rigidbody:

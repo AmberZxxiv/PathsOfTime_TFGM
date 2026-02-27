@@ -48,6 +48,7 @@ public class Menus_Control : MonoBehaviour
     public GameObject compaSign;
     public GameObject futrPanel;
     public GameObject pastPanel;
+    public TextMeshProUGUI exitText;
     #endregion
 
     #region /// WEAPONS UI ///
@@ -231,7 +232,7 @@ public class Menus_Control : MonoBehaviour
         }
     }
     public void CoinsCounter(int coinsLooted) //en start y Player collision
-    { coinText.text = "x " + coinsLooted.ToString(); }
+    { coinText.text = "x" + coinsLooted.ToString(); }
     public void FutrInteracton() //desde Player collision
     {
         futrPanel.SetActive(true);
@@ -265,8 +266,13 @@ public class Menus_Control : MonoBehaviour
         exitMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        Time.timeScale = 0;
+        // actualizo el texto dependiendo del resultado de la mision
+        if (_MM.missionCompleted == false)
+            exitText.text = "<color=black>Nice Try!\nBut we failed\nthe mission...";
+        if (_MM.missionCompleted == true)
+            exitText.text = "<color=white>Just in time!\nYou completed\nthe mission!";
 
+        Time.timeScale = 0;
     }
     public void ShowDead() //en update y Player collision
     {
