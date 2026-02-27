@@ -17,6 +17,7 @@ public class Player_Control : MonoBehaviour
 
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
+    Animator _animator;
     public float movSpeed;
     public float dashForce;
     public float dashCooldown;
@@ -60,11 +61,12 @@ public class Player_Control : MonoBehaviour
     }
     void Start()
     {
-        // pillo SINGLES de WC, MC, LM, MM
+        // pillo SINGLES y componentes
         _WC = Weapon_Control.instance;
         _MC = Menus_Control.instance;
         _MM = Mission_Manager.instance;
         _rb = GetComponent<Rigidbody>();
+        _animator = GetComponentInChildren<Animator>();
         // centramos el cursos en pantalla y lo ocultamos
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -103,9 +105,11 @@ public class Player_Control : MonoBehaviour
         // aqui cogemos los controles del movimiento
         _movLateral = Input.GetAxis("Horizontal");
         _movFrontal = Input.GetAxis("Vertical");
-        // hacemos que el personaje se mueva a donde mira
+        // rotamos el sprite y activamos la animacion
         if (_movLateral != 0)
         { transform.localScale = new Vector3(_movLateral > 0 ? -1 : 1, 1, 1); }
+        bool isMoving = Mathf.Abs(_movLateral) > 0.1f || Mathf.Abs(_movFrontal) > 0.1f;
+        _animator.SetBool("isMoving", isMoving);
         // chequeamos el raycast del salto
         GroundCheck();
     }
