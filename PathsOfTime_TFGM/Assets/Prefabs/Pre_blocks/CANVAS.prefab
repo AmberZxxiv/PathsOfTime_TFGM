@@ -2033,6 +2033,9 @@ MonoBehaviour:
   punchPow: {fileID: 5857481253972021794, guid: c8db5872919b06242a080f80f9c6d507, type: 3}
   shotPow: {fileID: 5857481253972021794, guid: 1f6d7f7b39d6e6c40a361663a3808849, type: 3}
   magicPow: {fileID: 5857481253972021794, guid: b747a7117fae59745a374661782ec985, type: 3}
+  cursorTexture: {fileID: 2800000, guid: d15672a0b5b61cd43a0c7fe214343309, type: 3}
+  hotspot: {x: 0, y: 0}
+  cursorMode: 0
 --- !u!114 &3138929881475065057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2223,8 +2226,8 @@ RectTransform:
   m_GameObject: {fileID: 3523780991929030117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 530234303027232901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2254,14 +2257,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08538c577f092e143bc2c69b8432f211, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1f328708e9dee7498698d119d7217df, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

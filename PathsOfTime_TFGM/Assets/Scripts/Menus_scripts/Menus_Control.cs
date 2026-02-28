@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.UI.VirtualMouseInput;
 
 public class Menus_Control : MonoBehaviour
 { // script en PREF padre CANVAS
@@ -57,6 +58,9 @@ public class Menus_Control : MonoBehaviour
     public GameObject punchPow;
     public GameObject shotPow;
     public GameObject magicPow;
+    public Texture2D cursorTexture;
+    public Vector2 hotspot = Vector2.zero;
+    public UnityEngine.CursorMode cursorMode = UnityEngine.CursorMode.Auto;
     #endregion
 
     void Awake()
@@ -101,11 +105,13 @@ public class Menus_Control : MonoBehaviour
             LiveContainer(_PC.playerHealth);
             CoinsCounter(_PC.coinsLooted);
         }
-        // equipo arma inicial
+        // equipo arma inicial y cursor
         if (_WC != null) EquipWeapon(_WC.weapon);
+        hotspot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        Cursor.SetCursor(cursorTexture, hotspot, cursorMode);
         // equipo la mision
         if (_MM != null) MissionDisplay(_MM.mission);
-        if (_MM.mission == Mission_Manager.MissionSelect.CompaMis)
+        if (_MM != null && _MM.mission == Mission_Manager.MissionSelect.CompaMis)
         { Invoke("LiveCompanier", 3f);}
     }
     void Update()
@@ -285,7 +291,7 @@ public class Menus_Control : MonoBehaviour
     }
     void OnPause()
     {
-        if (pauseMenu.activeSelf)
+        if (pauseMenu != null && pauseMenu.activeSelf)
             { QuitPause();}
         else
             {

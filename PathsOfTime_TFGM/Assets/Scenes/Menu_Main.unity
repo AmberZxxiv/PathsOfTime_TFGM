@@ -485,11 +485,15 @@ MonoBehaviour:
   compaSign: {fileID: 0}
   futrPanel: {fileID: 0}
   pastPanel: {fileID: 0}
+  exitText: {fileID: 0}
   weaponContainer: {fileID: 0}
   swordPow: {fileID: 0}
   punchPow: {fileID: 0}
   shotPow: {fileID: 0}
   magicPow: {fileID: 0}
+  cursorTexture: {fileID: 2800000, guid: d15672a0b5b61cd43a0c7fe214343309, type: 3}
+  hotspot: {x: 0, y: 0}
+  cursorMode: 0
 --- !u!114 &571801467
 MonoBehaviour:
   m_ObjectHideFlags: 0
