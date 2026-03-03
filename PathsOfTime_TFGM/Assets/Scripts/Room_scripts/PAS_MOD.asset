@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dungeon_Models
   floorMat: {fileID: 2100000, guid: d36d3222a3042c94eaf37250520d76f2, type: 2}
   floorMesh: {fileID: 0}
-  wallMat: {fileID: 2100000, guid: 1f8d7f2b387aa8e46b9925b1117c4063, type: 2}
-  wallMesh: {fileID: -3491089970105686941, guid: 353cb58ef42e5244393da5595a450d18, type: 3}
-  interMat: {fileID: 2100000, guid: 1f8d7f2b387aa8e46b9925b1117c4063, type: 2}
-  interMesh: {fileID: 9019894626782459550, guid: cdb216b0e48582a4b9fced2029f83bc8, type: 3}
-  cellMat: {fileID: 2100000, guid: 66141cbe1b1624d48a2ec8c90712bff9, type: 2}
-  cellMesh: {fileID: 7315242269385843767, guid: c244698c2c89ce64c8f123c9295e7213, type: 3}
+  wallMat: {fileID: 0}
+  wallMesh: {fileID: -7706236209929155493, guid: 64e480cf855340943b884f84ca245bc6, type: 3}
+  interMat: {fileID: 0}
+  interMesh: {fileID: -555156634148555571, guid: 987a86a5a2ca2da47a4d908d1360aa29, type: 3}
+  cellMat: {fileID: 0}
+  cellMesh: {fileID: -7369275342607637648, guid: 63f709abeccd0cc4aaa32c45abb5235d, type: 3}
   platMat: {fileID: 2100000, guid: f72b3cec1fb577c41a2b1462d5c24845, type: 2}
   platMesh: {fileID: 0}
   rumbMat: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
