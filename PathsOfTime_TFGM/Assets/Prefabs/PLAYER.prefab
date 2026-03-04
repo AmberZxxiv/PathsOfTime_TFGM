@@ -444,7 +444,7 @@ MonoBehaviour:
   _WC: {fileID: 0}
   _MC: {fileID: 0}
   _MM: {fileID: 0}
-  movSpeed: 12.75
+  movSpeed: 13
   dashForce: 10
   dashCooldown: 0.45
   jumpForce: 12.5

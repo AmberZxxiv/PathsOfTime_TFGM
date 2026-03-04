@@ -14,6 +14,7 @@ public class Player_Control : MonoBehaviour
     public Weapon_Control _WC; //pillo SINGLE del WC
     public Menus_Control _MC; //pillo SINGLE del MC
     public Mission_Manager _MM; //pillo SINGLE del MM
+    public Companion_Control _CC; //pillo SINGLE del CC
 
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
@@ -73,6 +74,8 @@ public class Player_Control : MonoBehaviour
     }
     void Update()
     {
+        if (_CC == null) _CC = Companion_Control.instance; // aseguro pillar companion
+
         if (_isAiming) // en primera persona cogemos MouseDelta y RightStick
         {
             PlayerInput playerInput = GetComponent<PlayerInput>();
@@ -187,6 +190,12 @@ public class Player_Control : MonoBehaviour
         {
             playerHealth += 2;
             _MC.UpdateLives(playerHealth);
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("heal") && _CC.companionHealth <= 12) // pillo heal pal companion
+        {
+            _CC.companionHealth += 2;
+            _MC.UpdateCompaniers(_CC.companionHealth);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("looteable"))

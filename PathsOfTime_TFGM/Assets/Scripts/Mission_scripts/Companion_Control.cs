@@ -21,6 +21,7 @@ public class Companion_Control : MonoBehaviour
     Animator _animator;
     public float minDistance;
     public float maxDistance;
+    public float tpSave;
     public float orbitRadius;
     public float orbitSpeed;
     float orbitAngle;
@@ -28,7 +29,6 @@ public class Companion_Control : MonoBehaviour
 
     #region /// HEALTH ///
     public int companionHealth;
-    public int _lastPlayerHeal;
     SpriteRenderer _spriteRenderer;
     Color _originalColor;
     #endregion
@@ -57,18 +57,11 @@ public class Companion_Control : MonoBehaviour
 
     void Update()
     {
-        if (_PC.playerHealth > _lastPlayerHeal && companionHealth < 12)
-        {
-         companionHealth += 2;
-         _MC.UpdateCompaniers(companionHealth);
-        }
-        _lastPlayerHeal = _PC.playerHealth;
         float distanceToPlayer = Vector3.Distance(transform.position, _target.position);
-        if (distanceToPlayer > maxDistance)
-        {
-            // demasiado lejos sigue al player
-            _agent.SetDestination(_target.position);
-        }
+        if (distanceToPlayer > tpSave) // demasiado lejos, tp alrededor del player
+        { TpToPlayer(); return; }
+        if (distanceToPlayer > maxDistance)// mas cerca, lo sigue sin mas
+        { _agent.SetDestination(_target.position);}
         else if (distanceToPlayer < minDistance)
         {
             // demasiado cerca retrocede un poco para mantener espacio
@@ -76,11 +69,8 @@ public class Companion_Control : MonoBehaviour
             Vector3 targetPos = _target.position + dir * orbitRadius;
             _agent.SetDestination(targetPos);
         }
-        else
-        {
-            // dentro del rango de orbita
-            OrbitAroundPlayer();
-        }
+        else // dentro del rango de orbita
+        { OrbitAroundPlayer(); }
     }
     void OrbitAroundPlayer()
     {
@@ -91,7 +81,17 @@ public class Companion_Control : MonoBehaviour
         Vector3 orbitPos = _target.position + new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * orbitRadius;
         _agent.SetDestination(orbitPos);
     }
-
+    void TpToPlayer()
+    {
+        // genera alrededor del player un spawn
+        if (!_agent.isOnNavMesh) return;
+        Vector3 randomOffset = Random.insideUnitSphere * orbitRadius;
+        randomOffset.y = 0f;
+        Vector3 targetPosition = _target.position + randomOffset;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(targetPosition, out hit, 2f, NavMesh.AllAreas))
+        { _agent.Warp(hit.position);}
+    }
     public void HITcompa(Vector3 force, int damage) //desde ENEMYS al golpear
     {
         // le impacto visualmente y le bajo la vida
