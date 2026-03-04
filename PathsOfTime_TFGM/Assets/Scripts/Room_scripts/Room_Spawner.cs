@@ -90,35 +90,35 @@ public class Room_Spawner : MonoBehaviour
             switch (child.tag)
             {
                 case "ground":
-                    newMat = model.floorMat;
+                    //newMat = model.floorMat;
                     newMesh = model.floorMesh;
                     break;
                 case "plataform":
-                    newMat = model.platMat;
+                    //newMat = model.platMat;
                     newMesh = model.platMesh;
                     break;
                 case "ceiling":
-                    newMat = model.cellMat;
+                    //newMat = model.cellMat;
                     newMesh = model.cellMesh;
                     break;
                 case "intermid":
-                    newMat = model.interMat;
+                    //newMat = model.interMat;
                     newMesh = model.interMesh;
                     break;
                 case "wall":
-                    newMat = model.wallMat;
+                    //newMat = model.wallMat;
                     newMesh = model.wallMesh;
                     break;
                 case "rumble":
-                    newMat = model.rumbMat;
+                    //newMat = model.rumbMat;
                     newMesh = model.rumbMesh;
                     break;
                 case "deadly":
-                    newMat = model.liquidMat;
+                    //newMat = model.liquidMat;
                     newMesh = model.liquidMesh;
                     break;
             }
-            if (newMat != null) elementMat.material = newMat;
+            //if (newMat != null) elementMat.material = newMat;
             if (newMesh != null) elementMesh.mesh = newMesh;
         }
     }
