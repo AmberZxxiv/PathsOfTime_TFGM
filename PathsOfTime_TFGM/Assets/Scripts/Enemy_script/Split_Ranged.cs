@@ -13,11 +13,14 @@ public class Split_Ranged : MonoBehaviour
     public float lifetimeSplit;
     public float delaySplit;
 
-    void Start()
+    private void Awake()
     {
         _PC = Player_Control.instance;
         _CC = Companion_Control.instance;
         _MC = Menus_Control.instance;
+    }
+    void Start()
+    {
         Destroy(gameObject, lifetimeSplit);
     }
 
@@ -30,14 +33,14 @@ public class Split_Ranged : MonoBehaviour
                 Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
                 _PC.StartCoroutine(_PC.StunnKnockback(hitDir, 2f));
                  ImpactDestroy();
-        }
+            }
        if (other.collider.CompareTag("companion"))
             {
               _CC.companionHealth -= damageSplit;
               _MC.UpdateCompaniers(_CC.companionHealth);
               _CC.HITcompa(transform.forward * 5f, damageSplit);
               Destroy(gameObject);
-        }
+            }
        else Destroy(gameObject);
     }
     IEnumerator ImpactDestroy()

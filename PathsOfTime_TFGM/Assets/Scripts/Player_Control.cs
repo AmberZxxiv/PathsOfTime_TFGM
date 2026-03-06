@@ -192,7 +192,7 @@ public class Player_Control : MonoBehaviour
             _MC.UpdateLives(playerHealth);
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("heal") && _CC.companionHealth <= 12) // pillo heal pal companion
+        if (collision.gameObject.CompareTag("heal") && _CC != null && _CC.companionHealth <= 12) // pillo heal pal companion
         {
             _CC.companionHealth += 2;
             _MC.UpdateCompaniers(_CC.companionHealth);
