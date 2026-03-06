@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a03eb98f1164f954f998ba99fdcb7d2d
+guid: 28cb5d0401ddfe6438e7afe6cc108516
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,57 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ataques_SKETCH_0
+      name: ataques_FIN_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 22
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dace4fcc9c00c54459df8d60cf029ebf
-      internalID: 1279686509
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ataques_SKETCH_1
-      rect:
-        serializedVersion: 2
-        x: 375
-        y: 0
-        width: 290
-        height: 290
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c68da4ef19c3f72438647b2ccc106c86
-      internalID: 187874894
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ataques_SKETCH_2
-      rect:
-        serializedVersion: 2
-        x: 729
+        x: 70
         y: 12
-        width: 275
-        height: 275
+        width: 253
+        height: 253
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 393deceae51765141941c12b565f4b4e
-      internalID: 2073251025
+      spriteID: 1d0a1142031d7ae45be32f5ec115e2e2
+      internalID: 1704966480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ataques_SKETCH_3
+      name: ataques_FIN_1
       rect:
         serializedVersion: 2
-        x: 1077
-        y: 3
-        width: 275
-        height: 275
+        x: 735
+        y: 15
+        width: 263
+        height: 263
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,8 +160,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f82427175e7c1644c8f5ac8834a233b6
-      internalID: -813964615
+      spriteID: 842fb72e9cd229a43b77b2d13b323680
+      internalID: 761545461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ataques_FIN_2
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 18
+        width: 258
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec98a932c1f75bc40a2b3cfdce6ce081
+      internalID: -1378566346
       vertices: []
       indices: 
       edges: []
@@ -214,7 +192,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2d1dcd735ee24ea44bc540bf1dfeeddb
+    spriteID: 528df57fe444d484597a50acb2f01ada
     internalID: 0
     vertices: []
     indices: 
@@ -226,10 +204,9 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      ataques_SKETCH_0: 1279686509
-      ataques_SKETCH_1: 187874894
-      ataques_SKETCH_2: 2073251025
-      ataques_SKETCH_3: -813964615
+      ataques_FIN_0: 1704966480
+      ataques_FIN_1: 761545461
+      ataques_FIN_2: -1378566346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
