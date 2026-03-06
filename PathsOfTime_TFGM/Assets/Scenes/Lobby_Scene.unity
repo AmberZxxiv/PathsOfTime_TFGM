@@ -2613,6 +2613,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 214886124417707112, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 214886124417707112, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 511589912698878995, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2625,13 +2633,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Mission_Manager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 817206838952588009, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1092086642900163147, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.0749512
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1092086642900163147, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.708313
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1297357943758413391, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2695,11 +2707,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4643743686718077750, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00012207031
+      value: 19.4
       objectReference: {fileID: 0}
     - target: {fileID: 4643743686718077750, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.3416748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4929719170944608943, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2736,14 +2748,22 @@ PrefabInstance:
     - target: {fileID: 6452546509240131224, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Mission_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536101523293529444, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536101523293529444, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6859371069927194154, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6859371069927194154, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.3416748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7074897097093787639, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2756,6 +2776,14 @@ PrefabInstance:
     - target: {fileID: 7074897097093787639, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Mission_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800300086317293651, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899702135792201471, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133715859093740274, guid: c74983b8cab1f1343a4f1cb77412a0b3, type: 3}
       propertyPath: m_Pivot.x
