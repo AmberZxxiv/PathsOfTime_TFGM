@@ -12,17 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b229b972d15150549b4e7cd4fd29d724, type: 3}
   m_Name: FUT_MOD
   m_EditorClassIdentifier: Assembly-CSharp::Dungeon_Models
+  floorPref: {fileID: 0}
   floorMat: {fileID: 2100000, guid: 8880261c793f21b40933044a91c8076e, type: 2}
   floorMesh: {fileID: 0}
-  wallMat: {fileID: 2100000, guid: e95cf9ea3e954e744be6a39a37e99831, type: 2}
-  wallMesh: {fileID: 6068128760482188544, guid: 754f558e5621a8244bd81abb483ead14, type: 3}
-  interMat: {fileID: 2100000, guid: e95cf9ea3e954e744be6a39a37e99831, type: 2}
-  interMesh: {fileID: -2734475075011460471, guid: 0024d0e33e098c34799b239f1d410b24, type: 3}
+  wallPref: {fileID: 5811866781189608020, guid: e918da125616dd94fa81247f7cb111ce, type: 3}
+  wallMat: {fileID: 0}
+  wallMesh: {fileID: 3673109175482894123, guid: ca7b60c342594c240b654dffc737f45a, type: 3}
+  interPref: {fileID: 6047442085878782702, guid: d5262ff9de113074daa50c08f7212f2c, type: 3}
+  interMat: {fileID: 0}
+  interMesh: {fileID: 3229944392979441278, guid: c8bb1dffe99e1e34c8887ba526d021c1, type: 3}
+  cellPref: {fileID: 0}
   cellMat: {fileID: 2100000, guid: 23b2ffa282b748540968c1972ca4d712, type: 2}
   cellMesh: {fileID: 3680383025929958244, guid: d49b753126f460e48a83208b9f2284cd, type: 3}
+  platPref: {fileID: 0}
   platMat: {fileID: 2100000, guid: 8880261c793f21b40933044a91c8076e, type: 2}
   platMesh: {fileID: 0}
+  rumbPref: {fileID: 0}
   rumbMat: {fileID: 2100000, guid: 52b51ada96d710748834a3573b947699, type: 2}
   rumbMesh: {fileID: 0}
+  liquidPref: {fileID: 0}
   liquidMat: {fileID: 2100000, guid: 6bdf7add1c035e24399cb4e94252477b, type: 2}
   liquidMesh: {fileID: 0}

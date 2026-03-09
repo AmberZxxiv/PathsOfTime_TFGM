@@ -79,47 +79,70 @@ public class Room_Spawner : MonoBehaviour
 
     void FindElements(GameObject roomToSearch)
     {
+        Dungeon_Models model = _dungeon == 0 ? pastModel : futurModel;
+        Debug.Log("Dungeon seleccionada: " + _dungeon);
+
         foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
         {
-            var elementMat = child.GetComponent<MeshRenderer>();
-            var elementMesh = child.GetComponent<MeshFilter>();
-            Material newMat = null;
+            Debug.Log("Encontrado hijo: " + child.name + " tag: " + child.tag);
+
+            MeshRenderer elementRenderer = child.GetComponent<MeshRenderer>();
+            MeshFilter elementMesh = child.GetComponent<MeshFilter>();
+
+            if (elementRenderer == null || elementMesh == null)
+                continue;
+
             Mesh newMesh = null;
-            Dungeon_Models model = _dungeon == 0 ? pastModel : futurModel;
+            Material[] newMats = null;
+
+            // Helper para asignar mesh y materiales según prefab o fallback
+            void AssignFromPrefabOrFallback(GameObject prefab, Mesh fallbackMesh, Material fallbackMat)
+            {
+                if (prefab != null)
+                {
+                    MeshFilter pfMesh = prefab.GetComponentInChildren<MeshFilter>();
+                    MeshRenderer pfRenderer = prefab.GetComponentInChildren<MeshRenderer>();
+
+                    if (pfMesh != null) newMesh = pfMesh.sharedMesh;
+                    if (pfRenderer != null) newMats = pfRenderer.sharedMaterials;
+                }
+                else
+                {
+                    if (fallbackMesh != null) newMesh = fallbackMesh;
+                    if (fallbackMat != null) newMats = new Material[] { fallbackMat };
+                }
+            }
 
             switch (child.tag)
             {
                 case "ground":
-                    //newMat = model.floorMat;
-                    newMesh = model.floorMesh;
+                    AssignFromPrefabOrFallback(model.floorPref, model.floorMesh, model.floorMat);
                     break;
                 case "plataform":
-                    //newMat = model.platMat;
-                    newMesh = model.platMesh;
+                    AssignFromPrefabOrFallback(model.platPref, model.platMesh, model.platMat);
                     break;
                 case "ceiling":
-                    //newMat = model.cellMat;
-                    newMesh = model.cellMesh;
+                    AssignFromPrefabOrFallback(model.cellPref, model.cellMesh, model.cellMat);
                     break;
                 case "intermid":
-                    //newMat = model.interMat;
-                    newMesh = model.interMesh;
+                    AssignFromPrefabOrFallback(model.interPref, model.interMesh, model.interMat);
                     break;
                 case "wall":
-                    //newMat = model.wallMat;
-                    newMesh = model.wallMesh;
+                    AssignFromPrefabOrFallback(model.wallPref, model.wallMesh, model.wallMat);
                     break;
                 case "rumble":
-                    //newMat = model.rumbMat;
-                    newMesh = model.rumbMesh;
+                    AssignFromPrefabOrFallback(model.rumbPref, model.rumbMesh, model.rumbMat);
                     break;
                 case "deadly":
-                    //newMat = model.liquidMat;
-                    newMesh = model.liquidMesh;
+                    AssignFromPrefabOrFallback(model.liquidPref, model.liquidMesh, model.liquidMat);
                     break;
             }
-            //if (newMat != null) elementMat.material = newMat;
-            if (newMesh != null) elementMesh.mesh = newMesh;
+
+            if (newMats != null)
+                elementRenderer.sharedMaterials = newMats;
+
+            if (newMesh != null)
+                elementMesh.sharedMesh = newMesh;
         }
     }
 

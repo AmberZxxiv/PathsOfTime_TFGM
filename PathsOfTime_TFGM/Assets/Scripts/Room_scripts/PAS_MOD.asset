@@ -12,17 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b229b972d15150549b4e7cd4fd29d724, type: 3}
   m_Name: PAS_MOD
   m_EditorClassIdentifier: Assembly-CSharp::Dungeon_Models
+  floorPref: {fileID: 0}
   floorMat: {fileID: 2100000, guid: d36d3222a3042c94eaf37250520d76f2, type: 2}
   floorMesh: {fileID: 0}
+  wallPref: {fileID: 1787872600129914313, guid: 11b027c373a702d4d80eca80273248d3, type: 3}
   wallMat: {fileID: 0}
   wallMesh: {fileID: -7706236209929155493, guid: 64e480cf855340943b884f84ca245bc6, type: 3}
+  interPref: {fileID: 90982974952786892, guid: 915fbc5af0a595b4583dfa140ae26b51, type: 3}
   interMat: {fileID: 0}
   interMesh: {fileID: -555156634148555571, guid: 987a86a5a2ca2da47a4d908d1360aa29, type: 3}
+  cellPref: {fileID: 5728556320419278234, guid: 4832bf6815a98964fade644ca8d994ca, type: 3}
   cellMat: {fileID: 0}
   cellMesh: {fileID: -7369275342607637648, guid: 63f709abeccd0cc4aaa32c45abb5235d, type: 3}
+  platPref: {fileID: 0}
   platMat: {fileID: 2100000, guid: f72b3cec1fb577c41a2b1462d5c24845, type: 2}
   platMesh: {fileID: 0}
+  rumbPref: {fileID: 0}
   rumbMat: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
   rumbMesh: {fileID: 0}
+  liquidPref: {fileID: 0}
   liquidMat: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
   liquidMesh: {fileID: 0}
