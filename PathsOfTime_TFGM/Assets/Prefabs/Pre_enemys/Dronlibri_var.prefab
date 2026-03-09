@@ -102,11 +102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: flyRange
-      value: 2.75
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: flySpeed
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: maxRange
@@ -118,7 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: flyHeight
-      value: 2.75
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: attackRange
@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478924098898778670, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: attackCooldown
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6019465198720560833, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
       propertyPath: m_LocalPosition.y

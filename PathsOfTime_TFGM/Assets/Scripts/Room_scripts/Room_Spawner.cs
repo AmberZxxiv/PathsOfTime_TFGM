@@ -79,70 +79,60 @@ public class Room_Spawner : MonoBehaviour
 
     void FindElements(GameObject roomToSearch)
     {
+        // Comparo el PlayerPref y cojo el Scriptable correspondiente
         Dungeon_Models model = _dungeon == 0 ? pastModel : futurModel;
-        Debug.Log("Dungeon seleccionada: " + _dungeon);
 
         foreach (Transform child in roomToSearch.GetComponentsInChildren<Transform>())
         {
-            Debug.Log("Encontrado hijo: " + child.name + " tag: " + child.tag);
-
+            // Por cada hijo cojo MeshRender y MeshFilter correspondeinte
             MeshRenderer elementRenderer = child.GetComponent<MeshRenderer>();
             MeshFilter elementMesh = child.GetComponent<MeshFilter>();
-
-            if (elementRenderer == null || elementMesh == null)
-                continue;
-
+            if (elementRenderer == null || elementMesh == null) continue;
             Mesh newMesh = null;
             Material[] newMats = null;
-
-            // Helper para asignar mesh y materiales según prefab o fallback
-            void AssignFromPrefabOrFallback(GameObject prefab, Mesh fallbackMesh, Material fallbackMat)
+            switch (child.tag)
+            {
+                case "ground":
+                CopyPrefabOrIndies(model.floorPref, model.floorMesh, model.floorMat);
+                break;
+                case "plataform":
+                CopyPrefabOrIndies(model.platPref, model.platMesh, model.platMat);
+                break;
+                case "ceiling":
+                CopyPrefabOrIndies(model.cellPref, model.cellMesh, model.cellMat);
+                break;
+                case "intermid":
+                CopyPrefabOrIndies(model.interPref, model.interMesh, model.interMat);
+                break;
+                case "wall":
+                CopyPrefabOrIndies(model.wallPref, model.wallMesh, model.wallMat);
+                break;
+                case "rumble":
+                CopyPrefabOrIndies(model.rumbPref, model.rumbMesh, model.rumbMat);
+                break;
+                case "deadly":
+                CopyPrefabOrIndies(model.liquidPref, model.liquidMesh, model.liquidMat);
+                break;
+            }
+            // Cojo componentes de Prefab o Individuales
+            void CopyPrefabOrIndies(GameObject prefab, Mesh indieMesh, Material indieMat)
             {
                 if (prefab != null)
                 {
                     MeshFilter pfMesh = prefab.GetComponentInChildren<MeshFilter>();
                     MeshRenderer pfRenderer = prefab.GetComponentInChildren<MeshRenderer>();
-
                     if (pfMesh != null) newMesh = pfMesh.sharedMesh;
                     if (pfRenderer != null) newMats = pfRenderer.sharedMaterials;
                 }
                 else
                 {
-                    if (fallbackMesh != null) newMesh = fallbackMesh;
-                    if (fallbackMat != null) newMats = new Material[] { fallbackMat };
+                    if (indieMesh != null) newMesh = indieMesh;
+                    if (indieMat != null) newMats = new Material[] { indieMat };
                 }
             }
-
-            switch (child.tag)
-            {
-                case "ground":
-                    AssignFromPrefabOrFallback(model.floorPref, model.floorMesh, model.floorMat);
-                    break;
-                case "plataform":
-                    AssignFromPrefabOrFallback(model.platPref, model.platMesh, model.platMat);
-                    break;
-                case "ceiling":
-                    AssignFromPrefabOrFallback(model.cellPref, model.cellMesh, model.cellMat);
-                    break;
-                case "intermid":
-                    AssignFromPrefabOrFallback(model.interPref, model.interMesh, model.interMat);
-                    break;
-                case "wall":
-                    AssignFromPrefabOrFallback(model.wallPref, model.wallMesh, model.wallMat);
-                    break;
-                case "rumble":
-                    AssignFromPrefabOrFallback(model.rumbPref, model.rumbMesh, model.rumbMat);
-                    break;
-                case "deadly":
-                    AssignFromPrefabOrFallback(model.liquidPref, model.liquidMesh, model.liquidMat);
-                    break;
-            }
-
-            if (newMats != null)
-                elementRenderer.sharedMaterials = newMats;
-
-            if (newMesh != null)
-                elementMesh.sharedMesh = newMesh;
+            // Asigno nuevo Mesh y Materials correspondientes
+            if (newMats != null) elementRenderer.sharedMaterials = newMats;
+            if (newMesh != null) elementMesh.sharedMesh = newMesh;
         }
     }
 

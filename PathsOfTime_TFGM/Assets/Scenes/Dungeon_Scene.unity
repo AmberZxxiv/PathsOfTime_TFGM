@@ -588,7 +588,7 @@ MonoBehaviour:
   miniGnobot: {fileID: 1135923462562175214, guid: 4e82060139d2d4c41b8ed0a23050e850, type: 3}
   miniDronlibri: {fileID: 468121702110529948, guid: b696394931073f247b7c804dd6d2cb34, type: 3}
   miniTurrem: {fileID: 714076751192314245, guid: 34122415ff50ea541944444b04520ed5, type: 3}
-  minionCount: 4
+  minionCount: 5
 --- !u!4 &1765574036
 Transform:
   m_ObjectHideFlags: 0
