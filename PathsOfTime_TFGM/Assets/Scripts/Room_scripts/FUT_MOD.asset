@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b229b972d15150549b4e7cd4fd29d724, type: 3}
   m_Name: FUT_MOD
   m_EditorClassIdentifier: Assembly-CSharp::Dungeon_Models
-  floorPref: {fileID: 0}
-  floorMat: {fileID: 2100000, guid: 8880261c793f21b40933044a91c8076e, type: 2}
+  floorPref: {fileID: 7617879915469655911, guid: 8216c67f88d2a574ea157b021e042b32, type: 3}
+  floorMat: {fileID: 0}
   floorMesh: {fileID: 0}
   wallPref: {fileID: 7143825991484929727, guid: 68ed3693b6459ab4da7ddb347d56fe0b, type: 3}
   wallMat: {fileID: 0}
@@ -24,7 +24,7 @@ MonoBehaviour:
   cellPref: {fileID: 6906836062119523421, guid: c5a3d92cb7392f547943c256e3574e56, type: 3}
   cellMat: {fileID: 0}
   cellMesh: {fileID: 0}
-  platPref: {fileID: 0}
+  platPref: {fileID: 7492810967767598299, guid: 9c8342c519d1f5f42874e52c9fd5397f, type: 3}
   platMat: {fileID: 2100000, guid: 8880261c793f21b40933044a91c8076e, type: 2}
   platMesh: {fileID: 0}
   rumbPref: {fileID: 0}
