@@ -21,9 +21,9 @@ MonoBehaviour:
   interPref: {fileID: 6335762946087696868, guid: 14f89a4ba7d0eb644bffad804024d210, type: 3}
   interMat: {fileID: 0}
   interMesh: {fileID: 3229944392979441278, guid: c8bb1dffe99e1e34c8887ba526d021c1, type: 3}
-  cellPref: {fileID: 0}
-  cellMat: {fileID: 2100000, guid: 23b2ffa282b748540968c1972ca4d712, type: 2}
-  cellMesh: {fileID: 3680383025929958244, guid: d49b753126f460e48a83208b9f2284cd, type: 3}
+  cellPref: {fileID: 6906836062119523421, guid: c5a3d92cb7392f547943c256e3574e56, type: 3}
+  cellMat: {fileID: 0}
+  cellMesh: {fileID: 0}
   platPref: {fileID: 0}
   platMat: {fileID: 2100000, guid: 8880261c793f21b40933044a91c8076e, type: 2}
   platMesh: {fileID: 0}
