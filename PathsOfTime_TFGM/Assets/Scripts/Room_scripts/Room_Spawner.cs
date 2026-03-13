@@ -27,7 +27,6 @@ public class Room_Spawner : MonoBehaviour
     public Dungeon_Models pastModel;
     public Dungeon_Models futurModel;
 
-
     void Start()
     {
         //pillo SINGLE del RM

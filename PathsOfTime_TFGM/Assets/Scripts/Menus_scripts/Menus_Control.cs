@@ -63,6 +63,15 @@ public class Menus_Control : MonoBehaviour
     public UnityEngine.CursorMode cursorMode = UnityEngine.CursorMode.Auto;
     #endregion
 
+    #region /// MUSIC ///
+    AudioSource _musicSource;
+    int _dungeon;
+    public AudioClip musicMain;
+    public AudioClip musicLobby;
+    public AudioClip musicPas;
+    public AudioClip musicFut;
+    #endregion
+
     void Awake()
     {// awake para instanciar singleton sin superponer varios
         if (instance == null) instance = this;
@@ -80,14 +89,24 @@ public class Menus_Control : MonoBehaviour
         _PC = Player_Control.instance;
         _WC = Weapon_Control.instance;
         _MM = Mission_Manager.instance;
-        // pilla el Input Action
-        _playerInput = GetComponent<PlayerInput>(); ;
+        _dungeon = PlayerPrefs.GetInt("Dungeon");
+        // pilla el Input Action y el AudioSource
+        _playerInput = GetComponent<PlayerInput>();
+        _musicSource = GetComponent<AudioSource>();
+
         // menu principal seleccionable
-       if (scene.buildIndex == 0)
-        { currentMenu = mainMenu; }
+        if (scene.buildIndex == 0)
+        { currentMenu = mainMenu; PlayMusic(musicMain); }
+        // menu lobby seleccionable
+        if (scene.buildIndex == 1)
+        { PlayMusic(musicLobby); }
         // menu de carga para la dungeon
         if (scene.buildIndex == 2)
-        { StartCoroutine(DungeonLoadScreen()); }
+        { 
+            StartCoroutine(DungeonLoadScreen()); 
+            if (_dungeon == 0) { PlayMusic(musicPas); }
+            else if (_dungeon == 1) { PlayMusic(musicFut); }
+        }
     }
     IEnumerator DungeonLoadScreen()
     {
@@ -129,6 +148,13 @@ public class Menus_Control : MonoBehaviour
                 EventSystem.current.currentSelectedGameObject == null)
             { SelectFirstActiveButtonInMenu(currentMenu);}
         }
+    }
+    void PlayMusic(AudioClip clip)
+    {
+        if (_musicSource.clip == clip) return;
+        _musicSource.Stop();
+        _musicSource.clip = clip;
+        _musicSource.Play();
     }
     void SelectFirstActiveButtonInMenu(GameObject menu)
     {
