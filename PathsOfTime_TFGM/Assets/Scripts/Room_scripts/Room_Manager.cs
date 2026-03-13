@@ -50,7 +50,7 @@ public class Room_Manager : MonoBehaviour
     {
         //pillo SINGLE del MM
         _MM = Mission_Manager.instance;
-        //Invoke("BakeNavMesh", 2f);
+        Invoke("BakeNavMesh", 2f);
         Invoke("SpawnEnemy", 3f);
         Invoke("SpawnChest", 2.5f);
         Invoke("SpawnExit", 2.5f);
