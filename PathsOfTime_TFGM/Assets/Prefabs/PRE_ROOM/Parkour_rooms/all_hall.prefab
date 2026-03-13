@@ -378,6 +378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlatPas_var
       objectReference: {fileID: 0}
+    - target: {fileID: 5702524448049553401, guid: b934004bb2920664282d1e1c158c69d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
