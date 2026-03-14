@@ -383,6 +383,8 @@ public class Enemy_Control : MonoBehaviour
                 {
                     _PC.playerHealth -= attackDamage;
                     _MC.UpdateLives(_PC.playerHealth);
+                    Vector3 hitDir = (_PC.transform.position - transform.position).normalized;
+                    _PC.StartCoroutine(_PC.StunnKnockback(hitDir, attackForce));
                     _laserTicks = 0f;
                 }
                 didDamage = true;

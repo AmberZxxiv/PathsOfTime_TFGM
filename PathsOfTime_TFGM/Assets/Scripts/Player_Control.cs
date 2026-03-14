@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class Player_Control : MonoBehaviour
@@ -52,6 +53,7 @@ public class Player_Control : MonoBehaviour
 
     #region /// STATS NUMBERS ///
     public int playerHealth;
+    public PostProcessVolume pospoDamage;
     public int coinsLooted;
     #endregion
 
@@ -246,11 +248,13 @@ public class Player_Control : MonoBehaviour
     { _canDash = true; _isDashing = false; }
     public IEnumerator StunnKnockback(Vector3 direction, float force) //del enemy al hitearme
     {
+        pospoDamage.weight = 1f;
         _isStunned = true; //bloqueo el fixed movement
         _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0); // limpio fisics del rb
         _rb.AddForce(direction * force, ForceMode.Impulse);
         yield return new WaitForSeconds(0.1f);
         _isStunned = false;
+        pospoDamage.weight = 0f;
     }
     void OnDrawGizmosSelected() // muestro raycast de los pies del player
     {

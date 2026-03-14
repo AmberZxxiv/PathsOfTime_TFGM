@@ -2550,6 +2550,8 @@ MonoBehaviour:
   loadPortal: {fileID: 1503842132142155474}
   mainMenu: {fileID: 0}
   currentMenu: {fileID: 0}
+  pospoPasado: {fileID: 0}
+  pospoFuturo: {fileID: 0}
   actualLives: []
   companionLives: []
   heartPrefab: {fileID: 5544477635962534840, guid: 38f0452b8a071df449b39fa054fe910a, type: 3}
@@ -2621,7 +2623,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0

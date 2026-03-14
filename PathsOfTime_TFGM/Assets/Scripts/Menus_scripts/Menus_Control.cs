@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.UI.VirtualMouseInput;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Menus_Control : MonoBehaviour
 { // script en PREF padre CANVAS
@@ -27,6 +28,8 @@ public class Menus_Control : MonoBehaviour
     public GameObject mainMenu;
     public GameObject currentMenu;
     PlayerInput _playerInput;
+    public PostProcessVolume pospoPasado;
+    public PostProcessVolume pospoFuturo;
     #endregion
 
     #region /// HEARTS UI ///
@@ -105,8 +108,18 @@ public class Menus_Control : MonoBehaviour
         if (scene.buildIndex == 2)
         { 
             StartCoroutine(DungeonLoadScreen()); 
-            if (_dungeon == 0) { PlayMusic(musicPas); }
-            else if (_dungeon == 1) { PlayMusic(musicFut); }
+            if (_dungeon == 0) 
+            { 
+                PlayMusic(musicPas);
+                pospoPasado.weight = 1f;
+                pospoFuturo.weight = 0f;
+            }
+            else if (_dungeon == 1) 
+            { 
+                PlayMusic(musicFut);
+                pospoPasado.weight = 0f;
+                pospoFuturo.weight = 1f;
+            }
         }
     }
     IEnumerator DungeonLoadScreen()
@@ -312,6 +325,7 @@ public class Menus_Control : MonoBehaviour
     public void ShowDead() //en update y Player collision
     {
         deadMenu.SetActive(true);
+        if (_musicSource != null) _musicSource.Pause();
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         currentMenu = deadMenu;
@@ -320,21 +334,25 @@ public class Menus_Control : MonoBehaviour
     }
     void OnPause()
     {
-        if (pauseMenu != null && pauseMenu.activeSelf)
-            { QuitPause();}
-        else
+        if (pauseMenu != null)
+        {
+            if (pauseMenu.activeSelf) { QuitPause(); }
+            else
             {
-            pauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            currentMenu = pauseMenu;
-            SelectFirstActiveButtonInMenu(currentMenu);
-            Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                currentMenu = pauseMenu;
+                SelectFirstActiveButtonInMenu(currentMenu);
+                if (_musicSource != null) _musicSource.Pause();
+                Time.timeScale = 0;
             }
+        }
     }
     public void QuitPause()
     { 
         Time.timeScale = 1;
+        if (_musicSource != null) _musicSource.UnPause();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pauseMenu.SetActive(false);
