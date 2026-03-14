@@ -20,6 +20,7 @@ public class Player_Control : MonoBehaviour
     #region /// PLAYER MOVEMENT ///
     Rigidbody _rb;
     Animator _animator;
+    GameObject _sprite;
     public float movSpeed;
     public float dashForce;
     public float dashCooldown;
@@ -46,15 +47,19 @@ public class Player_Control : MonoBehaviour
     #region /// CAMERA LOCATION ///
     public float mouseSensitivity;
     public float joystickSensitivity;
-    private float mouseRotation = 0f;
+    float _mouseRotation = 0f;
     public Transform cameraTransform;
-    public bool _isAiming;
+    public bool isAiming;
     #endregion
 
     #region /// STATS NUMBERS ///
     public int playerHealth;
     public PostProcessVolume pospoDamage;
     public int coinsLooted;
+    public GameObject forgotEquip;
+    public GameObject forgotMission;
+    public GameObject forgotWeapon;
+    Power_Giver _lastPowGived;
     #endregion
 
     void Awake()// singleton sin superponer y no destruir al cambiar escena
@@ -70,6 +75,7 @@ public class Player_Control : MonoBehaviour
         _MM = Mission_Manager.instance;
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
+        _sprite = _animator.gameObject;
         // centramos el cursos en pantalla y lo ocultamos
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -78,7 +84,7 @@ public class Player_Control : MonoBehaviour
     {
         if (_CC == null) _CC = Companion_Control.instance; // aseguro pillar companion
 
-        if (_isAiming) // en primera persona cogemos MouseDelta y RightStick
+        if (isAiming) // en primera persona cogemos MouseDelta y RightStick
         {
             PlayerInput playerInput = GetComponent<PlayerInput>();
             InputAction playerLook = GetComponent<PlayerInput>().actions["Look"];
@@ -102,9 +108,9 @@ public class Player_Control : MonoBehaviour
             // rotación del jugador
             transform.Rotate(0, horizontalRotation, 0);
             // rotación vertical de la cámara
-            mouseRotation -= verticalRotation;
-            mouseRotation = Mathf.Clamp(mouseRotation, -90f, 90f);
-            cameraTransform.localRotation = Quaternion.Euler(mouseRotation, 0, 0);
+            _mouseRotation -= verticalRotation;
+            _mouseRotation = Mathf.Clamp(_mouseRotation, -90f, 90f);
+            cameraTransform.localRotation = Quaternion.Euler(_mouseRotation, 0, 0);
         }
 
         // aqui cogemos los controles del movimiento
@@ -112,7 +118,7 @@ public class Player_Control : MonoBehaviour
         _movFrontal = Input.GetAxis("Vertical");
         // rotamos el sprite y activamos la animacion
         if (_movLateral != 0)
-        { transform.localScale = new Vector3(_movLateral > 0 ? -1 : 1, 1, 1); }
+        { _sprite.GetComponent<SpriteRenderer>().flipX = (_movLateral < 0); }
         bool isMoving = Mathf.Abs(_movLateral) > 0.1f || Mathf.Abs(_movFrontal) > 0.1f;
         _animator.SetBool("isMoving", isMoving);
         // chequeamos el raycast del salto
@@ -130,46 +136,74 @@ public class Player_Control : MonoBehaviour
         }
         // aumentamos la velocidad del salto al subir
         if (_rb.linearVelocity.y > 0f)
-        {
-            _rb.linearVelocity += Vector3.up * Physics.gravity.y * jumpSpeed * Time.fixedDeltaTime;
-        }
+        { _rb.linearVelocity += Vector3.up * Physics.gravity.y * jumpSpeed * Time.fixedDeltaTime; }
         // aumentamos la gravedad al caer del salto
         if (_rb.linearVelocity.y < 0f)
-        {
-            _rb.linearVelocity += Vector3.up * Physics.gravity.y * fallSpeed * Time.fixedDeltaTime;
-        }
+        { _rb.linearVelocity += Vector3.up * Physics.gravity.y * fallSpeed * Time.fixedDeltaTime; }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NPCpas")) //conversar con NPC pasado
-        { _MC.PastInteracton(); }
-        if (other.CompareTag("NPCfut")) //conversar con NPC futuro
-        { _MC.FutrInteracton(); }
-       
-        if (other.CompareTag("PORpas") //si hemos escogido mision y arma, guardamos pasado y cargamos dungeon
-            && _MM.mission != Mission_Manager.MissionSelect.None
-            && _WC.weapon != Weapon_Control.WeaponType.None) 
+        string tag = other.gameObject.tag;
+        switch (tag)
         {
-            PlayerPrefs.SetInt("Dungeon", 0);
-            PlayerPrefs.Save();
-            SceneManager.LoadScene(2);
+            case "NPCpas":
+            _MC.PastInteracton(); break;
+            case "NPCfut":
+            _MC.FutrInteracton(); break;
+            case "PORexit":
+            _MC.ShowExit(); break;
+            case "PORpas":
+            TryRun(0); break;
+            case "PORfut":
+            TryRun(1); break;
         }
-        if (other.CompareTag("PORfut") //si hemos escogido mision y arma, guardamos futuro y cargamos dungeon
-            && _MM.mission != Mission_Manager.MissionSelect.None
-            && _WC.weapon != Weapon_Control.WeaponType.None)
-        {
-            PlayerPrefs.SetInt("Dungeon", 1);
-            PlayerPrefs.Save();
-            SceneManager.LoadScene(2);
-        }
-
-        if (other.CompareTag("PORexit")) //salimos al menu de completao
-        { _MC.ShowExit(); }
 
         Power_Giver power = other.GetComponent<Power_Giver>();
-        if (power != null) //si es PowUp, equipo en WEAPON
-        { _WC.NewWeapon(power.newWeapon); }
+        if (power != null) //si es PowUp
+        {
+            // devolvemos el arma anterior
+            if (_lastPowGived != null)
+            { _lastPowGived.SetVisibility(true); }
+            // equipamos NEW en WEAPON
+            _WC.NewWeapon(power.newWeapon);
+            // guardamos nueva arma y la ocultamos
+            _lastPowGived = power;
+            power.SetVisibility(false);
+        }
+    }
+
+    void TryRun(int dungeonID)
+    {
+        bool haveMission = _MM.mission != Mission_Manager.MissionSelect.None;
+        bool haveWeapon = _WC.weapon != Weapon_Control.WeaponType.None;
+        if (haveMission && haveWeapon)
+        { // si todo, cargamos dungeon
+            PlayerPrefs.SetInt("Dungeon", dungeonID);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(2);
+        }
+        else // si falta algo
+        {
+            if (!haveMission && !haveWeapon)
+            {
+             GameObject bocadillo =
+             Instantiate(forgotEquip, transform.position + forgotEquip.transform.localPosition, forgotEquip.transform.rotation, transform);
+             Destroy(bocadillo, 3f);
+            }
+            else if (!haveMission)
+            {
+            GameObject bocadillo =
+            Instantiate(forgotMission, transform.position + forgotMission.transform.localPosition, forgotMission.transform.rotation, transform);
+            Destroy(bocadillo, 3f);
+            }
+            else if (!haveWeapon)
+            {
+            GameObject bocadillo =
+            Instantiate(forgotWeapon, transform.position + forgotWeapon.transform.localPosition, forgotWeapon.transform.rotation, transform);
+            Destroy(bocadillo, 3f);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -188,13 +222,13 @@ public class Player_Control : MonoBehaviour
             _MC.UpdateLives(playerHealth);
             _MC.ShowDead();
         }
-        if (collision.gameObject.CompareTag("heal") && playerHealth <= 10) // pillo heal si no estoy a tope
+        if (collision.gameObject.CompareTag("heal") && playerHealth < 12) // pillo heal si no estoy a tope
         {
             playerHealth += 2;
             _MC.UpdateLives(playerHealth);
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("heal") && _CC != null && _CC.companionHealth <= 12) // pillo heal pal companion
+        if (collision.gameObject.CompareTag("heal") && _CC != null && _CC.companionHealth < 12) // pillo heal pal companion
         {
             _CC.companionHealth += 2;
             _MC.UpdateCompaniers(_CC.companionHealth);

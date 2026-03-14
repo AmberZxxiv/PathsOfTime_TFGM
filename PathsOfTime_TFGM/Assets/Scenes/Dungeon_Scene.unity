@@ -1089,9 +1089,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: isAiming
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: pospoDamage
       value: 
       objectReference: {fileID: 1732278539}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: mouseRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4196726406899913745, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: m_TagString
       value: MainCamera

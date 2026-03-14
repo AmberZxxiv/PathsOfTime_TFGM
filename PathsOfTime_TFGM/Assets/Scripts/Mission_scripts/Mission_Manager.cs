@@ -85,15 +85,21 @@ public class Mission_Manager : MonoBehaviour
     {
         mission = MissionSelect.BossMis;
         _MC.MissionDisplay(mission);
+        _MC.futurGO.SetActive(true);
+        _MC.pastGO.SetActive(true);
     }
     public void TokenMission()
     {
         mission = MissionSelect.TokenMis;
         _MC.MissionDisplay(mission);
+        _MC.futurGO.SetActive(true);
+        _MC.pastGO.SetActive(true);
     }
     public void CompanionMission()
     {
         mission = MissionSelect.CompaMis;
         _MC.MissionDisplay(mission);
+        _MC.futurGO.SetActive(true);
+        _MC.pastGO.SetActive(true);
     }
 }

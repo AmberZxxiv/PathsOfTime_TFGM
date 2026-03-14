@@ -54,6 +54,8 @@ public class Menus_Control : MonoBehaviour
     public GameObject futrPanel;
     public GameObject pastPanel;
     public TextMeshProUGUI exitText;
+    public GameObject futurGO;
+    public GameObject pastGO;
     #endregion
 
     #region /// WEAPONS UI ///
@@ -162,8 +164,6 @@ public class Menus_Control : MonoBehaviour
                 EventSystem.current.currentSelectedGameObject == null)
             { SelectFirstActiveButtonInMenu(currentMenu);}
         }
-        //if (loadPortal != null && loadPortal.activeSelf)
-        //{ loadPortal.transform.Rotate(0f, 0f, 50 * Time.deltaTime); }
     }
     void PlayMusic(AudioClip clip)
     {

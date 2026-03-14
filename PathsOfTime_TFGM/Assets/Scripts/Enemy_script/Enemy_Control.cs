@@ -81,6 +81,7 @@ public class Enemy_Control : MonoBehaviour
     Color _originalColor;
     public GameObject healCherry;
     public float healChance;
+    public GameObject deadParticles;
     public GameObject coinLoot;
     public float coinChance;
     #endregion
@@ -425,6 +426,7 @@ public class Enemy_Control : MonoBehaviour
         // si muere
         if (enemyHealth <= 0)
         {
+            Instantiate(deadParticles, transform.position, Quaternion.identity);
             // en mision de matar a boss 
             if (CompareTag("boss") && _MM.mission == Mission_Manager.MissionSelect.BossMis)
             { _MM.BossComplete(); }

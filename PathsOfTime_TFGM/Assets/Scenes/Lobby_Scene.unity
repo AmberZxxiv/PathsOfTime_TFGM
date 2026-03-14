@@ -252,6 +252,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 8897777888557495306}
     m_Modifications:
     - target: {fileID: 4720497594174180824, guid: 79a0fabf52a992942a33027482890914, type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720497594174180824, guid: 79a0fabf52a992942a33027482890914, type: 3}
+      propertyPath: m_Center.z
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720497594174180824, guid: 79a0fabf52a992942a33027482890914, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -584,13 +592,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: forgotEquip
+      value: 
+      objectReference: {fileID: 6867838919652955050, guid: 13152605202f2134ba0a9f92841a895b, type: 3}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: dashCooldown
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: forgotWeapon
+      value: 
+      objectReference: {fileID: 6867838919652955050, guid: 48500c3ccee72ff4387d03a1e028a969, type: 3}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: playerHealth
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
+      propertyPath: forgotMission
+      value: 
+      objectReference: {fileID: 6867838919652955050, guid: 440dc425b33e95345967b0f59b90b996, type: 3}
     - target: {fileID: 4121390181147301613, guid: 2b9274641fcb153439c5fa831684776c, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -3591,6 +3611,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8897777888557495306}
     m_Modifications:
+    - target: {fileID: 4720497594174180824, guid: 79a0fabf52a992942a33027482890914, type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720497594174180824, guid: 79a0fabf52a992942a33027482890914, type: 3}
+      propertyPath: m_Center.z
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 4720497594174180824, guid: 79a0fabf52a992942a33027482890914, type: 3}
       propertyPath: m_IsTrigger
       value: 1

@@ -30,6 +30,7 @@ public class Companion_Control : MonoBehaviour
     #region /// HEALTH ///
     public int companionHealth;
     SpriteRenderer _spriteRenderer;
+    public GameObject deadParticles;
     Color _originalColor;
     #endregion
 
@@ -100,6 +101,7 @@ public class Companion_Control : MonoBehaviour
         // si muere
         if (companionHealth <= 0)
         {
+            Instantiate(deadParticles, transform.position, Quaternion.identity);
             _MM.CompanionLose();
             Destroy(gameObject);
         }

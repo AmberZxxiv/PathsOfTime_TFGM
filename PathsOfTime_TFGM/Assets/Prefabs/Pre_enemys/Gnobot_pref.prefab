@@ -148,6 +148,7 @@ MonoBehaviour:
   enemyHealth: 8
   healCherry: {fileID: 3576113440945831091, guid: 44d2a430757407041a5966f1dd7a4e64, type: 3}
   healChance: 0.25
+  deadParticles: {fileID: 5183614774896885698, guid: b959597fa31de9c4988b2b59337b7a86, type: 3}
   coinLoot: {fileID: 3576113440945831091, guid: f81dc6d600e27d54a905afae05adb3ed, type: 3}
   coinChance: 0.25
 --- !u!114 &7766454580206351369
