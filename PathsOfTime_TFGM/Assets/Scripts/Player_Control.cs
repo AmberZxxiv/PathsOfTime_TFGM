@@ -21,6 +21,7 @@ public class Player_Control : MonoBehaviour
     Rigidbody _rb;
     Animator _animator;
     GameObject _sprite;
+    public PostProcessVolume pospoDash;
     public float movSpeed;
     public float dashForce;
     public float dashCooldown;
@@ -263,19 +264,35 @@ public class Player_Control : MonoBehaviour
     void OnDash() // llamamos Dash ActionMap en Shift y LeftShoulder
     {
         if (_canDash) // si puedo, hago el dash
-        { 
+        {
+            StartCoroutine(DashEffectRoutine());            
+            
         // impulso en la direccion del movimiento
         Vector3 dashDirection = (transform.right * _movLateral + transform.forward * _movFrontal).normalized;
-        if (dashDirection == Vector3.zero)
-        { // sin direccion, dash hacia adelante
-            dashDirection = transform.forward;
-        }
+           if (dashDirection == Vector3.zero) // sin direccion, dash hacia adelante
+           { dashDirection = transform.forward; }
         _rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
 
         // activamos cooldown
-        _isDashing = true;
-        _canDash = false;
+        _isDashing = true; _canDash = false;
         Invoke("ResetDASH", dashCooldown);
+        }
+    }
+    IEnumerator DashEffectRoutine()
+    {
+        if (pospoDash != null)
+        {
+            float duration = 0.2f;
+            float elapsed = 0f;
+            pospoDash.weight = 1f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                // Interpolación lineal para que el efecto desaparezca poco a poco
+                pospoDash.weight = Mathf.Lerp(1f, 0f, elapsed / duration);
+                yield return null;
+            }
+            pospoDash.weight = 0f;
         }
     }
     void ResetDASH()
