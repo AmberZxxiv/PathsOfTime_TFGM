@@ -27,9 +27,9 @@ MonoBehaviour:
   platPref: {fileID: 5702524448049553401, guid: b934004bb2920664282d1e1c158c69d9, type: 3}
   platMat: {fileID: 0}
   platMesh: {fileID: 0}
-  rumbPref: {fileID: 0}
-  rumbMat: {fileID: 2100000, guid: 5f0b516d9100af04b9f98c1692e2f8e5, type: 2}
+  rumbPref: {fileID: 2059864298526623411, guid: a51ab0571ded8104ba64001062bef9cf, type: 3}
+  rumbMat: {fileID: 0}
   rumbMesh: {fileID: 0}
-  liquidPref: {fileID: 0}
-  liquidMat: {fileID: 2100000, guid: 8dce1d43c3d548f40a9da4fc26fbc9d5, type: 2}
+  liquidPref: {fileID: 5985583569894372226, guid: e60a4dee9100d934a8a800ffd0ca0a8c, type: 3}
+  liquidMat: {fileID: 0}
   liquidMesh: {fileID: 0}
