@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d3623142bf145ea4a85cc291d3dfed69, type: 2}
+    - target: {fileID: -5754084199372789682, guid: b738632093a73964b88fec9700bf3dc3, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4798027145526982905, guid: b738632093a73964b88fec9700bf3dc3, type: 3}
     - target: {fileID: 919132149155446097, guid: b738632093a73964b88fec9700bf3dc3, type: 3}
       propertyPath: m_Name
       value: Floor_Bas
@@ -82,14 +86,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b738632093a73964b88fec9700bf3dc3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4120030564166327190}
+      addedObject: {fileID: 8695253496843478897}
   m_SourcePrefab: {fileID: 100100000, guid: b738632093a73964b88fec9700bf3dc3, type: 3}
 --- !u!1 &8458660996081056035 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b738632093a73964b88fec9700bf3dc3, type: 3}
   m_PrefabInstance: {fileID: 8764667389923148914}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4120030564166327190
+--- !u!65 &8695253496843478897
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
