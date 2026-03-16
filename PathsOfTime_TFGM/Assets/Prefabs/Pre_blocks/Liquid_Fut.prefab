@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.17309882
       objectReference: {fileID: 0}
+    - target: {fileID: 935669148333782389, guid: e60a4dee9100d934a8a800ffd0ca0a8c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 935669148333782389, guid: e60a4dee9100d934a8a800ffd0ca0a8c, type: 3}
+      propertyPath: m_RenderMode
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5193192408356508247, guid: e60a4dee9100d934a8a800ffd0ca0a8c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
