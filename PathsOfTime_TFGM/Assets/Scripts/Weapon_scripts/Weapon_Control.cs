@@ -45,6 +45,7 @@ public class Weapon_Control : MonoBehaviour
     public float lastAttackTimer;
     #endregion
 
+
     void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -98,19 +99,22 @@ public class Weapon_Control : MonoBehaviour
 
     void OnAttack() // llamamos Attack ActionMap en LeftClic y RightTrigger
     {
-        if (weapon == WeaponType.None) return;
-        // ataco cuando haya pasado el cooldown correspondiente
-        float actualCooldown = cooldowns[weapon];
-        if (Time.time < lastAttackTimer + actualCooldown) return;
-        lastAttackTimer = Time.time;
-        // activo el ataque correspondiente al weapon equipado
-        switch (weapon)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-        case WeaponType.None: return;
-        case WeaponType.Sword: DoSWOSH(); break;
-        case WeaponType.Punch:DoPUNCH();break;
-        case WeaponType.Shot: DoSHOT(); break;
-        case WeaponType.Spell:DoSPELL();break;
+            if (weapon == WeaponType.None) return;
+            // ataco cuando haya pasado el cooldown correspondiente
+            float actualCooldown = cooldowns[weapon];
+            if (Time.time < lastAttackTimer + actualCooldown) return;
+            lastAttackTimer = Time.time;
+            // activo el ataque correspondiente al weapon equipado
+            switch (weapon)
+            {
+                case WeaponType.None: return;
+                case WeaponType.Sword: DoSWOSH(); break;
+                case WeaponType.Punch: DoPUNCH(); break;
+                case WeaponType.Shot: DoSHOT(); break;
+                case WeaponType.Spell: DoSPELL(); break;
+            }
         }
     }
 

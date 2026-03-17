@@ -190,19 +190,19 @@ public class Player_Control : MonoBehaviour
             {
              GameObject bocadillo =
              Instantiate(forgotEquip, transform.position + forgotEquip.transform.localPosition, forgotEquip.transform.rotation, transform);
-             Destroy(bocadillo, 3f);
+             Destroy(bocadillo, 2.25f);
             }
             else if (!haveMission)
             {
             GameObject bocadillo =
             Instantiate(forgotMission, transform.position + forgotMission.transform.localPosition, forgotMission.transform.rotation, transform);
-            Destroy(bocadillo, 3f);
+            Destroy(bocadillo, 2.25f);
             }
             else if (!haveWeapon)
             {
             GameObject bocadillo =
             Instantiate(forgotWeapon, transform.position + forgotWeapon.transform.localPosition, forgotWeapon.transform.rotation, transform);
-            Destroy(bocadillo, 3f);
+            Destroy(bocadillo, 2.25f);
             }
         }
     }
