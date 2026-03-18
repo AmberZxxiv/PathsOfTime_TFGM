@@ -69,8 +69,11 @@ public class Room_Manager : MonoBehaviour
         int dungeon = PlayerPrefs.GetInt("Dungeon"); //compruebo la dungeon escogida
         if (dungeon == 0) //enemigos del pasado
         {
-            //Hydra aparece en ultima sala en su 00
-            Instantiate(bossHydra, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
+            //spawneo Hydra
+            Transform bossSpawn = roomMap[roomMap.Count - 1].transform.Find("EnemySpawn");
+            Vector3 bossPos = bossSpawn.position + Vector3.up * 0.5f;
+            Instantiate(bossHydra, bossPos, transform.rotation);
+
             // spawneo gnobots o torrems en las salas menos la primera y ultima
             for (int i = 1; i < roomMap.Count - 1; i++)
             {
@@ -96,8 +99,11 @@ public class Room_Manager : MonoBehaviour
         }
         if (dungeon == 1) //enemigos del futuro
         {
-            //Angel aparece en ultima sala en su 00
-            Instantiate(bossAngel, roomMap[roomMap.Count - 1].transform.position + Vector3.up * 5, transform.rotation);
+            // spawneo Angel
+            Transform bossSpawn = roomMap[roomMap.Count - 1].transform.Find("EnemySpawn");
+            Vector3 bossPos = bossSpawn.position + Vector3.up * 0.5f;
+            Instantiate(bossAngel, bossPos, transform.rotation);
+
             // spawneo dronlibris o torrems en las salas menos la primera y ultima
             for (int i = 1; i < roomMap.Count - 1; i++)
             {

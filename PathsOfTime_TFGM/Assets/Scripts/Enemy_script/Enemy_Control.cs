@@ -269,7 +269,7 @@ public class Enemy_Control : MonoBehaviour
     IEnumerator MultiBiteRoutine()
     {
         // parametros del barrido y animación
-        float spacing = 5f;
+        float spacing = 2.75f;
         float range = attackRange;
         Vector3 halfExtents = new Vector3(1f, 1f, range);
         float delay = 0.25f;

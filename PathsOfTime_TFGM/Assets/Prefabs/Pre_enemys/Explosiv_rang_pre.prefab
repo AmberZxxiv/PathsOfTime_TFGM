@@ -5054,7 +5054,7 @@ MonoBehaviour:
   _CC: {fileID: 0}
   _MC: {fileID: 0}
   damageExplosiv: 2
-  radiusExplosiv: 7
+  radiusExplosiv: 7.5
   lifetimeExplosive: 5
   delayExplosive: 0.25
   particles: {fileID: 2296898445320665111}
