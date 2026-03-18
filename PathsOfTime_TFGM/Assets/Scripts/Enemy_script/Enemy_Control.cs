@@ -38,7 +38,6 @@ public class Enemy_Control : MonoBehaviour
     Rigidbody _rb;
     Vector3 _startPoint;
     Vector3 _patrolPoint;
-    bool _hasPoint = false;
     public float flySpeed;
     public float flyHeight;
     public float flyRange;
@@ -183,26 +182,24 @@ public class Enemy_Control : MonoBehaviour
     }
     void FlyWander() // patrulla de voladores
     {
-        //compruebo si ha llegado al punto o no tiene
-        if (!_hasPoint || Vector3.Distance
-            (new Vector3(transform.position.x, 0, transform.position.z),
-             new Vector3(_patrolPoint.x, 0, _patrolPoint.z)) < 1f)
+        _wanderTimer -= Time.deltaTime; //empiezo timer para cambiar de posicion
+        if (_wanderTimer <= 0f) //cuando pasa el tiempo, doy objetivo nuevo y reinicio timer
         {
             _patrolPoint = RandomFlyPoint(transform.position, wanderRadius);
-            _hasPoint = true;
+            _wanderTimer = wanderCooldown;
         }
         // movimiento hacia el punto objetivo
         Vector3 newPos = _patrolPoint;
         newPos.y += Mathf.Sin(Time.time) * 0.5f;
-       Vector3 finalPos = Vector3.MoveTowards
-        (_rb.position, newPos, flySpeed * Time.deltaTime);
+        Vector3 finalPos = Vector3.MoveTowards
+         (_rb.position, newPos, flySpeed * Time.deltaTime);
         _rb.MovePosition(finalPos);
     }
     Vector3 RandomFlyPoint(Vector3 origin, float radius)
     { // genero Vector3 en radio del volador y lo devuelve como punto objetivo
-        Vector2 randCircle = UnityEngine.Random.insideUnitCircle * radius;
-        Vector3 point = new Vector3(origin.x + randCircle.x, flyHeight, origin.z + randCircle.y);
-        return point;
+        Vector3 randSphere = UnityEngine.Random.insideUnitSphere * radius;
+        Vector3 targetPoint = origin + randSphere;
+        return targetPoint;
     }
 
     private void FixedUpdate() // fixed para contar en segundos y no en frames
