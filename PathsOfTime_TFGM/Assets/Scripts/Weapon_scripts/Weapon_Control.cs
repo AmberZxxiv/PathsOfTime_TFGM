@@ -131,6 +131,7 @@ public class Weapon_Control : MonoBehaviour
         gizCenter = attackCenter;
 
         // instancio prefab para visualizar la zona
+        if (_MC != null) _MC.PlayWeaponAttack();
         GameObject swoshZone = Instantiate(swordPref, attackCenter, Quaternion.LookRotation(dir));
         swoshZone.transform.Rotate(90f, 0f, 0f);
         Vector3 baseScale = swoshZone.transform.localScale;
@@ -170,6 +171,7 @@ public class Weapon_Control : MonoBehaviour
         gizExtents = halfExtents;
 
         // instancio prefab para visualizar la zona
+        if (_MC != null) _MC.PlayWeaponAttack();
         GameObject punchZone = Instantiate(punchPref, attackCenter, attackRot);
         punchZone.transform.Rotate(90f, 0f, 0f);
         Vector3 baseScale = punchZone.transform.localScale;
@@ -197,6 +199,7 @@ public class Weapon_Control : MonoBehaviour
         Vector3 dir = cam.forward.normalized;
 
         // instancio la bala ignorando al player
+        if (_MC != null) _MC.PlayWeaponAttack();
         GameObject bullShot = Instantiate(shotPref, attackOrigin.position + dir * 1f, Quaternion.LookRotation(dir, Vector3.up) * shotPref.transform.rotation);
         Collider playerCollider = _PC.GetComponent<Collider>();
         Collider bulletCollider = bullShot.GetComponent<Collider>();
@@ -213,6 +216,7 @@ public class Weapon_Control : MonoBehaviour
         Vector3 dir = cam.forward.normalized;
 
         // instancio el spell ignorando al player
+        if (_MC != null) _MC.PlayWeaponAttack();
         GameObject spellCast = Instantiate(magicPref, attackOrigin.position + dir * 2f, Quaternion.LookRotation(dir, Vector3.up) * magicPref.transform.rotation);
         // le doy fuerza a la bala pa lanzarla
         Rigidbody rb = spellCast.GetComponent<Rigidbody>();

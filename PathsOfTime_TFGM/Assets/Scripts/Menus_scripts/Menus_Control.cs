@@ -64,6 +64,7 @@ public class Menus_Control : MonoBehaviour
     public GameObject punchPow;
     public GameObject shotPow;
     public GameObject magicPow;
+    Animator _currentAnimator;
     public Texture2D cursorTexture;
     public Vector2 hotspot = Vector2.zero;
     public UnityEngine.CursorMode cursorMode = UnityEngine.CursorMode.Auto;
@@ -196,13 +197,19 @@ public class Menus_Control : MonoBehaviour
         GameObject iconToInstantiate = null;
         switch (weapon)
         {
-            case Weapon_Control.WeaponType.None: return;
+            case Weapon_Control.WeaponType.None: _currentAnimator = null; return;
             case Weapon_Control.WeaponType.Sword: iconToInstantiate = swordPow; break;
             case Weapon_Control.WeaponType.Punch: iconToInstantiate = punchPow; break;
             case Weapon_Control.WeaponType.Shot: iconToInstantiate = shotPow; break;
             case Weapon_Control.WeaponType.Spell: iconToInstantiate = magicPow; break;
         }
-        Instantiate(iconToInstantiate, weaponContainer.transform);
+        GameObject newIcon = Instantiate(iconToInstantiate, weaponContainer.transform);
+        _currentAnimator = newIcon.GetComponent<Animator>();
+    }
+    public void PlayWeaponAttack() // lo llamo desde cada Weapon al atacar
+    {
+        if (_currentAnimator != null)
+        { _currentAnimator.SetTrigger("isAttacking"); }
     }
     public void MissionDisplay(Mission_Manager.MissionSelect mission) //llamo desde MM para mostrar mision seleccionada
     {
